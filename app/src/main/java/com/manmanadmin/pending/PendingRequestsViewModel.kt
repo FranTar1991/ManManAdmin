@@ -5,22 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.firebase.ui.database.ObservableSnapshotArray
 import com.manmanadmin.utils.ManManRequest
+import com.manmanadmin.utils.ViewModelForAdapter
 
-class PendingRequestsViewModel(): ViewModel() {
+class PendingRequestsViewModel(): ViewModel(), ViewModelForAdapter {
 
     private val _navigateToReviewRequest = MutableLiveData<ManManRequest?>()
     val navigateToReviewRequest: LiveData<ManManRequest?>
     get() = _navigateToReviewRequest
 
-    private val _numberOfPendingRequests = MutableLiveData<Int>()
-    val numberOfPendingRequests: LiveData<Int>
-        get() = _numberOfPendingRequests
+    override val _numberOfPendingRequests: MutableLiveData<Int> = MutableLiveData<Int>()
+
 
     fun setNavigateToReviewRequestFragment(value: ManManRequest?) {
         _navigateToReviewRequest.value = value
     }
 
-    fun setNumberOfPendingRequests(numberOfPendingRequests: Int) {
-        _numberOfPendingRequests.value = numberOfPendingRequests
-    }
+
 }

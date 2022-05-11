@@ -1,4 +1,4 @@
-package com.manmanadmin.pending
+package com.manmanadmin.utils
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.manmanadmin.databinding.ManManRequestItemBinding
-import com.manmanadmin.utils.ManManRequest
 
-class PendingRequestsAdapter (private val viewModel: PendingRequestsViewModel, options: FirebaseRecyclerOptions<ManManRequest>, private val clickListener: OnManManRequestClickListener):
-    FirebaseRecyclerAdapter<ManManRequest, PendingRequestsAdapter.ViewHolder>(options) {
+class AdapterForRequests (private val viewModel: ViewModelForAdapter, options: FirebaseRecyclerOptions<ManManRequest>, private val clickListener: OnManManRequestClickListener):
+    FirebaseRecyclerAdapter<ManManRequest, AdapterForRequests.ViewHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

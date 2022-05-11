@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="com.manmanadmin.pending.OnManManRequestClickListener" />
+            type="com.manmanadmin.utils.OnManManRequestClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

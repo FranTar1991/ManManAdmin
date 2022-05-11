@@ -200,4 +200,5 @@
     <string name="finished_requests">FInalizadas</string>
     <string name="set_service_status">Cerrar o Abrir el negocio</string>
     <string name="sure_of_log_out">¿Seguro que quieres salir?</string>
+    <string name="waiting_to_be_processed">Solicitud a esperas de ser procesada</string>
 </resources>

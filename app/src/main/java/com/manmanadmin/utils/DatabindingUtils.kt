@@ -9,6 +9,7 @@ import com.manmanadmin.utils.STATUS.*
 import android.annotation.SuppressLint
 import android.widget.*
 import androidx.core.view.isVisible
+import java.util.*
 
 @BindingAdapter("myListener")
 fun Spinner.myListener(listener: AdapterView.OnItemSelectedListener?){
@@ -131,19 +132,6 @@ fun TextView.setTheTitleText(title: String?){
     }
 }
 
-@BindingAdapter("set_tint")
-fun ImageView.setTint(status: STATUS?){
-    status?.let {
-        drawable.setTint( when(status){
-            Received -> context.getColor(R.color.pending_color)
-            Progress -> context.getColor(R.color.progress_color)
-            Finished -> context.getColor(R.color.finished_color)
-            Unknown, Canceled, null ->context.getColor(R.color.gray)
-        })
-    }
-
-
-}
 
 @BindingAdapter("setTheTextColor")
 fun TextView.setTheTextColor(status: STATUS?){
@@ -155,8 +143,13 @@ fun TextView.setTheTextColor(status: STATUS?){
             Unknown, Canceled, null ->context.getColor(R.color.gray)
         })
     }
+}
 
-
+@BindingAdapter("setFirstLetterAsText")
+fun TextView.setFirstLetterAsText(agentName: String?){
+    agentName?.let {
+        text = agentName.substring(0,1).uppercase(Locale.getDefault())
+    }
 }
 
 @BindingAdapter("setSecondButton")
@@ -190,7 +183,7 @@ fun Button.setTheText(status: String?){
 fun EditText.setTheText(requestRemote: RequestRemote?){
     requestRemote?.status?.let {status ->
        setText(if(status != Canceled.name){
-            requestRemote.agentPhone.toString()
+            requestRemote.userPhone.toString()
         }else{
             context.getString(R.string.skip_request)
         })
@@ -198,6 +191,7 @@ fun EditText.setTheText(requestRemote: RequestRemote?){
 
 
 }
+
 
 @BindingAdapter("setVisibility")
 fun ImageView.setVisibility(status: STATUS?){

@@ -31,6 +31,13 @@
         <item name="android:gravity">start</item>
     </style>
 
+    <style name="status_tag_style">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="type_txt_details">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>

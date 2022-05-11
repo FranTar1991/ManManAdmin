@@ -13,8 +13,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.firebase.ui.database.SnapshotParser
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.databinding.ToolBarIncludedLayoutBinding
 
@@ -161,4 +165,26 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
 
  fun getRequestReference(requestId: String, userId: String): DatabaseReference {
     return FirebaseDatabase.getInstance().reference.child("users").child(userId).child("requests").child(requestId)
+}
+
+ fun setAdapter(query: Query,
+                onManManRequestClickListener: OnManManRequestClickListener,
+                viewLifecycleOwner: LifecycleOwner,
+                viewModel: ViewModelForAdapter): AdapterForRequests {
+
+    val snapshotParser = SnapshotParser<ManManRequest> { snapshot ->
+        val requestId = snapshot.key
+        val userId = snapshot.child("user_id").getValue(String::class.java)
+        val status = snapshot.child("status").getValue(String::class.java)
+
+        ManManRequest(requestId = requestId, user_id = userId, status =  status)
+    }
+
+    val options: FirebaseRecyclerOptions<ManManRequest> = FirebaseRecyclerOptions.Builder<ManManRequest>()
+        .setQuery(query,snapshotParser)
+        .setLifecycleOwner(viewLifecycleOwner)
+        .build()
+
+    return AdapterForRequests(viewModel, options, onManManRequestClickListener)
+
 }

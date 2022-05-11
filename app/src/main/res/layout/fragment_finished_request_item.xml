@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="remoteRequest"
+            type="com.manmanadmin.utils.RequestRemote" />
+        <variable
+            name="clickListener"
+            type="com.manmanadmin.finished.OnFinishedRequestClickListener" />
+        <variable
+            name="viewModel"
+            type="com.manmanadmin.finished.FinishedRequestsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_contraint_layout"
+            android:layout_width="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/round_corners"
+            android:elevation="10dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/delet_item_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:src="@drawable/ic_baseline_delete_forever_24"
+                app:layout_constraintBottom_toTopOf="@+id/item_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/item_status"
+                app:layout_constraintTop_toBottomOf="@+id/item_status" />
+
+            <ImageView
+                android:id="@+id/circle_img"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_baseline_circle_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="2dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/abril_fatface"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toTopOf="@+id/circle_img"
+                android:text="@{remoteRequest.agentName}" />
+
+            <TextView
+                android:id="@+id/item_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:gravity="top"
+                android:maxLines="2"
+                android:text="@{remoteRequest.details}"
+                app:layout_constraintBottom_toBottomOf="@+id/circle_img"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                tools:text="Detalles de la compra, detalless de detalles de la compra, detalles de la comprala compra, detalles de la" />
+
+            <TextView
+                android:id="@+id/item_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{remoteRequest.date}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="25/04/2002" />
+
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{remoteRequest.price}"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                tools:text="C$60" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <TextView
+                android:id="@+id/status_txt"
+                style="@style/status_tag_style"
+                android:layout_width="wrap_content"
+                app:setFirstLetterAsText="@{remoteRequest.agentName}"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/abril_fatface"
+                app:layout_constraintBottom_toBottomOf="@+id/circle_img"
+                app:layout_constraintEnd_toEndOf="@+id/circle_img"
+                app:layout_constraintStart_toStartOf="@+id/circle_img"
+                app:layout_constraintTop_toTopOf="@+id/circle_img" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
