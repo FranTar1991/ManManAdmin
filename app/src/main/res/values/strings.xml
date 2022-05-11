@@ -27,6 +27,8 @@
     <string name="explain_pick_up_address_empty">Recomiendamos agregar la dirección del negocio o lugar a donde el cliente desea que se le haga el mandado.</string>
     <string name="add_address_if_necessary">Dirección del lugar donde se hará tu mandado, gestión, viaje o entrega.</string>
     <string name="continue_btn">Continuar</string>
+    <string name="skip_request">Omitir</string>
+    <string name="want_to_skip_request">Se omitirá esta solicitud, pues el cliente la canceló</string>
     <string name="gps_title">El GPS not está encendido</string>
     <string name="turn_on_gps">Porfavor enciende el GPS para continuar</string>
     <string name="please_enter_reference">Porfavor ingresa una referencia.</string>

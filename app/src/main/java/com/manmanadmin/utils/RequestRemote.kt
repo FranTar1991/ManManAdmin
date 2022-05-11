@@ -22,7 +22,7 @@ data class RequestRemote(var id: String? = "",
                          var agentPhone: String? = null,
 
                          var date: String? = null,
-                         var status: STATUS?= null,
+                         var status: String?= null,
                          var title: String? = null,
 
                          var type: String?= null,

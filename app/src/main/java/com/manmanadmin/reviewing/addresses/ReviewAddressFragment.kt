@@ -56,12 +56,15 @@ class ReviewAddressFragment : Fragment() {
             currentTransactionItem =  args.currentTransactionItem
             viewModel.updateTransactionItem(currentTransactionItem)
 
-        viewModel.requestToReview.observe(viewLifecycleOwner){
+        viewModel.requestToReview.observe(viewLifecycleOwner){remoteRequest ->
 
-            if (currentTransactionItem == null){
-                currentTransactionItem = viewModel.fromRemoteToLocal(it)
-                viewModel.updateTransactionItem(currentTransactionItem)
+            remoteRequest?.let {
+                if (currentTransactionItem == null){
+                    currentTransactionItem = viewModel.fromRemoteToLocal(it)
+                    viewModel.updateTransactionItem(currentTransactionItem)
+                }
             }
+
 
         }
 

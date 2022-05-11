@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.manmanadmin.utils.STATUS"/>
         <variable
             name="viewModel"
             type="com.manmanadmin.reviewing.info.ReviewRequestViewModel" />
@@ -61,7 +62,7 @@
                     android:background="@drawable/rounded_corners_et_white"
                     android:gravity="center"
                     android:padding="16dp"
-                    android:text="@{viewModel.requestToReview.userPhone}"
+                    app:setTheText="@{viewModel.requestToReview}"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="+50587151530" />
             </LinearLayout>
@@ -125,7 +126,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="@string/continue_btn"
+                    app:setTheText="@{viewModel.requestToReview.status}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

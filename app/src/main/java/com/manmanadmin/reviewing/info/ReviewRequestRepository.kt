@@ -42,4 +42,15 @@ class ReviewRequestRepository() {
 
     }
 
+    fun deleteThisRequest(
+        requestReference: DatabaseReference?,
+        _navigateToNextFragment: MutableLiveData<Boolean>
+    ) {
+        requestReference?.get()?.addOnSuccessListener {
+            it.ref.removeValue().addOnSuccessListener {
+                _navigateToNextFragment.postValue(true)
+            }
+        }
+    }
+
 }

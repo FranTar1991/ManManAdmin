@@ -173,6 +173,32 @@ fun Button.setSecondButton(status: STATUS?){
 
 }
 
+@BindingAdapter("setTheText")
+fun Button.setTheText(status: String?){
+    status?.let {
+        text = if(status == Canceled.name){
+           context.getString(R.string.skip_request)
+        }else{
+            context.getString(R.string.continue_btn)
+        }
+    }
+
+
+}
+
+@BindingAdapter("setTheText")
+fun EditText.setTheText(requestRemote: RequestRemote?){
+    requestRemote?.status?.let {status ->
+       setText(if(status != Canceled.name){
+            requestRemote.agentPhone.toString()
+        }else{
+            context.getString(R.string.skip_request)
+        })
+    }
+
+
+}
+
 @BindingAdapter("setVisibility")
 fun ImageView.setVisibility(status: STATUS?){
     status?.let {

@@ -10,15 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.database.DatabaseReference
+import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentReviewInfoBinding
-
-import com.manmanadmin.utils.ManManRequest
-import com.manmanadmin.utils.getRequestReference
-import com.manmanadmin.utils.setToolbarUpFunction
+import com.manmanadmin.utils.*
 
 
 class ReviewRequestFragment : Fragment() {
 
+    private var requestToReview: RequestRemote? = null
     private var requestReference: DatabaseReference? = null
     private lateinit var binding: FragmentReviewInfoBinding
     private val args: ReviewRequestFragmentArgs by navArgs()
@@ -65,6 +64,16 @@ class ReviewRequestFragment : Fragment() {
             }
         }
 
+        viewModel.requestToReview.observe(viewLifecycleOwner){
+            requestToReview = it
+        }
+
+        viewModel.navigateToMainFragment.observe(viewLifecycleOwner){
+            if (it){
+                this.findNavController().navigate(ReviewRequestFragmentDirections.actionReviewRequestFragmentToContainerFragment())
+                viewModel.setNavigateToMainFragment(false)
+            }
+        }
         return binding.root
     }
 
@@ -72,7 +81,23 @@ class ReviewRequestFragment : Fragment() {
 
     private fun setContinueListener() {
         continueBtn.setOnClickListener {
-            viewModel.updateRequestInfo(requestReference,binding.detailsEt.text.toString(), binding.titleEt.text.toString(), binding.nameEt.text.toString(), binding.phoneEt.text.toString())
+
+            if (requestToReview?.status == STATUS.Canceled.name){
+
+                showAlertDialog(getString(R.string.alert),getString(R.string.want_to_skip_request),activity,true,null){
+                    currentRequest?.requestId?.let {
+                        viewModel.deleteThisRequest(getThisNodeReference(it))
+                    }
+                }?.show()
+            } else if (requestToReview?.status == STATUS.Received.name){
+                viewModel.updateRequestInfo(requestReference,
+                    binding.detailsEt.text.toString(),
+                    binding.titleEt.text.toString(),
+                    binding.nameEt.text.toString(),
+                    binding.phoneEt.text.toString())
+            }
+
+
         }
     }
 

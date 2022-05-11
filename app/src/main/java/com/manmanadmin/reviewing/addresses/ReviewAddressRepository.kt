@@ -8,7 +8,7 @@ import com.google.firebase.database.ValueEventListener
 import com.manmanadmin.utils.RequestRemote
 
 class ReviewAddressRepository() {
-    fun setRequestListener(reference: DatabaseReference?, callback: MutableLiveData<RequestRemote>){
+    fun setRequestListener(reference: DatabaseReference?, callback: MutableLiveData<RequestRemote?>){
         reference?.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val remoteRequest = snapshot.getValue(RequestRemote::class.java)

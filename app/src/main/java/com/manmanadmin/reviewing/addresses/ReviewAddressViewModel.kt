@@ -38,8 +38,8 @@ class ReviewAddressViewModel(private val repo: ReviewAddressRepository): ViewMod
     val requestRawInfo: LiveData<ManManRequest?>
         get() = _requestRawInfo
 
-    private val _requestToReview = MutableLiveData<RequestRemote>()
-    val requestToReview: LiveData<RequestRemote>
+    private val _requestToReview = MutableLiveData<RequestRemote?>()
+    val requestToReview: LiveData<RequestRemote?>
         get() = _requestToReview
 
     override var _toolbarTextLiveData = MutableLiveData<String>()

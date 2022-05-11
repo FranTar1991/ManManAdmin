@@ -14,16 +14,20 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
     private val _requestToReview = MutableLiveData<RequestRemote>()
     val requestToReview: LiveData<RequestRemote>
     get() = _requestToReview
+
     override var _toolbarTextLiveData = MutableLiveData<String>()
 
     private val _requestRawInfo= MutableLiveData<ManManRequest?>()
     val requestRawInfo: LiveData<ManManRequest?>
         get() = _requestRawInfo
 
+    private val _navigateToMainFragment= MutableLiveData<Boolean>()
+    val navigateToMainFragment: LiveData<Boolean>
+        get() = _navigateToMainFragment
+
     private val _navigateToNextFragment= MutableLiveData<Boolean>()
     val navigateToNextFragment: LiveData<Boolean>
         get() = _navigateToNextFragment
-
 
     fun setNavigateToNextFragment(value: Boolean){
         _navigateToNextFragment.value = value
@@ -37,6 +41,10 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
         repo.setRequestListener(reference, _requestToReview)
     }
 
+    override fun setNavigateToMainFragment(value: Boolean) {
+        _navigateToMainFragment.value = value
+    }
+
     fun updateRequestInfo(
         reference: DatabaseReference?,
         details: String?,
@@ -45,6 +53,10 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
         userPhone: String
     ){
         repo.updateRequestInfo(reference,_navigateToNextFragment, details, title, userName, userPhone)
+    }
+
+    fun deleteThisRequest(requestReference: DatabaseReference?) {
+        repo.deleteThisRequest(requestReference, _navigateToMainFragment)
     }
 
 
