@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.manmanadmin.reviewing.info.ReviewRequestViewModel" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:background="@drawable/ic_back_manchas_02"
+            android:layout_height="match_parent"
+            tools:context=".set_up_transaction.transaction_info.TransactionInfoFragment">
+
+            <include
+                android:id="@+id/included_toolbar_layout"
+                layout="@layout/tool_bar_included_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/inside_main"
+                app:layout_constraintStart_toStartOf="@+id/inside_main"
+                app:layout_constraintTop_toBottomOf="@+id/included_toolbar_layout">
+
+                    <EditText
+                        style="@style/type_txt_details"
+                        android:id="@+id/name_et"
+                        android:background="@drawable/rounded_corners_et_white"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:scrollbars="horizontal"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:padding="16dp"
+                        android:text="@{viewModel.requestToReview.userName}"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+                <EditText
+                    style="@style/type_txt_details"
+                    android:layout_width="0dp"
+                    android:id="@+id/phone_et"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/rounded_corners_et_white"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="@{viewModel.requestToReview.userPhone}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="+50587151530" />
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/inside_main"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="32dp"
+                android:background="@drawable/round_corners"
+                android:elevation="10dp"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <EditText
+                    android:id="@+id/title_et"
+                    style="@style/edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="40"
+                    android:maxLines="1"
+                    android:text="@{viewModel.requestToReview.title}"
+                    app:isTitle="@{true}"
+                    app:layout_constraintBottom_toTopOf="@+id/details_et"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+                    app:setMyHint="@{viewModel.requestToReview.type}" />
+
+                <EditText
+                    android:id="@+id/details_et"
+                    style="@style/edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="8dp"
+                    android:gravity="start|top"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:text="@{viewModel.requestToReview.details}"
+                    app:isTitle="@{false}"
+                    app:layout_constraintBottom_toTopOf="@+id/continue_btn_to_addresses"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_et"
+                    app:setMyHint="@{viewModel.requestToReview.type}" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/continue_btn_to_addresses"
+                    style="@style/my_btn_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/continue_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/details_et" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:elevation="11dp"
+                android:layout_marginStart="-38dp"
+                android:layout_marginBottom="-38dp"
+                app:decideWhichIcon="@{viewModel.requestToReview.type}"
+                app:layout_constraintBottom_toTopOf="@+id/inside_main"
+                app:layout_constraintStart_toEndOf="@+id/inside_main" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

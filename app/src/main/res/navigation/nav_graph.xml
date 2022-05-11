@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/containerFragment">
+
+    <fragment
+        android:id="@+id/pendingRequestsFragment"
+        android:name="com.manmanadmin.pending.PendingRequestsFragment"
+        android:label="fragment_pending_requests"
+        tools:layout="@layout/fragment_pending_requests" />
+    <fragment
+        android:id="@+id/processingRequestsFragment"
+        android:name="com.manmanadmin.processing.ProcessingRequestsFragment"
+        android:label="fragment_processing_requests"
+        tools:layout="@layout/fragment_processing_requests" />
+    <fragment
+        android:id="@+id/reviewedRequestsFragment"
+        android:name="com.manmanadmin.reviewed.ReviewedRequestsFragment"
+        android:label="fragment_reviewed_requests"
+        tools:layout="@layout/fragment_reviewed_requests" />
+    <fragment
+        android:id="@+id/finishedRequestsFragment"
+        android:name="com.manmanadmin.finished.FinishedRequestsFragment"
+        android:label="fragment_finished_requests"
+        tools:layout="@layout/fragment_finished_requests" />
+    <fragment
+        android:id="@+id/reviewRequestFragment"
+        android:name="com.manmanadmin.reviewing.info.ReviewRequestFragment"
+        android:label="ReviewRequestFragment" >
+        <argument
+            android:name="request"
+            app:argType="com.manmanadmin.utils.ManManRequest"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_reviewRequestFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+        <action
+            android:id="@+id/action_reviewRequestFragment_to_transactionAddressesFragment"
+            app:destination="@id/transactionAddressesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.manmanadmin.main_container.ContainerFragment"
+        android:label="ContainerFragment" >
+        <action
+            android:id="@+id/action_containerFragment_to_reviewRequestFragment"
+            app:destination="@id/reviewRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.manmanadmin.location_picker.MapsFragment"
+        android:label="MapsFragment" >
+        <argument
+            android:name="location"
+            app:argType="com.manmanadmin.utils.SelectedLocation"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="callingFragment"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="currentTransactionItem"
+            app:argType="com.manmanadmin.utils.RequestLocal"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_mapsFragment_to_transactionAddressesFragment"
+            app:destination="@id/transactionAddressesFragment" />
+        <argument
+            android:name="currentManManRequest"
+            app:argType="com.manmanadmin.utils.ManManRequest"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionAddressesFragment"
+        android:name="com.manmanadmin.reviewing.addresses.ReviewAddressFragment"
+        android:label="TransactionAddressesFragment" >
+        <action
+            android:id="@+id/action_transactionAddressesFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+        <argument
+            android:name="request"
+            app:argType="com.manmanadmin.utils.ManManRequest"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_transactionAddressesFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="callingFragment"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="currentTransactionItem"
+            app:argType="com.manmanadmin.utils.RequestLocal"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_transactionAddressesFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.manmanadmin.reviewing.checkout.CheckoutFragment"
+        android:label="CheckoutFragment" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+        <argument
+            android:name="currentTransactionItem"
+            app:argType="com.manmanadmin.utils.RequestLocal"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="manManRequest"
+            app:argType="com.manmanadmin.utils.ManManRequest"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+
+</navigation>

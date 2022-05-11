@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.manmanadmin.reviewing.addresses.ReviewAddressViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="@drawable/ic_back_manchas_02"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_in_addresses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".set_up_transaction.transaction_address.TransactionAddressesFragment">
+
+            <include
+                android:id="@+id/included_toolbar_layout"
+                layout="@layout/tool_bar_included_layout" />
+
+            <include
+                android:id="@+id/user_address_layout"
+                layout="@layout/address_section_layout"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/location_b_address_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/included_toolbar_layout" />
+
+            <CheckBox
+                android:id="@+id/add_another_address_chk"
+                android:layout_width="match_parent"
+                android:background="@drawable/rounded_corners_et_white"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:elevation="10dp"
+                android:textSize="12sp"
+                android:text="@string/add_address_if_necessary"
+                app:layout_constraintBottom_toTopOf="@+id/location_b_address_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_address_layout"
+                app:layout_constraintTop_toBottomOf="@+id/user_address_layout" />
+
+            <include
+                android:id="@+id/location_b_address_layout"
+                android:layout_marginBottom="16dp"
+                android:visibility="@{addAnotherAddressChk.checked ? View.VISIBLE : View.GONE}"
+                layout="@layout/address_section_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/continue_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_address_layout" />
+
+            <Button
+                android:id="@+id/continue_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/continue_btn"
+                style="@style/my_btn_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/location_b_address_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</layout>

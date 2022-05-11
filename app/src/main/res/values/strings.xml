@@ -1,0 +1,201 @@
+<resources>
+    <string name="app_name">MM Admin</string>
+    <string name="error_log_in">No se pudo ingresar, error: %d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Titulo</string>
+    <string name="details">Detalles</string>
+    <string name="select_location">Selecciona un lugar</string>
+    <string name="add_a_reference">Agrega una referencia de la casa o lugar.</string>
+    <string name="save_location">Guardar</string>
+    <string-array name="cities_array">
+        <item>--Selecciona--</item>
+        <item>Jinotepe</item>
+        <item>Diriamba</item>
+        <item>Dolores</item>
+        <item>San_Marcos</item>
+        <item>La_Paz</item>
+        <item>El_Rosario</item>
+        <item>Santa_Teresa</item>
+        <item>Guisquiliapa</item>
+    </string-array>
+
+    <string name="your_address">Tu dirección es:</string>
+    <string name="user_location">Tu ubicación actual es:</string>
+    <string name="add_address_b">Direccion adicional:</string>
+    <string name="add_address_to_know_price">Importante para calcular el precio del servicio.</string>
+    <string name="explain_pick_up_address_empty">Recomiendamos agregar la dirección del negocio o lugar a donde el cliente desea que se le haga el mandado.</string>
+    <string name="add_address_if_necessary">Dirección del lugar donde se hará tu mandado, gestión, viaje o entrega.</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="gps_title">El GPS not está encendido</string>
+    <string name="turn_on_gps">Porfavor enciende el GPS para continuar</string>
+    <string name="please_enter_reference">Porfavor ingresa una referencia.</string>
+
+    <string name="cacenlIt">Cancelar</string>
+    <string name="okIt">Ok</string>
+
+    <string name="select_your_location">Porfavor ingresa la ubicación del cliente.</string>
+
+
+    <string name="signed_out">The user has been sighed out</string>
+
+    <string name="location">Mi ubicación</string>
+    <string name="jinotepe">Jinotepe</string>
+    <string name="ok">Ok</string>
+
+    <string name="user_name">Nombre</string>
+    <string name="user_phone_number">Cel. con código de área</string>
+    <string name="add_address">Direcciónes</string>
+    <string name="save">Guardar</string>
+    <string name="preference_file_key">my_shared_preferences</string>
+    <string name="saved_user_name">Nombre de usuario</string>
+    <string name="saved_user_phone">Teléfono</string>
+    <string name="the_selected_address">Lat: %s - Long: %s</string>
+    <string name="content_description_update_profile">Actualizar perfil</string>
+    <string name="profile">Perfil</string>
+    <string name="more">más</string>
+    <string name="content_description_more">Mas opciones</string>
+    <string name="add_request">Agregar solicitud</string>
+    <string name="price_list">Lista de precios</string>
+    <string name="tutorial">Explicación del proceso</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="log_out">Salir</string>
+    <string name="transaction_1">Buy</string>
+    <string name="transaction_2">Ship</string>
+    <string name="transaction_3">Ride</string>
+    <string name="transaction_4">Other</string>
+
+    <string name="transaction_1_label">Compras</string>
+    <string name="transaction_2_label">Envíos</string>
+    <string name="transaction_3_label">Ride</string>
+    <string name="transaction_4_label">Otros</string>
+    <string name="choose_type">¿Que quieres hacer?</string>
+    <string name="select_type">Selecciona una opción</string>
+
+    <string name="not_recognized">Algo anda mal</string>
+
+
+
+    <string name="purchase">Título de la compra.</string>
+    <string name="shipment">Título del envío.</string>
+    <string name="ride">Título del viaje.</string>
+    <string name="transaction_request">Título de la solicitud.</string>
+
+    <string name="transaction_1_description">Agrega todos los detalles sobre tus compras, tales como: ¿ya pagaste?, ¿quien recibirá el paquete?, ¿en que negocio quieres que se compren los artículos?. Si hay alguna duda, nos comunicaremos por medio de whatsapp.</string>
+    <string name="transaction_2_description">Agrega todos los detalles sobre tu envío, tales como: ¿que envías? , ¿necesita algún cuidado especial?, ¿que tan grande es la caja?. Si hay alguna duda, nos comunicaremos por medio de whatsapp.</string>
+    <string name="transaction_3_description">Agrega todos los detalles sobre tu viaje. ¿a donde vas?, ¿dónde te recogemos?. Recuerda que necesitarás tu propio casco. Si hay alguna duda, nos comunicaremos por medio de whatsapp.</string>
+    <string name="transaction_4_description">¿En que podemos ayudarte? Porfavor, sé tan específico como puedas. Si hay alguna duda, nos comunicaremos por medio de whatsapp.</string>
+    <string name="addresses">Direcciones</string>
+    <string name="add_details">Agregar los detalles</string>
+    <string name="checkout">Checkout</string>
+    <string name="details_label">Detalles:</string>
+    <string name="city">Ciudad:</string>
+    <string name="price">Costo del servicio:</string>
+    <string name="journey_string">%s - %s</string>
+    <string name="show_price">C$%s</string>
+    <string name="text_for_referece">Atención: Si ves "\"No definido"\" como el precio del servicio, significa que el sistema no pudo calcularlo debido a que no ingresaste 2 direcciones. El repartidor te dirá el precio cuando se comunique contigo.</string>
+    <string name="update_request">Actualizar solicitud</string>
+    <string name="track_request">Rastrear tu solicitud</string>
+    <string name="internet_error">Hubo un error. No se pudo calcular el precio del servicio.</string>
+    <string name="price_not_defined">No definido</string>
+    <string name="no_requests">No hay solicitudes.</string>
+    <string name="not_connected">No estás conectado a internet :(</string>
+    <string name="something_wrong">Asegúrate de ingresar toda la información solicitada.</string>
+    <string name="alert">Alerta</string>
+    <string name="explain_why_permission">Necesitamos saber tu ubicación para poder entregar lo que solicitaste.</string>
+
+    <string name="this_is_required">Esto es requerido</string>
+
+    <string name="user_lat">user_lat</string>
+    <string name="user_long">user_long</string>
+    <string name="user_ref">user_ref</string>
+    <string name="sending_request">Actualizando solicitud…</string>
+    <string name="status">Estado</string>
+    <string name="greeting">Hola, %s</string>
+
+    <string name="received_status">Received</string>
+    <string name="finished_status">Finished</string>
+    <string name="canceled_status">Canceled</string>
+    <string name="in_progress_short">Progress</string>
+    <string name="in_progress_status">In progress</string>
+
+    <string name="received_status_label">Recibido</string>
+    <string name="finished_status_label">Finalizado</string>
+    <string name="canceled_status_label">Cancelado</string>
+    <string name="in_progress_status_label">En proceso</string>
+
+    <string name="in_progress_status_by">Procesado por:</string>
+
+
+    <string name="edit">Editar/Ver</string>
+    <string name="track">Rastrear</string>
+    <string name="repeat">Repetir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="chat_agent">Chatear</string>
+    <string name="chat_customer_service">Calificar</string>
+    <string name="sure_cancel">¿Quieres cancelar esto? Tu solicitud va a ser descartada</string>
+
+    <string name="report_issue_via_whatsapp">Número de orden</string>
+    <string name="want_to_repeat">¿Quieres repetir ésta transacción?</string>
+    <string name="want_to_edit">A continuación podrás editar/ver ésta transacción</string>
+
+    <string name="nothing_selected">No hay filtros aplicados</string>
+    <string name="showing">Mostrando las transacciones: %s</string>
+    <string name="R">R</string>
+    <string name="P">P</string>
+    <string name="F">F</string>
+    <string name="default_notification_channel_id">696969</string>
+    <string name="fcm_message">Solicitud actualizada</string>
+    <string name="msg_token_fmt">Token: %s</string>
+    <string name="request_updated">Solicitud actualizada.</string>
+    <string name="in_progress_notification">Ya estamos procesando tu solicitud. El repartidor se comunicará contigo en breve.</string>
+    <string name="finised_notification">Tu solicitud fue completada. Ayúdanos a mejorar y envía un mensaje calificando el servicio aquí.</string>
+    <string name="request_id_extra">request_id</string>
+    <string name="request_title">%s</string>
+    <string name="C">C</string>
+    <string name="canceled_notification">Solicitud cancelada con éxito :(</string>
+    <string name="item_deleted">Solicitud borrada con éxito</string>
+    <string name="want_to_delete">¿Quieres borrar esto permanentemente?</string>
+    <string name="checking_internet_connection">Verificando conección…</string>
+    <string name="back_online">Está conectado :)</string>
+    <string name="unknown_state">Uknown status</string>
+    <string name="service_status">Hola, ya estamos cerrados. Nuestras horas laborales sonde %s a %s. De %s a %s. Si envías una solicitud podría ser procesada hasta el próximo día laboral.</string>
+    <string name="services_closed">cerrado</string>
+    <string name="closed_title">Estamos cerrados</string>
+    <string name="opening_whatsapp">Se abrirá Whatsapp con el número de teléfono de servicio al cliente y ahí podrás enviar tu calificación y comentarios.</string>
+    <string name="opening_whatsapp_agent">Se abrirá Whatsapp para que puedas chatear con %s.</string>
+    <string name="list_of_price">Precio para solicitudes en la misma ciudad</string>
+    <string name="price_clarification">Para que el sistema calcule el precio correctamente se tendrán que ingresar 2 direcciones. En caso contrario se mostrará "\"No definido"\" y el precio será brindado por el repartidor antes de procesar la solicitud.</string>
+    <string name="choose_from_below">Escoge</string>
+    <string name="welcome">Bienvenido a Manchas Mandados Jinotepe. Donde Hacemos tu vida más fácil.</string>
+    <string name="process_explained">Explicación del proceso</string>
+
+    <string name="first_s_p">1. Presiona el botón de agregar.</string>
+    <string name="second_s_p">2. Escoge el tipo de envío. Puede ser Compras, Envíos, Ride y Otros.</string>
+    <string name="third_s_p">3. Ingresa un título breve y descriptivo sobre la solicitud</string>
+    <string name="fourth_s_p">3. Ingresa todos los detalles sobre la solicitud. Esta parte es importante, mientras más descriptivo mejor. Si en caso tenemos alguna duda nos contactaremos por medio de whatsapp.</string>
+    <string name="fifth_s_p">4. Selecciona tu ubicación actual en el mapa e ingresa una referencia del lugar, como número de casa, color o incluso podrás ingresar la dirección en formato Nica. Esto es requerido, pues así sabremos a donde entregar tu pedido.</string>
+    <string name="sixth_s_p">5. Selecciona la ubicación del negocio o lugar a donde se hará el mandado. Esto es opcional, pero es importante para que la aplicación te pueda brindar el precio del servicio, si no lo agregas sabrás el precio hasta que el repartidor se comunique contigo.</string>
+    <string name="seventh_s_p">6. Dale enviar a la solicitud y quédate pendiente del estado de tu solicitud por medio de las notificaciones que te enviaremos.</string>
+    <string name="status_explained">La solicitud pasará por 3 estados. \"\R\"\ Recibido, \"\P\"\ Procesando y \"\F\"\ Finalizado.</string>
+    <string name="add_request_tut">Primero envía tu solicitud</string>
+    <string name="press_add_tut">Presiona el botón agregar e ingresa todos los detalles de la solicitud. Luego la solicitud pasará por 3 fases:</string>
+    <string name="received_status_label_tut">Solicitud \"Recibida\"\</string>
+    <string name="in_progress_status_label_tut">Solicitud \"En proceso\"\</string>
+    <string name="finished_status_label_tut">Solicitud \"Finalizada\"\</string>
+
+    <string name="received_status_explanation_tut">La solicitud está en espera a ser procesada. Aquí podrás modificar o cancelar.</string>
+    <string name="in_progress_status_explanation_tut">La solicitud está siendo procesado por un repartidor y se comunicará contigo en breve.</string>
+    <string name="finished_status_explanation_tut">La solicitud se completó con éxito.</string>
+    <string name="show_tut">show_tut</string>
+    <string name="profile_saved">profile_saved</string>
+    <string name="call_intro">Mostrar intro</string>
+    <string name="to_be_defined">No definido</string>
+    <string name="add_price">Agrega un precio al servicio</string>
+    <string name="not_checked">No revisadas</string>
+    <string name="already_checked">Revisadas</string>
+    <string name="procesing">Procesandose</string>
+    <string name="finished_requests">FInalizadas</string>
+    <string name="set_service_status">Cerrar o Abrir el negocio</string>
+    <string name="sure_of_log_out">¿Seguro que quieres salir?</string>
+</resources>
