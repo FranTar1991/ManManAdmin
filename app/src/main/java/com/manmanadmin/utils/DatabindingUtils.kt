@@ -68,13 +68,13 @@ fun ImageView.decideWhichIcon(type: String?){
 }
 
 @BindingAdapter("setThePriceText")
-fun EditText.setThePriceText(price: String?){
-    setText(if (price == context.getString(R.string.to_be_defined)){
+fun EditText.setThePriceText(price: Double?){
+    setText(if (price  == -1.0){
         isEnabled = true
         ""
     }else{
         isEnabled = false
-        price
+        price.toString()
     })
 }
 
@@ -132,6 +132,12 @@ fun TextView.setTheTitleText(title: String?){
     }
 }
 
+@BindingAdapter("setTheItemCountText")
+fun TextView.setTheItemCountText(itemCount: Int?){
+    itemCount?.let {
+        text = context.getString(R.string.item_count, itemCount.toString())
+    }
+}
 
 @BindingAdapter("setTheTextColor")
 fun TextView.setTheTextColor(status: STATUS?){
@@ -221,4 +227,33 @@ fun TextView.setTheTextForInternetCheck(status: GeneralStatus?){
     }
 
 }
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("showTheDetails")
+fun TextView.showTheDetails(requestRemote: RequestRemote?){
+    requestRemote?.let {
+        text = "Fecha: ${requestRemote.date}"+"\n\n"+
+                "Agente: ${requestRemote.agentName}"+"\n\n"+
+                "Nombre del cliente: ${requestRemote.userName}"+"\n\n"+
+                "Título: ${requestRemote.title}"+"\n\n"+
+                "Detalles: ${requestRemote.details}"+"\n\n"+
+                "Precio: ${requestRemote.price}"+"\n\n"+
+                "Dirección A: Lat ${requestRemote.userAddressLat} Long ${requestRemote.userAddressLong}"+"\n\n"+
+                "Referencia de A: ${requestRemote.userAddressReference}"+"\n\n"+
+                "Dirección B: Lat ${requestRemote.locationBAddressLat} Long ${requestRemote.locationBAddressLong}"+"\n\n"+
+                "Referencia de B: ${requestRemote.locationBAddressReference}"+"\n\n"+
+                "ID: ${requestRemote.id}"+"\n"
+    }
+
+}
+
+@BindingAdapter("showMoneyEarned")
+fun TextView.showMoneyEarned(allRequests: List<RequestRemote>?){
+    allRequests?.let {
+        val sumInt = getSumOfMoneyEarnedInRequests(allRequests)
+        text = context.getString(R.string.sum_of_requests, sumInt.toString())
+    }
+}
+
+
 

@@ -7,7 +7,7 @@ import com.manmanadmin.utils.ManManRequest
 import com.manmanadmin.utils.ViewModelForAdapter
 
 class ReviewedRequestsViewModel(): ViewModel(), ViewModelForAdapter {
-    override val _numberOfPendingRequests: MutableLiveData<Int> = MutableLiveData<Int>()
+    override val _numberOfRequests: MutableLiveData<Int> = MutableLiveData<Int>()
 
 
 }

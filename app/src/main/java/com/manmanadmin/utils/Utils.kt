@@ -188,3 +188,16 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
     return AdapterForRequests(viewModel, options, onManManRequestClickListener)
 
 }
+
+fun getSumOfMoneyEarnedInRequests(requests: List<RequestRemote>?): Double{
+    var sum  = 0.0
+        requests?.let {
+            for (request in requests){
+                sum += request.price ?: 0.0
+            }
+        }
+
+    return sum
+}
+
+

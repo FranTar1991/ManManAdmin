@@ -22,7 +22,7 @@ class AdapterForRequests (private val viewModel: ViewModelForAdapter, options: F
 
     override fun onDataChanged() {
         super.onDataChanged()
-        viewModel.setNumberOfPendingRequests(itemCount)
+        viewModel.setNumberOfRequests(itemCount)
     }
 
     class ViewHolder private constructor(private val binding: ManManRequestItemBinding) :

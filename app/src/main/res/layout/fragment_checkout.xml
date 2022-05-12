@@ -97,6 +97,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:inputType="numberDecimal"
                     android:background="@color/fragment_background"
                     app:setThePriceText='@{viewModel.priceForThisRequest}'
                     app:layout_constraintBaseline_toBaselineOf="@+id/textView8"

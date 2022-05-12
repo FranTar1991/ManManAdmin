@@ -72,8 +72,8 @@ class CheckoutFragment : Fragment() {
         binding.updateRequestBtn.setOnClickListener {
             it.isEnabled = false
             (it as Button).text = getString(R.string.sending_request)
-            currentRequest.price = binding.priceEt.text.toString()
-            if (currentRequest.price == ""){
+            currentRequest.price = binding.priceEt.text.toString().toDouble()
+            if (currentRequest.price.toString() == ""){
                 showAlertDialog(getString(R.string.alert),getString(R.string.add_price), hasCancelButton = false, icon = null, functionToExecute =  null, context = context)?.show()
                 it.isEnabled = true
                 (it as Button).text = getString(R.string.update_request)

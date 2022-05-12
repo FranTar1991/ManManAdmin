@@ -23,8 +23,8 @@ class CheckoutFragmentViewModel(private val repository: CheckoutFragmentRepo): V
     val transactionItem: LiveData<RequestLocal>
     get() = _transactionItem
 
-    private val _priceForThisRequest = MutableLiveData<String?>()
-    val priceForThisRequest: LiveData<String?>
+    private val _priceForThisRequest = MutableLiveData<Double?>()
+    val priceForThisRequest: LiveData<Double?>
         get() = _priceForThisRequest
 
     private val _listOfUpdatedPrices = MutableLiveData<CustomPrices>()
@@ -57,7 +57,7 @@ class CheckoutFragmentViewModel(private val repository: CheckoutFragmentRepo): V
         _navigateToMainFragment.value = value
     }
 
-    fun setPriceForThisRequest(value: String?){
+    fun setPriceForThisRequest(value: Double?){
         _priceForThisRequest.value = value
     }
 

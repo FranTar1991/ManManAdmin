@@ -63,7 +63,7 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
     fun getPriceForCurrentRequest(
         journey: Journey,
         customPrices: CustomPrices,
-        priceForThisRequest: MutableLiveData<String?>
+        priceForThisRequest: MutableLiveData<Double?>
     ) {
 
         val isSameCity = journey.locationBCity == journey.userCity
@@ -93,18 +93,19 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
             }
 
 
-     val priceString =   if (priceFoLocationB == 0 || priceForUser == 0){
-         context?.getString(R.string.price_not_defined)
+        val priceProcessed: Double =   if (priceFoLocationB == 0 || priceForUser == 0){
+            -1.0
         }else if (isSameCity){
-        val price = priceFoLocationB!! + priceForUser!!
-         context?.getString(R.string.show_price, price.toString())
+            (priceFoLocationB!! + priceForUser!!).toDouble()
+
         }else if (!isSameCity){
-         val price = (priceFoLocationB!! + priceForUser!!)*1.40
-         context?.getString(R.string.show_price, price.toInt().toString())
+
+            (priceFoLocationB!! + priceForUser!! * 1.40).toDouble()
+
         }else{
-         context?.getString(R.string.price_not_defined)
-     }
-        priceForThisRequest.postValue(priceString)
+            -1.0
+        }
+        priceForThisRequest.postValue(priceProcessed)
 
     }
 

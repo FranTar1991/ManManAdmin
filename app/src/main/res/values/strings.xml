@@ -77,7 +77,6 @@
     <string name="not_recognized">Algo anda mal</string>
 
 
-
     <string name="purchase">Título de la compra.</string>
     <string name="shipment">Título del envío.</string>
     <string name="ride">Título del viaje.</string>
@@ -201,4 +200,12 @@
     <string name="set_service_status">Cerrar o Abrir el negocio</string>
     <string name="sure_of_log_out">¿Seguro que quieres salir?</string>
     <string name="waiting_to_be_processed">Solicitud a esperas de ser procesada</string>
+    <string name="finished_request">Solicitud finalizada</string>
+    <string name="filter_requests">Filter</string>
+    <string name="delete_all">Borrar todas</string>
+    <string name="want_to_delete_all">¿Quieres borrar todas las solicitudes?</string>
+    <string name="items_deleted">Todas las solicitudes fueron borradas.</string>
+    <string name="item_count"># de solicitudes: %s</string>
+    <string name="cordoba_sign">C$</string>
+    <string name="sum_of_requests">Monto en C$: %s</string>
 </resources>

@@ -4,13 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 interface ViewModelForAdapter {
-    val _numberOfPendingRequests: MutableLiveData<Int>
-    val numberOfPendingRequests: LiveData<Int>
-        get() = _numberOfPendingRequests
+    val _numberOfRequests: MutableLiveData<Int>
+    val numberOfRequests: LiveData<Int>
+        get() = _numberOfRequests
 
 
 
-    fun setNumberOfPendingRequests(numberOfPendingRequests: Int) {
-        _numberOfPendingRequests.value = numberOfPendingRequests
+    fun setNumberOfRequests(numberOfPendingRequests: Int) {
+        _numberOfRequests.value = numberOfPendingRequests
     }
+
+
 }

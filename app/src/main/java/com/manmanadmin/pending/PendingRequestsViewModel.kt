@@ -13,7 +13,7 @@ class PendingRequestsViewModel(): ViewModel(), ViewModelForAdapter {
     val navigateToReviewRequest: LiveData<ManManRequest?>
     get() = _navigateToReviewRequest
 
-    override val _numberOfPendingRequests: MutableLiveData<Int> = MutableLiveData<Int>()
+    override val _numberOfRequests: MutableLiveData<Int> = MutableLiveData<Int>()
 
 
     fun setNavigateToReviewRequestFragment(value: ManManRequest?) {

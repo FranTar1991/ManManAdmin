@@ -17,7 +17,7 @@ data class RequestRemote(var id: String? = "",
                          var trackingLong: Double = CITIES.Jinotepe.latLng.longitude,
                          var trackingLat: Double = CITIES.Jinotepe.latLng.latitude,
 
-                         var price: String?= null,
+                         var price: Double?= null,
                          var agentName: String? = null,
                          var agentPhone: String? = null,
 

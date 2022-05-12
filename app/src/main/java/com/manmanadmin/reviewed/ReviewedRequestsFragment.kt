@@ -22,7 +22,7 @@ class ReviewedRequestsFragment : Fragment() {
     ): View {
         binding = FragmentReviewedRequestsBinding.inflate(inflater,container,false)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         val query: Query = FirebaseDatabase.getInstance()
             .reference
             .child("all_requests")

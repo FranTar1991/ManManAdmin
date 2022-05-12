@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_containerFragment_to_reviewRequestFragment"
             app:destination="@id/reviewRequestFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_requestWithAllDetailsFragment"
+            app:destination="@id/requestWithAllDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -121,6 +124,16 @@
         <argument
             android:name="manManRequest"
             app:argType="com.manmanadmin.utils.ManManRequest"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestWithAllDetailsFragment"
+        android:name="com.manmanadmin.finished.with_details.RequestWithAllDetailsFragment"
+        android:label="RequestWithAllDetailsFragment" >
+        <argument
+            android:name="finishedRequest"
+            app:argType="com.manmanadmin.utils.RequestRemote"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>

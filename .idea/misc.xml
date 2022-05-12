@@ -21,10 +21,11 @@
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/address_section_layout.xml" value="0.10461956521739131" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_checkout.xml" value="0.25" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_container.xml" value="0.10461956521739131" />
-        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_finished_request_item.xml" value="0.33" />
-        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_finished_requests.xml" value="0.10461956521739131" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_finished_request_item.xml" value="0.25" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_finished_requests.xml" value="0.15" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_pending_requests.xml" value="0.22" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_processing_requests.xml" value="0.10461956521739131" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_request_with_all_details.xml" value="0.18" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_address.xml" value="0.38979118329466356" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_info.xml" value="0.25" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_request.xml" value="0.18" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/spinner_item_layout.xml" value="0.10461956521739131" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/tool_bar_included_layout.xml" value="0.16" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/menu/menu.xml" value="0.22" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/menu/menu_bottom_app_bar.xml" value="0.25" />
       </map>
     </option>
   </component>
