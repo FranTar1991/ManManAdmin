@@ -23,12 +23,8 @@ class ReviewRequestRepository() {
     }
 
     fun updateRequestInfo(
-        reference: DatabaseReference?,
-        callback: MutableLiveData<Boolean>,
-        details: String?,
-        title: String?,
-        userName: String,
-        userPhone: String
+        reference: DatabaseReference?, callback: MutableLiveData<Boolean>, details: String?,
+        title: String?, userName: String, userPhone: String
     ){
         reference?.child("details")?.setValue(details)?.addOnSuccessListener {
             reference.child("title").setValue(title).addOnSuccessListener {

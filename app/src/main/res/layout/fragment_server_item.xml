@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="server"
+            type="com.manmanadmin.utils.MMServer" />
+        <variable
+            name="viewModel"
+            type="com.manmanadmin.servers.ServersViewModel" />
+        <variable
+            name="clickListener"
+            type="com.manmanadmin.servers.OnServerClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corners_et_white"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/server_name_txt"
+            style="@style/type_server_txt"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{server.associate}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/server_phone_txt"
+            app:layout_constraintEnd_toStartOf="@+id/server_phone_txt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Franklin Tardencilla" />
+
+        <TextView
+            android:id="@+id/server_phone_txt"
+            style="@style/type_server_txt"
+            android:text="@{server.phoneNumber}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/server_name_txt"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:text="+50587151530" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/type_txt_details"
+            android:layout_width="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@{server.serverStatus}"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/server_name_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ocupado" />
+
+        <TextView
+            android:id="@+id/last_time_used_txt"
+            style="@style/type_txt_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:setLastTimeUsed="@{server.lastTimeUsed}"
+            app:layout_constraintBottom_toTopOf="@+id/server_name_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ocupado" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:onClickListener="@{(view) -> clickListener.onClick(view,server)}"
+            android:visibility="@{server.currentRequestId == null ? View.GONE : View.VISIBLE}"
+            android:background="@drawable/rounded_corners_et"
+            app:layout_constraintEnd_toEndOf="@+id/server_phone_txt"
+            app:layout_constraintStart_toStartOf="@+id/server_name_txt"
+            app:layout_constraintTop_toBottomOf="@+id/server_phone_txt">
+
+            <TextView
+                android:id="@+id/call_id_txt"
+                style="@style/type_txt_details"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{server.currentRequestId}"
+                app:layout_constraintEnd_toStartOf="@+id/user_id_txt"
+                app:layout_constraintHorizontal_bias="0.5"
+                android:padding="16dp"
+                android:layout_width="0dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
+                tools:text="Franklin Tardencilla" />
+
+            <TextView
+                android:id="@+id/user_id_txt"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/type_txt_details"
+                android:maxLines="1"
+                android:text="@{server.currentUserId}"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/call_id_txt"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="+50587151530" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

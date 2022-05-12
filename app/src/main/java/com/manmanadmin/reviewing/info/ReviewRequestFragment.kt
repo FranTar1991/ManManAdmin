@@ -17,6 +17,7 @@ import com.manmanadmin.utils.*
 
 class ReviewRequestFragment : Fragment() {
 
+
     private var requestToReview: RequestRemote? = null
     private var requestReference: DatabaseReference? = null
     private lateinit var binding: FragmentReviewInfoBinding
@@ -49,18 +50,14 @@ class ReviewRequestFragment : Fragment() {
                 viewModel.setNavigateToNextFragment(false)
             }
         }
-        setToolbarUpFunction(this, context ,binding.includedToolbarLayout, viewModel)
-
-        viewModel.toolbarTextLiveData.observe(viewLifecycleOwner){
-            binding.includedToolbarLayout.appTitle.text = it
-        }
-
+        setToolbarUpFunction(binding.myToolbar)
 
         viewModel.requestRawInfo.observe(viewLifecycleOwner){
             it?.let {
                 currentRequest = it
                  requestReference = it.user_id?.let { it1 -> getRequestReference(it.requestId!!, it1) }
                 viewModel.setRequestListener(requestReference)
+                viewModel.setThisNodeReference(getThisNodeReference(it.requestId!!))
             }
         }
 
@@ -86,7 +83,7 @@ class ReviewRequestFragment : Fragment() {
 
                 showAlertDialog(getString(R.string.alert),getString(R.string.want_to_skip_request),activity,true,null){
                     currentRequest?.requestId?.let {
-                        viewModel.deleteThisRequest(getThisNodeReference(it))
+                        viewModel.deleteThisRequest()
                     }
                 }?.show()
             } else if (requestToReview?.status == STATUS.Received.name){

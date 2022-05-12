@@ -21,11 +21,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/progress_color"
+        android:background="@color/fragment_background"
         tools:context=".pending.PendingRequestsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/all_requests_rv"
+            android:id="@+id/all_items_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
@@ -52,10 +52,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:padding="16dp"
+                style="@style/type_txt_details"
                 app:setTheItemCountText="@{viewModel.numberOfRequests}"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"/>
             <TextView
+                style="@style/type_txt_details"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:padding="16dp"
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:textColor="@color/black"
-                android:text="@string/no_requests"
+                android:text="@string/no_finished_requests"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/add_empty_view_img"
                 app:layout_constraintStart_toStartOf="@id/add_empty_view_img"

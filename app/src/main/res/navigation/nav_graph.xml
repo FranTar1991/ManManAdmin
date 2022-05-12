@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_pending_requests" />
     <fragment
         android:id="@+id/processingRequestsFragment"
-        android:name="com.manmanadmin.processing.ProcessingRequestsFragment"
+        android:name="com.manmanadmin.servers.ServersFragment"
         android:label="fragment_processing_requests"
-        tools:layout="@layout/fragment_processing_requests" />
+        tools:layout="@layout/fragment_servers" />
     <fragment
         android:id="@+id/reviewedRequestsFragment"
         android:name="com.manmanadmin.reviewed.ReviewedRequestsFragment"
@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_containerFragment_to_requestWithAllDetailsFragment"
             app:destination="@id/requestWithAllDetailsFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -136,6 +139,20 @@
             app:argType="com.manmanadmin.utils.RequestRemote"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.manmanadmin.tracking_function.TrackingFragment"
+        android:label="TrackingFragment" >
+        <argument
+            android:name="remoteRequest"
+            app:argType="com.manmanadmin.utils.RequestRemote"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="server"
+            app:argType="com.manmanadmin.utils.MMServer"
+            app:nullable="true" />
     </fragment>
 
 

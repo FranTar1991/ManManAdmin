@@ -99,7 +99,7 @@
     <string name="track_request">Rastrear tu solicitud</string>
     <string name="internet_error">Hubo un error. No se pudo calcular el precio del servicio.</string>
     <string name="price_not_defined">No definido</string>
-    <string name="no_requests">No hay solicitudes.</string>
+    <string name="no_requests">No hay solicitudes pendientes.</string>
     <string name="not_connected">No estás conectado a internet :(</string>
     <string name="something_wrong">Asegúrate de ingresar toda la información solicitada.</string>
     <string name="alert">Alerta</string>
@@ -195,7 +195,7 @@
     <string name="add_price">Agrega un precio al servicio</string>
     <string name="not_checked">No revisadas</string>
     <string name="already_checked">Revisadas</string>
-    <string name="procesing">Procesandose</string>
+    <string name="servers">Repartidores</string>
     <string name="finished_requests">FInalizadas</string>
     <string name="set_service_status">Cerrar o Abrir el negocio</string>
     <string name="sure_of_log_out">¿Seguro que quieres salir?</string>
@@ -208,4 +208,7 @@
     <string name="item_count"># de solicitudes: %s</string>
     <string name="cordoba_sign">C$</string>
     <string name="sum_of_requests">Monto en C$: %s</string>
+    <string name="no_reviewed_requests">No hay solicitudes revisadas.</string>
+    <string name="no_finished_requests">No hay solicitudes completadas.</string>
+    <string name="no_servers">No hay repartidores disponibles</string>
 </resources>

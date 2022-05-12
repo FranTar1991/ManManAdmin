@@ -9,6 +9,9 @@ import com.manmanadmin.utils.STATUS.*
 import android.annotation.SuppressLint
 import android.widget.*
 import androidx.core.view.isVisible
+import com.manmanadmin.reviewing.info.ReviewRequestViewModel
+import java.text.DateFormat.getTimeInstance
+import java.text.SimpleDateFormat
 import java.util.*
 
 @BindingAdapter("myListener")
@@ -158,6 +161,19 @@ fun TextView.setFirstLetterAsText(agentName: String?){
     }
 }
 
+@BindingAdapter("setLastTimeUsed")
+fun TextView.setLastTimeUsed(lastTimeUsed: Long?){
+    lastTimeUsed?.let {
+        text = getTimeSinceLastUpdate(lastTimeUsed)
+    }
+}
+
+fun getTimeSinceLastUpdate(lastTimeUsed: Long?): String? {
+    val simpleDate = getTimeInstance()
+    return simpleDate.format(lastTimeUsed)
+}
+
+
 @BindingAdapter("setSecondButton")
 fun Button.setSecondButton(status: STATUS?){
     status?.let {
@@ -168,8 +184,20 @@ fun Button.setSecondButton(status: STATUS?){
             Unknown, null -> ""
         }
     }
+}
 
-
+@BindingAdapter("myClickListener")
+fun ImageView.myClickListener(viewModel: ReviewRequestViewModel?){
+    viewModel?.let {
+       setOnClickListener {
+           showAlertDialog(context.getString(R.string.alert),
+               context.getString(R.string.want_to_delete),
+               context,true
+               ,null){
+               viewModel.deleteThisRequest()
+           }?.show()
+       }
+    }
 }
 
 @BindingAdapter("setTheText")
@@ -235,6 +263,7 @@ fun TextView.showTheDetails(requestRemote: RequestRemote?){
         text = "Fecha: ${requestRemote.date}"+"\n\n"+
                 "Agente: ${requestRemote.agentName}"+"\n\n"+
                 "Nombre del cliente: ${requestRemote.userName}"+"\n\n"+
+                "# tel del cliente: ${requestRemote.userPhone}"+"\n\n"+
                 "Título: ${requestRemote.title}"+"\n\n"+
                 "Detalles: ${requestRemote.details}"+"\n\n"+
                 "Precio: ${requestRemote.price}"+"\n\n"+

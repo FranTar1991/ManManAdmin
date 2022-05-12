@@ -72,14 +72,17 @@ class CheckoutFragment : Fragment() {
         binding.updateRequestBtn.setOnClickListener {
             it.isEnabled = false
             (it as Button).text = getString(R.string.sending_request)
-            currentRequest.price = binding.priceEt.text.toString().toDouble()
-            if (currentRequest.price.toString() == ""){
-                showAlertDialog(getString(R.string.alert),getString(R.string.add_price), hasCancelButton = false, icon = null, functionToExecute =  null, context = context)?.show()
+
+            if (binding.priceEt.text.toString() == ""){
+                showSnackbar(binding.root.rootView,getString(R.string.add_price))
                 it.isEnabled = true
                 (it as Button).text = getString(R.string.update_request)
                 return@setOnClickListener
             }
-            viewModel.updateRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
+                currentRequest.price = binding.priceEt.text.toString().toDouble()
+                viewModel.updateRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
+
+
         }
 
         viewModel.writeToDataBaseStatus.observe(viewLifecycleOwner){

@@ -32,7 +32,7 @@ class ReviewedRequestsFragment : Fragment() {
         }
         val adapter = setAdapter(query,listener, viewLifecycleOwner,viewModel)
 
-        val requestRv = binding.allRequestsRv
+        val requestRv = binding.allItemsRv
         requestRv.adapter = adapter
         requestRv.layoutManager = activity?.let { WrapContentLinearLayoutManager(it) }
 

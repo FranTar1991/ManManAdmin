@@ -80,7 +80,7 @@ class ContainerFragment : Fragment() {
      tab.text =  when(position){
            0 -> getString(R.string.not_checked)
            1 -> getString(R.string.already_checked)
-           2 -> getString(R.string.procesing)
+           2 -> getString(R.string.servers)
            3 -> getString(R.string.finished_requests)
          else -> {""}
      }

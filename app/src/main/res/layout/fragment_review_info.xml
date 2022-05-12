@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <import type="com.manmanadmin.utils.STATUS"/>
         <variable
             name="viewModel"
@@ -17,12 +18,46 @@
             android:layout_height="match_parent"
             tools:context=".set_up_transaction.transaction_info.TransactionInfoFragment">
 
-            <include
-                android:id="@+id/included_toolbar_layout"
-                layout="@layout/tool_bar_included_layout"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/myToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:elevation="4dp"
+                    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                    android:theme="@style/ToolBarStyle"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <TextView
+                        android:id="@+id/app_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/details_label"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        tools:text="@string/details_label"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/delete_transaction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:visibility="@{viewModel.requestToReview == null ? View.VISIBLE : View.GONE}"
+                        app:myClickListener="@{viewModel}"
+                        android:paddingEnd="16dp"
+                        android:src="@drawable/ic_delete_forever_normal" />
+
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -31,7 +66,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/inside_main"
                 app:layout_constraintStart_toStartOf="@+id/inside_main"
-                app:layout_constraintTop_toBottomOf="@+id/included_toolbar_layout">
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
 
                     <EditText
                         style="@style/type_txt_details"

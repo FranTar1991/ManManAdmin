@@ -56,7 +56,7 @@ class FinishedRequestsFragment : Fragment() {
             }
         }
 
-        val requestRv = binding.allRequestsRv
+        val requestRv = binding.allItemsRv
         requestRv.layoutManager = activity?.let { WrapContentLinearLayoutManager(it) }
         mainQuery = FirebaseDatabase.getInstance()
             .reference

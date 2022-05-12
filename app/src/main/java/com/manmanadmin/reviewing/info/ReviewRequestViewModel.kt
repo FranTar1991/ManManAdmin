@@ -29,6 +29,10 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
     val navigateToNextFragment: LiveData<Boolean>
         get() = _navigateToNextFragment
 
+    private val _thisNodeReference= MutableLiveData<DatabaseReference>()
+    val thisNodeReference: LiveData<DatabaseReference>
+        get() = _thisNodeReference
+
     fun setNavigateToNextFragment(value: Boolean){
         _navigateToNextFragment.value = value
     }
@@ -55,8 +59,12 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
         repo.updateRequestInfo(reference,_navigateToNextFragment, details, title, userName, userPhone)
     }
 
-    fun deleteThisRequest(requestReference: DatabaseReference?) {
-        repo.deleteThisRequest(requestReference, _navigateToMainFragment)
+    fun deleteThisRequest() {
+        repo.deleteThisRequest(thisNodeReference.value, _navigateToMainFragment)
+    }
+
+    fun setThisNodeReference(thisNodeReference: DatabaseReference) {
+        _thisNodeReference.value = thisNodeReference
     }
 
 
