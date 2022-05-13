@@ -143,13 +143,12 @@ fun TextView.setTheItemCountText(itemCount: Int?){
 }
 
 @BindingAdapter("setTheTextColor")
-fun TextView.setTheTextColor(status: STATUS?){
+fun TextView.setTheTextColor(status: String?){
     status?.let {
-        setTextColor(when(status){
-            Received -> context.getColor(R.color.pending_color)
-            Progress -> context.getColor(R.color.progress_color)
-            Finished -> context.getColor(R.color.finished_color)
-            Unknown, Canceled, null ->context.getColor(R.color.gray)
+        setBackgroundColor(when(status){
+            context.resources.getStringArray(R.array.busines_status_options)[0] -> context.getColor(R.color.pending_color)
+            context.resources.getStringArray(R.array.busines_status_options)[1]-> context.getColor(R.color.progress_color)
+            else -> context.getColor(R.color.white)
         })
     }
 }

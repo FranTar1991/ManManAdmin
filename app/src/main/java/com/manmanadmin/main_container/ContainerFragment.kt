@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.manmanadmin.R
+import com.manmanadmin.change_business_status.ChangeBusinessStatusDialog
+import com.manmanadmin.change_business_status.ChangeBusinessStatusViewModel
 import com.manmanadmin.databinding.FragmentContainerBinding
 import com.manmanadmin.main_activity.MainActivity
 import com.manmanadmin.utils.showAlertDialog
@@ -19,7 +23,8 @@ import com.manmanadmin.utils.showAlertDialog
 class ContainerFragment : Fragment() {
 
     private lateinit var binding: FragmentContainerBinding
-    private val viewModel: MainContainerViewModel by viewModels()
+    private lateinit var viewModel: MainContainerViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +43,23 @@ class ContainerFragment : Fragment() {
             }
 
         }
+
+        val reference = FirebaseDatabase.getInstance().reference.child("data").child("status_service").child("status")
+        val repo = MainContainerRepo(reference)
+        val factory = MainContainerViewModelFactory(repo, requireNotNull(activity).application)
+        viewModel = ViewModelProvider(this, factory)[MainContainerViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+
         viewModel.callMainActivity.observe(viewLifecycleOwner){
             if (it){
                 callMainActivityIntent()
                 viewModel.setCallMainActivity(false)
             }
         }
+
+
 
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
@@ -57,6 +73,8 @@ class ContainerFragment : Fragment() {
     }
 
     private fun changeBusinessStatus(): Boolean {
+        val status_options = requireActivity().resources!!.getStringArray(R.array.busines_status_options) as Array<String>
+        ChangeBusinessStatusDialog(status_options).show(childFragmentManager,"business_status_dialog")
         return true
     }
 

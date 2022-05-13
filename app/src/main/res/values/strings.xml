@@ -8,17 +8,7 @@
     <string name="select_location">Selecciona un lugar</string>
     <string name="add_a_reference">Agrega una referencia de la casa o lugar.</string>
     <string name="save_location">Guardar</string>
-    <string-array name="cities_array">
-        <item>--Selecciona--</item>
-        <item>Jinotepe</item>
-        <item>Diriamba</item>
-        <item>Dolores</item>
-        <item>San_Marcos</item>
-        <item>La_Paz</item>
-        <item>El_Rosario</item>
-        <item>Santa_Teresa</item>
-        <item>Guisquiliapa</item>
-    </string-array>
+
 
     <string name="your_address">Tu dirección es:</string>
     <string name="user_location">Tu ubicación actual es:</string>
@@ -162,6 +152,7 @@
     <string name="unknown_state">Uknown status</string>
     <string name="service_status">Hola, ya estamos cerrados. Nuestras horas laborales sonde %s a %s. De %s a %s. Si envías una solicitud podría ser procesada hasta el próximo día laboral.</string>
     <string name="services_closed">cerrado</string>
+
     <string name="closed_title">Estamos cerrados</string>
     <string name="opening_whatsapp">Se abrirá Whatsapp con el número de teléfono de servicio al cliente y ahí podrás enviar tu calificación y comentarios.</string>
     <string name="opening_whatsapp_agent">Se abrirá Whatsapp para que puedas chatear con %s.</string>
@@ -211,4 +202,21 @@
     <string name="no_reviewed_requests">No hay solicitudes revisadas.</string>
     <string name="no_finished_requests">No hay solicitudes completadas.</string>
     <string name="no_servers">No hay repartidores disponibles</string>
+    <string name="change_status">Cierra o Abre el negocio</string>
+
+    <string-array name="cities_array">
+        <item>--Selecciona--</item>
+        <item>Jinotepe</item>
+        <item>Diriamba</item>
+        <item>Dolores</item>
+        <item>San_Marcos</item>
+        <item>La_Paz</item>
+        <item>El_Rosario</item>
+        <item>Santa_Teresa</item>
+        <item>Guisquiliapa</item>
+    </string-array>
+    <string-array name="busines_status_options">
+        <item name="closed">closed</item>
+        <item name="open">open</item>
+    </string-array>
 </resources>

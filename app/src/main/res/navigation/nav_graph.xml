@@ -36,10 +36,18 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_reviewRequestFragment_to_containerFragment"
-            app:destination="@id/containerFragment" />
+            app:destination="@id/containerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_reviewRequestFragment_to_transactionAddressesFragment"
-            app:destination="@id/transactionAddressesFragment" />
+            app:destination="@id/transactionAddressesFragment"
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/fui_slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
@@ -47,13 +55,25 @@
         android:label="ContainerFragment" >
         <action
             android:id="@+id/action_containerFragment_to_reviewRequestFragment"
-            app:destination="@id/reviewRequestFragment" />
+            app:destination="@id/reviewRequestFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_containerFragment_to_requestWithAllDetailsFragment"
-            app:destination="@id/requestWithAllDetailsFragment" />
+            app:destination="@id/requestWithAllDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_containerFragment_to_trackingFragment"
-            app:destination="@id/trackingFragment" />
+            app:destination="@id/trackingFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -76,7 +96,11 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_mapsFragment_to_transactionAddressesFragment"
-            app:destination="@id/transactionAddressesFragment" />
+            app:destination="@id/transactionAddressesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <argument
             android:name="currentManManRequest"
             app:argType="com.manmanadmin.utils.ManManRequest"
@@ -89,7 +113,11 @@
         android:label="TransactionAddressesFragment" >
         <action
             android:id="@+id/action_transactionAddressesFragment_to_containerFragment"
-            app:destination="@id/containerFragment" />
+            app:destination="@id/containerFragment"
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/fui_slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <argument
             android:name="request"
             app:argType="com.manmanadmin.utils.ManManRequest"
@@ -97,7 +125,11 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_transactionAddressesFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/mapsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <argument
             android:name="callingFragment"
             app:argType="string"
@@ -110,7 +142,11 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_transactionAddressesFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/fui_slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
@@ -118,7 +154,11 @@
         android:label="CheckoutFragment" >
         <action
             android:id="@+id/action_checkoutFragment_to_containerFragment"
-            app:destination="@id/containerFragment" />
+            app:destination="@id/containerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <argument
             android:name="currentTransactionItem"
             app:argType="com.manmanadmin.utils.RequestLocal"

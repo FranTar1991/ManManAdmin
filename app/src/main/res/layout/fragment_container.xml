@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.manmanadmin.main_container.MainContainerViewModel" />
     </data>
 
 
@@ -30,7 +32,10 @@
                         android:id="@+id/app_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        app:setTheTextColor="@{viewModel.currentBusinessStatus}"
+                        android:text="@{viewModel.currentBusinessStatus}"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />
