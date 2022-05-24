@@ -73,10 +73,9 @@ fun ImageView.decideWhichIcon(type: String?){
 @BindingAdapter("setThePriceText")
 fun EditText.setThePriceText(price: Double?){
     setText(if (price  == -1.0){
-        isEnabled = true
+
         ""
     }else{
-        isEnabled = false
         price.toString()
     })
 }

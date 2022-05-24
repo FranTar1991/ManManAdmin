@@ -68,6 +68,7 @@ class CheckoutFragmentViewModel(private val repository: CheckoutFragmentRepo): V
     fun getJourney(transactionItem: RequestLocal, context: Context?){
          val handler = CoroutineExceptionHandler { _, exception ->
             Toast.makeText(context,context?.getString(R.string.internet_error), Toast.LENGTH_LONG).show()
+             setPriceForThisRequest(-1.0)
         }
 
         viewModelScope.launch(handler) {

@@ -88,9 +88,14 @@ class CheckoutFragment : Fragment() {
         viewModel.writeToDataBaseStatus.observe(viewLifecycleOwner){
             when(it){
                GeneralStatus.success-> {
-                   showAlertDialog(getString(R.string.alert),getString(R.string.request_updated),activity, false){
+                val dialog =   showAlertDialog(getString(R.string.alert),getString(R.string.request_updated),activity, false){
                        viewModel.setNavigateToMainFragment(true)
-                   }?.show()
+                   }
+
+                   dialog?.apply {
+                       setCancelable(false)
+                       show()
+                   }
                }
                 else -> {
                     Toast.makeText(context, "something´s wrong", Toast.LENGTH_SHORT).show()
