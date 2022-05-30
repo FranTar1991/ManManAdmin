@@ -16,12 +16,20 @@ class MainContainerViewModel(private val repo: MainContainerRepo, private val ap
     val currentBusinessStatus: LiveData<String?>
         get() = _currentBusinessStatus
 
+    private val _navigateToAddBusinessFragment = MediatorLiveData<Boolean>()
+    val navigateToAddBusinessFragment: LiveData<Boolean>
+        get() = _navigateToAddBusinessFragment
+
     init {
         repo.getBusinessCurrentStatus(_currentBusinessStatus)
     }
 
     fun setCallMainActivity(b: Boolean) {
         _callMainActivity.value = b
+    }
+
+    fun setNavigateToAddBusinessFragment(value: Boolean){
+        _navigateToAddBusinessFragment.value = value
     }
 
 

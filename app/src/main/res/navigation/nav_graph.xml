@@ -194,6 +194,10 @@
             app:argType="com.manmanadmin.utils.MMServer"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/addBusinessFragment"
+        android:name="com.manmanadmin.add_business.AddBusinessFragment"
+        android:label="AddBusinessFragment" />
 
 
 </navigation>

@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textColor="@color/black"
             android:text="@{manManRequest.requestId}"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,15 +42,30 @@
             tools:text="-N1eXVfDQsfQCDnbFuYa" />
 
         <TextView
+            android:id="@+id/bottom_txt"
             android:layout_width="0dp"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@{manManRequest.user_id}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/request_id_txt"
             tools:text="-N1eXVfDQsfQCDnbFuYa" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/special_note"
+            android:inputType="textMultiLine"
+            android:textColor="@color/pending_color"
+            android:ems="12"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_txt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

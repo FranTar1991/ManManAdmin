@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".add_business.AddBusinessFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/myToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="4dp"
+                android:theme="@style/ToolBarStyle"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/set_business"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
+            app:layout_constraintBottom_toTopOf="@+id/save_business_btn"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/category_et"
+                    android:hint="@string/category"
+                    app:layout_constraintBottom_toTopOf="@+id/business_name"
+                    app:layout_constraintEnd_toEndOf="@+id/business_name"
+                    android:text="@string/food"
+                    app:layout_constraintStart_toStartOf="@+id/business_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/business_style" />
+
+                <EditText
+                    android:id="@+id/business_name"
+                    style="@style/business_style"
+                    android:inputType="text"
+                    android:hint="@string/business_name"
+                    app:layout_constraintBottom_toTopOf="@+id/logo_url_et"
+                    app:layout_constraintEnd_toEndOf="@+id/logo_url_et"
+                    app:layout_constraintStart_toStartOf="@+id/logo_url_et"
+                    app:layout_constraintTop_toBottomOf="@+id/category_et" />
+
+                <EditText
+                    android:id="@+id/logo_url_et"
+                    style="@style/business_style"
+                    android:hint="@string/image_url"
+                    android:inputType="textUri"
+                    app:layout_constraintBottom_toTopOf="@+id/logo_img"
+                    app:layout_constraintEnd_toEndOf="@+id/logo_img"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/logo_img"
+                    app:layout_constraintTop_toBottomOf="@+id/business_name" />
+
+                <ImageView
+                    android:id="@+id/logo_img"
+                    style="@style/business_style"
+                    app:layout_constraintBottom_toTopOf="@+id/latitude_et"
+                    app:layout_constraintEnd_toEndOf="@+id/latitude_et"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/latitude_et"
+                    app:layout_constraintTop_toBottomOf="@+id/logo_url_et"
+                    tools:src="@tools:sample/avatars" />
+
+                <EditText
+                    android:id="@+id/latitude_et"
+                    style="@style/business_style"
+                    android:hint="@string/lat"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toTopOf="@+id/longitude_et"
+                    app:layout_constraintEnd_toEndOf="@+id/longitude_et"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/longitude_et"
+                    app:layout_constraintTop_toBottomOf="@+id/logo_img" />
+
+                <EditText
+                    android:id="@+id/longitude_et"
+                    style="@style/business_style"
+                    android:hint="@string/longitude"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/latitude_et" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <Button
+            android:id="@+id/save_business_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/save_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

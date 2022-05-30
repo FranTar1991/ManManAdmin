@@ -2,4 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
  <item android:id="@+id/log_out_menu" android:title="@string/log_out"/>
  <item android:id="@+id/set_close_open_menu" android:title="@string/set_service_status"/>
+ <item android:id="@+id/add_business_menu" android:title="@string/add_business"/>
 </menu>

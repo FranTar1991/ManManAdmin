@@ -1,5 +1,6 @@
 package com.manmanadmin.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,6 +9,9 @@ import android.graphics.Canvas
 import android.location.LocationManager
 import android.provider.Settings
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -28,6 +32,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.manmanadmin.R
+import com.manmanadmin.change_business_status.ChangeBusinessStatusDialog
 import com.manmanadmin.databinding.ToolBarIncludedLayoutBinding
 
 const val PROFILE_FRAGMENT = "profile_fragment"
@@ -163,6 +168,12 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
     return FirebaseDatabase.getInstance().reference.child("all_requests_not_reviewed").child(requestId)
 }
 
+ fun changeBusinessStatus(activity: Activity, childFragmentManager: FragmentManager): Boolean {
+    val status_options = activity.resources!!.getStringArray(R.array.busines_status_options) as Array<String>
+    ChangeBusinessStatusDialog(status_options).show(childFragmentManager,"business_status_dialog")
+    return true
+}
+
  fun getRequestReference(requestId: String, userId: String): DatabaseReference {
     return FirebaseDatabase.getInstance().reference.child("users").child(userId).child("requests").child(requestId)
 }
@@ -198,6 +209,29 @@ fun getSumOfMoneyEarnedInRequests(requests: List<RequestRemote>?): Double{
         }
 
     return sum
+}
+
+fun EditText.checkIfEmpty(): Boolean{
+   return if (text.toString() == ""){
+        shake(this,context)
+        true
+    }else {
+        false
+    }
+
+}
+
+fun EditText.setEmpty(){
+    setText("")
+}
+
+fun shake(view: View?, context: Context?) {
+    // Create shake effect from xml resource
+    // Create shake effect from xml resource
+    val shake: Animation = AnimationUtils.loadAnimation(context, R.anim.shake_view)
+    // Perform animation
+    // Perform animation
+    view?.startAnimation(shake)
 }
 
 
