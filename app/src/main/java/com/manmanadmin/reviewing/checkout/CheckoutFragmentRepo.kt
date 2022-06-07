@@ -132,7 +132,9 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
     private fun sendTransactionToTheServers(baseRef:DatabaseReference, thisNodeReference: DatabaseReference?) {
         thisNodeReference?.get()?.addOnSuccessListener { dataToTransfer ->
             val formattedDataToPaste = getObjectToPaste(dataToTransfer)
-            dataToTransfer.key?.let { thisKey -> baseRef.child("all_requests").child(thisKey).setValue(formattedDataToPaste).addOnSuccessListener {
+            dataToTransfer.key?.let { thisKey -> baseRef.child("all_requests")
+                .child(thisKey)
+                .setValue(formattedDataToPaste).addOnSuccessListener {
                 dataToTransfer.ref.removeValue()
             }}
         }
@@ -140,7 +142,8 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
 
     private fun getObjectToPaste(dataToTransfer: DataSnapshot): ManManRequest? {
         val userId = dataToTransfer.child("user_id").value.toString()
-       return ManManRequest(user_id = userId)
+        val comments = dataToTransfer.child("comments").value.toString()
+       return ManManRequest(user_id = userId, comments = comments)
     }
 
     private fun fromLocalToRemote(item: RequestLocal): RequestRemote {

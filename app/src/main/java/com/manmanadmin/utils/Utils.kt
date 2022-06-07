@@ -190,8 +190,9 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
         val requestId = snapshot.key
         val userId = snapshot.child("user_id").getValue(String::class.java)
         val status = snapshot.child("status").getValue(String::class.java)
+        val comments = snapshot.child("comments").getValue(String::class.java)
 
-        ManManRequest(requestId = requestId, user_id = userId, status =  status)
+        ManManRequest(requestId = requestId, user_id = userId, status =  status, comments = comments)
     }
 
     val options: FirebaseRecyclerOptions<ManManRequest> = FirebaseRecyclerOptions.Builder<ManManRequest>()
