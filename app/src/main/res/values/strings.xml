@@ -37,7 +37,7 @@
 
     <string name="user_name">Nombre</string>
     <string name="user_phone_number">Cel. con código de área</string>
-    <string name="add_address">Direcciónes</string>
+    <string name="add_address">Direcciones</string>
     <string name="save">Guardar</string>
     <string name="preference_file_key">my_shared_preferences</string>
     <string name="saved_user_name">Nombre de usuario</string>
@@ -214,6 +214,7 @@
     <string name="category">Categoría</string>
     <string name="food">Food</string>
     <string name="business_added">Negocio agregado</string>
+    <string name="add_coordinate">Coordenadas (lat, long)</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

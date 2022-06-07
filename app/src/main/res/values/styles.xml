@@ -64,4 +64,10 @@
         <item name="android:padding">16dp</item>
         <item name="android:background">@drawable/rounded_corners_et</item>
     </style>
+
+    <style name="SearchViewTheme" parent="Widget.AppCompat.Light.SearchView">
+    <item name="android:textColorHint">@color/finished_color</item>
+        <item name="android:editTextColor">@color/black</item>
+    </style>
+
 </resources>

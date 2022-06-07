@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.SearchView.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
@@ -69,7 +72,7 @@ class MapsFragment : Fragment(){
                 }?.show()
 
             } else {
-                binding.searchingView.isVisible = true
+                binding.loadingView.isVisible = true
                 fusedLocationProviderClient?.let { viewModel.getDeviceLocation(it,requireActivity(),true) }
             }
 
@@ -113,6 +116,8 @@ class MapsFragment : Fragment(){
           )
 
         }
+
+      setSearchCoordinateView()
 
 
         binding.saveLocationBtn.setOnClickListener {
@@ -166,7 +171,7 @@ class MapsFragment : Fragment(){
 
         viewModel.locationSelected.observe(viewLifecycleOwner, Observer {lastKnownLocation ->
             locationSelected = lastKnownLocation
-            binding.searchingView.isVisible = false
+            binding.loadingView.isVisible = false
             if (isFirstCall){
                 viewModel.updateMapCamera(LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
                     , ZOOM_BUILDING_LEVEL.toFloat())
@@ -182,6 +187,29 @@ class MapsFragment : Fragment(){
 
 
         return binding.root
+    }
+
+    private fun setSearchCoordinateView() {
+       val editText = binding.searchEt
+
+        binding.coordinatesSV.setStartIconOnClickListener{
+            val coordinateLatLang = getCoordinatesInLatLang(editText.text.toString())
+
+            coordinateLatLang?.let {
+                //myMap?.moveCamera(CameraUpdateFactory.newLatLng(coordinateLatLang))
+                viewModel.setLocationSelected(coordinateLatLang)
+            }
+        }
+    }
+
+    private fun getCoordinatesInLatLang(coordinatesString: String?): LatLng? {
+        var coordinates: LatLng? = null
+        val array = coordinatesString?.split(",")?.map { it.trim().toDouble() }
+
+        array?.let {
+           coordinates =  LatLng(array[0], array[1])
+        }
+        return coordinates
     }
 
     private fun getMapScreenshot(){
