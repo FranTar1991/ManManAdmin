@@ -53,6 +53,7 @@ class ServersAdapter  (private val viewModel: ServersViewModel,
             phoneNumber: String?
         ) {
             serverPhoneTxt.setOnClickListener {
+                viewModel.setShowProgressbar(View.VISIBLE)
                 viewModel.setCallWhatsappWithPhoneNumber(phoneNumber)
             }
         }

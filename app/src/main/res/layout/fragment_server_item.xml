@@ -73,13 +73,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="ocupado" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/rounded_corners_et"
             android:onClickListener="@{(view) -> clickListener.onClick(view,server)}"
             android:visibility="@{server.currentRequestId == null ? View.GONE : View.VISIBLE}"
-            android:background="@drawable/rounded_corners_et"
             app:layout_constraintEnd_toEndOf="@+id/server_phone_txt"
             app:layout_constraintStart_toStartOf="@+id/server_name_txt"
             app:layout_constraintTop_toBottomOf="@+id/server_phone_txt">
@@ -87,29 +89,29 @@
             <TextView
                 android:id="@+id/call_id_txt"
                 style="@style/type_txt_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
+                android:padding="16dp"
                 android:text="@{server.currentRequestId}"
                 app:layout_constraintEnd_toStartOf="@+id/user_id_txt"
                 app:layout_constraintHorizontal_bias="0.5"
-                android:padding="16dp"
-                android:layout_width="0dp"
-                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_height="wrap_content"
                 tools:text="Franklin Tardencilla" />
 
             <TextView
                 android:id="@+id/user_id_txt"
-                android:gravity="center"
-                android:ellipsize="end"
+                style="@style/type_txt_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/type_txt_details"
+                android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
-                android:text="@{server.currentUserId}"
                 android:padding="16dp"
+                android:text="@{server.currentUserId}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/call_id_txt"
@@ -117,22 +119,23 @@
                 tools:text="+50587151530" />
 
             <TextView
-                android:layout_margin="16dp"
-                android:padding="16dp"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:background="@drawable/rounded_corners_et_white"
+                android:padding="16dp"
                 android:text="@{server.currentRequestComment}"
-                android:textColor="@color/black"
                 android:textAlignment="center"
-                tools:text = "These are the comments from the app"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_id_txt"
-                android:layout_height="wrap_content"/>
+                tools:text="These are the comments from the app" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

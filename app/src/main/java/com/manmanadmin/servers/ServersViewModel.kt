@@ -1,5 +1,6 @@
 package com.manmanadmin.servers
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,8 +25,20 @@ class ServersViewModel(private val repo: ServersRepo) : ViewModel() {
     val navigateToTrackingFragment: LiveData<RequestRemote?>
     get() = _navigateToTrackingFragment
 
+    private val _showProgressbar = MutableLiveData<Int>()
+    val showProgressbar: LiveData<Int>
+        get() = _showProgressbar
+
     fun setNumberOfServers(value: Int?){
         _numberOfServers.value = value
+    }
+
+    init {
+        setShowProgressbar(View.GONE)
+    }
+
+    fun setShowProgressbar(value: Int){
+        _showProgressbar.value = value
     }
 
     fun setRemoteRequestListener(requestReference: DatabaseReference) {

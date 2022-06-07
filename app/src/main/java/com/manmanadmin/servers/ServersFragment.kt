@@ -38,14 +38,14 @@ class ServersFragment : Fragment() {
 
         val serversRv = binding.allItemsRv
         serversRv.layoutManager = activity?.let { WrapContentLinearLayoutManager(it) }
-        val serversQuery = FirebaseDatabase.getInstance()
-            .reference
-            .child("servers")
+        val serversQuery = FirebaseDatabase.getInstance().reference.child("servers")
+
         val onServersClickListener = OnServerClickListener{view, server ->
             this.server = server
             val requestReference = FirebaseDatabase.getInstance().reference.child("users")
                 .child(server.currentUserId!!).child("requests").child(server.currentRequestId!!)
             viewModel.setRemoteRequestListener(requestReference)
+            viewModel.setShowProgressbar(View.VISIBLE)
 
         }
 
@@ -60,14 +60,15 @@ class ServersFragment : Fragment() {
             it?.let {
                 openWhatsAppWithNumber(it, context)
                 viewModel.setCallWhatsappWithPhoneNumber(null)
+                viewModel.setShowProgressbar(View.GONE)
             }
         }
 
         viewModel.navigateToTrackingFragment.observe(viewLifecycleOwner){
             it?.let {
-                this.findNavController()
-                    .navigate(ContainerFragmentDirections.actionContainerFragmentToTrackingFragment(remoteRequest = it, server = server))
+                this.findNavController().navigate(ContainerFragmentDirections.actionContainerFragmentToTrackingFragment(remoteRequest = it, server = server))
                 viewModel.setNavigateToTrackingFragment(null)
+               viewModel.setShowProgressbar(View.GONE)
             }
         }
 

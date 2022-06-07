@@ -21,6 +21,7 @@
         android:background="@color/fragment_background"
         tools:context=".pending.PendingRequestsFragment">
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_items_rv"
             android:layout_width="0dp"
@@ -75,5 +76,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:visibility="@{viewModel.showProgressbar}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
