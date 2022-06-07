@@ -16,6 +16,7 @@ import com.manmanadmin.databinding.FragmentServersBinding
 import com.manmanadmin.main_container.ContainerFragmentDirections
 import com.manmanadmin.utils.MMServer
 import com.manmanadmin.utils.WrapContentLinearLayoutManager
+import com.manmanadmin.utils.openWhatsAppWithNumber
 
 
 class ServersFragment : Fragment() {
@@ -52,6 +53,13 @@ class ServersFragment : Fragment() {
         viewModel.remoteRequest.observe(viewLifecycleOwner){
             it?.let {
                 viewModel.setNavigateToTrackingFragment(it)
+            }
+        }
+
+        viewModel.callWhatsappWithPhoneNumberLiveData.observe(viewLifecycleOwner){
+            it?.let {
+                openWhatsAppWithNumber(it, context)
+                viewModel.setCallWhatsappWithPhoneNumber(null)
             }
         }
 

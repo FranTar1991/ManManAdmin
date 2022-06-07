@@ -16,6 +16,10 @@ class ServersViewModel(private val repo: ServersRepo) : ViewModel() {
     val remoteRequest: LiveData<RequestRemote?>
         get() = _remoteRequest
 
+    private val _callWhatsappWithPhoneNumberLiveData = MutableLiveData<String?>()
+    val callWhatsappWithPhoneNumberLiveData: LiveData<String?>
+    get() = _callWhatsappWithPhoneNumberLiveData
+
     private val _navigateToTrackingFragment = MutableLiveData<RequestRemote?>()
     val navigateToTrackingFragment: LiveData<RequestRemote?>
     get() = _navigateToTrackingFragment
@@ -30,6 +34,10 @@ class ServersViewModel(private val repo: ServersRepo) : ViewModel() {
 
     fun setNavigateToTrackingFragment(request: RequestRemote?) {
         _navigateToTrackingFragment.value = request
+    }
+
+    fun setCallWhatsappWithPhoneNumber(phoneNumber: String?) {
+        _callWhatsappWithPhoneNumberLiveData.value = phoneNumber
     }
 
 

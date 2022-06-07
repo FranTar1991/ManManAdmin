@@ -1,10 +1,10 @@
 package com.manmanadmin.servers
 
 import android.app.Activity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -42,8 +42,19 @@ class ServersAdapter  (private val viewModel: ServersViewModel,
             binding.server = item
             binding.viewModel = viewModel
             binding.clickListener = clickListener
+            setClickToChatListener(binding.serverPhoneTxt, viewModel, item.phoneNumber)
 
             binding.executePendingBindings()
+        }
+
+        private fun setClickToChatListener(
+            serverPhoneTxt: TextView,
+            viewModel: ServersViewModel,
+            phoneNumber: String?
+        ) {
+            serverPhoneTxt.setOnClickListener {
+                viewModel.setCallWhatsappWithPhoneNumber(phoneNumber)
+            }
         }
 
 

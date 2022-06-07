@@ -4,14 +4,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.LocationManager
+import android.net.Uri
 import android.provider.Settings
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -234,4 +237,19 @@ fun shake(view: View?, context: Context?) {
     view?.startAnimation(shake)
 }
 
+ fun openWhatsAppWithNumber(number: String, context: Context?){
+    val pm: PackageManager? = context?.packageManager
+
+    try {
+        // Raise exception if whatsapp doesn't exist
+        val info = pm?.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA)
+        val url = "https://wa.me/$number"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        context?.startActivity(intent)
+    } catch (e: PackageManager.NameNotFoundException) {
+        Toast.makeText(context, "Please install whatsapp app", Toast.LENGTH_SHORT)
+            .show()
+    }
+}
 
