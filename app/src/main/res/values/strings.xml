@@ -203,7 +203,7 @@
     <string name="no_finished_requests">No hay solicitudes completadas.</string>
     <string name="no_servers">No hay repartidores disponibles</string>
     <string name="change_status">Cierra o Abre el negocio</string>
-    <string name="special_note">Recordatorio (no se guarda)</string>
+    <string name="special_note">Commentarios</string>
     <string name="add_business">Agregar un negocio</string>
     <string name="save_btn">Guardar</string>
     <string name="set_business">Agrega un negocio</string>

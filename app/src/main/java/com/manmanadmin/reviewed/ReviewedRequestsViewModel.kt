@@ -1,12 +1,10 @@
 package com.manmanadmin.reviewed
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.manmanadmin.utils.ManManRequest
-import com.manmanadmin.utils.ViewModelForAdapter
+import com.manmanadmin.utils.ViewModelForAdapterInterface
 
-class ReviewedRequestsViewModel(): ViewModel(), ViewModelForAdapter {
+class ReviewedRequestsViewModel(): ViewModel(), ViewModelForAdapterInterface {
     override val _numberOfRequests: MutableLiveData<Int> = MutableLiveData<Int>()
 
 

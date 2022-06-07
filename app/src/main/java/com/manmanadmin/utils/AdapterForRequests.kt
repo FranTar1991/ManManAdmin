@@ -6,9 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DatabaseReference
 import com.manmanadmin.databinding.ManManRequestItemBinding
 
-class AdapterForRequests (private val viewModel: ViewModelForAdapter, options: FirebaseRecyclerOptions<ManManRequest>, private val clickListener: OnManManRequestClickListener):
+class AdapterForRequests(
+    private val viewModel: ViewModelForAdapterInterface,
+    options: FirebaseRecyclerOptions<ManManRequest>,
+    private val clickListener: OnManManRequestClickListener,
+    private val reference: DatabaseReference
+):
     FirebaseRecyclerAdapter<ManManRequest, AdapterForRequests.ViewHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,7 +23,7 @@ class AdapterForRequests (private val viewModel: ViewModelForAdapter, options: F
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: ManManRequest) {
-        holder.bind(model, clickListener)
+        holder.bind(model, clickListener, viewModel, reference)
     }
 
     override fun onDataChanged() {
@@ -30,11 +36,18 @@ class AdapterForRequests (private val viewModel: ViewModelForAdapter, options: F
 
         fun bind(
             item: ManManRequest,
-            clickListener: OnManManRequestClickListener
+            clickListener: OnManManRequestClickListener,
+            viewModel: ViewModelForAdapterInterface,
+            reference: DatabaseReference
         ) {
             binding.manManRequest = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
+            binding.commentsContainer.setStartIconOnClickListener {
+                item.requestId?.let {
+                    viewModel.saveNewComments(binding.commentsEt.text.toString(),reference.child(it) )
+                }
+            }
         }
 
 

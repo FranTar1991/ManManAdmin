@@ -3,11 +3,10 @@ package com.manmanadmin.pending
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.firebase.ui.database.ObservableSnapshotArray
 import com.manmanadmin.utils.ManManRequest
-import com.manmanadmin.utils.ViewModelForAdapter
+import com.manmanadmin.utils.ViewModelForAdapterInterface
 
-class PendingRequestsViewModel(): ViewModel(), ViewModelForAdapter {
+class PendingRequestsViewModel(): ViewModel(), ViewModelForAdapterInterface {
 
     private val _navigateToReviewRequest = MutableLiveData<ManManRequest?>()
     val navigateToReviewRequest: LiveData<ManManRequest?>

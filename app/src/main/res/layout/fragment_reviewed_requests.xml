@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.manmanadmin.utils.ViewModelForAdapter" />
+            type="com.manmanadmin.utils.ViewModelForAdapterInterface" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

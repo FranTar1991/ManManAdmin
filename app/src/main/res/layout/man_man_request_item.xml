@@ -53,20 +53,32 @@
             app:layout_constraintTop_toBottomOf="@+id/request_id_txt"
             tools:text="-N1eXVfDQsfQCDnbFuYa" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/special_note"
+            android:id="@+id/comments_container"
+            app:startIconDrawable="@drawable/ic_baseline_check_circle_24"
             android:inputType="textMultiLine"
-            android:textColor="@color/pending_color"
+            app:endIconMode="clear_text"
+            android:layout_margin="16dp"
+            android:hint="@string/special_note"
             android:ems="12"
-            android:text="@{manManRequest.comments}"
             android:scrollbars="vertical"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/bottom_txt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/comments_et"
+                android:text="@{manManRequest.comments}"
+                android:background="@drawable/rounded_corners_et"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

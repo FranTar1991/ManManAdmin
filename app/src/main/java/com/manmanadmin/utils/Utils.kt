@@ -29,7 +29,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -184,7 +183,7 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
  fun setAdapter(query: Query,
                 onManManRequestClickListener: OnManManRequestClickListener,
                 viewLifecycleOwner: LifecycleOwner,
-                viewModel: ViewModelForAdapter): AdapterForRequests {
+                viewModel: ViewModelForAdapterInterface): AdapterForRequests {
 
     val snapshotParser = SnapshotParser<ManManRequest> { snapshot ->
         val requestId = snapshot.key
@@ -200,7 +199,7 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
         .setLifecycleOwner(viewLifecycleOwner)
         .build()
 
-    return AdapterForRequests(viewModel, options, onManManRequestClickListener)
+    return AdapterForRequests(viewModel, options, onManManRequestClickListener, query as DatabaseReference)
 
 }
 
