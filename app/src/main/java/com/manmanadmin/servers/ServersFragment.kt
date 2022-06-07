@@ -94,10 +94,14 @@ class ServersFragment : Fragment() {
             val serverStatus = snapshot.child("serverStatus").getValue(String::class.java)
             val currentRequestId = snapshot.child("current").child("requestId").getValue(String::class.java)
             val currentUserId = snapshot.child("current").child("userId").getValue(String::class.java)
+            val currentRequestComment = snapshot.child("current").child("comments").getValue(String::class.java)
 
 
             MMServer(FCMToken = token, associate = associate, lastTimeUsed =  lastTimeUsed,
-                phoneNumber=phoneNumber, serverStatus=serverStatus, currentRequestId=currentRequestId, currentUserId =currentUserId  )
+                currentRequestComment = currentRequestComment ,
+                phoneNumber=phoneNumber, serverStatus=serverStatus,
+                currentRequestId=currentRequestId,
+                currentUserId =currentUserId  )
         }
 
         val options: FirebaseRecyclerOptions<MMServer> = FirebaseRecyclerOptions.Builder<MMServer>()

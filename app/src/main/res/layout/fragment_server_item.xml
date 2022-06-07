@@ -116,6 +116,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="+50587151530" />
 
+            <TextView
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:layout_width="0dp"
+                android:background="@drawable/rounded_corners_et_white"
+                android:text="@{server.currentRequestComment}"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                tools:text = "These are the comments from the app"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_id_txt"
+                android:layout_height="wrap_content"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
