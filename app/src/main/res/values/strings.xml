@@ -215,6 +215,7 @@
     <string name="food">Food</string>
     <string name="business_added">Negocio agregado</string>
     <string name="add_coordinate">Coordenadas (lat, long)</string>
+    <string name="send_back_to_queue">¿Seguro que deseas enviar esta solicitud de regreso a la fila?</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

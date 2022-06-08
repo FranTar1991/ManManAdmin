@@ -12,11 +12,13 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentServersBinding
 import com.manmanadmin.main_container.ContainerFragmentDirections
 import com.manmanadmin.utils.MMServer
 import com.manmanadmin.utils.WrapContentLinearLayoutManager
 import com.manmanadmin.utils.openWhatsAppWithNumber
+import com.manmanadmin.utils.showAlertDialog
 
 
 class ServersFragment : Fragment() {
@@ -77,6 +79,18 @@ class ServersFragment : Fragment() {
         serversRv.adapter = adapter
 
 
+        viewModel.confirmSendBackToQueue.observe(viewLifecycleOwner){
+            it?.let {
+
+                showAlertDialog(getString(R.string.alert),getString(R.string.send_back_to_queue),context,true,null){
+                  viewModel.sendBackToQueue(it)
+                }?.show()
+
+                viewModel.setConfirmSendBackToQueue(null)
+            }
+        }
+
+
         return binding.root
     }
 
@@ -87,7 +101,7 @@ class ServersFragment : Fragment() {
     ): ServersAdapter {
 
         val snapshotParser = SnapshotParser<MMServer> { snapshot ->
-            val requestId = snapshot.key
+            val serverId = snapshot.key
             val token = snapshot.child("FCMToken").getValue(String::class.java)
             val associate = snapshot.child("associate").getValue(String::class.java)
             val lastTimeUsed = snapshot.child("lastTimeUsed").getValue(Long::class.java)
@@ -102,6 +116,7 @@ class ServersFragment : Fragment() {
                 currentRequestComment = currentRequestComment ,
                 phoneNumber=phoneNumber, serverStatus=serverStatus,
                 currentRequestId=currentRequestId,
+                serverId = serverId,
                 currentUserId =currentUserId  )
         }
 

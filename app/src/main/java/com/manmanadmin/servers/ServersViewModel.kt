@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DatabaseReference
+import com.manmanadmin.utils.MMServer
 import com.manmanadmin.utils.RequestRemote
 
 class ServersViewModel(private val repo: ServersRepo) : ViewModel() {
@@ -16,6 +17,10 @@ class ServersViewModel(private val repo: ServersRepo) : ViewModel() {
     private val _remoteRequest = MutableLiveData<RequestRemote?>()
     val remoteRequest: LiveData<RequestRemote?>
         get() = _remoteRequest
+
+    private val _confirmSendBackToQueue = MutableLiveData<MMServer?>()
+    val confirmSendBackToQueue: LiveData<MMServer?>
+        get() = _confirmSendBackToQueue
 
     private val _callWhatsappWithPhoneNumberLiveData = MutableLiveData<String?>()
     val callWhatsappWithPhoneNumberLiveData: LiveData<String?>
@@ -51,6 +56,15 @@ class ServersViewModel(private val repo: ServersRepo) : ViewModel() {
 
     fun setCallWhatsappWithPhoneNumber(phoneNumber: String?) {
         _callWhatsappWithPhoneNumberLiveData.value = phoneNumber
+    }
+
+
+    fun setConfirmSendBackToQueue(server: MMServer?){
+        _confirmSendBackToQueue.value = server
+    }
+
+    fun sendBackToQueue(server: MMServer) {
+        repo.sendBackToQueue(server)
     }
 
 

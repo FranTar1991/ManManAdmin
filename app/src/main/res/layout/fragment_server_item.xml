@@ -47,20 +47,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/server_name_txt"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/back_btn"
             tools:text="+50587151530" />
 
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/type_txt_details"
+        <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_margin="8dp"
-            android:text="@{server.serverStatus}"
+            android:src="@drawable/ic_baseline_change_circle_24"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/server_name_txt"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="ocupado" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/last_time_used_txt"

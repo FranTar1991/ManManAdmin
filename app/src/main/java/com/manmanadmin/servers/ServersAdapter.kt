@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -35,16 +36,30 @@ class ServersAdapter  (private val viewModel: ServersViewModel,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            item: MMServer,
+            server: MMServer,
             viewModel: ServersViewModel,
             clickListener: OnServerClickListener
         ) {
-            binding.server = item
+            binding.server = server
             binding.viewModel = viewModel
             binding.clickListener = clickListener
-            setClickToChatListener(binding.serverPhoneTxt, viewModel, item.phoneNumber)
-
+            setClickToChatListener(binding.serverPhoneTxt, viewModel, server.phoneNumber)
+            setSendBackToQueeListener(binding.backBtn, viewModel, server)
             binding.executePendingBindings()
+        }
+
+
+
+        private fun setSendBackToQueeListener(
+            backBtn: ImageView,
+            viewModel: ServersViewModel,
+            server: MMServer
+        ) {
+            backBtn.setOnClickListener {
+                viewModel.setConfirmSendBackToQueue(server)
+            }
+
+
         }
 
         private fun setClickToChatListener(
