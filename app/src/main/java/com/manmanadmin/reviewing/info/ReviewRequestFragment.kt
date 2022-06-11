@@ -52,6 +52,16 @@ class ReviewRequestFragment : Fragment() {
         }
         setToolbarUpFunction(binding.myToolbar)
 
+        binding.clickToChatImg.setOnClickListener {
+            viewModel.setCallWhatsappWithPhoneNumberLivedata(binding.phoneEt.text.toString())
+        }
+
+        viewModel.callWhatsappWithPhoneNumberLivedata.observe(viewLifecycleOwner){
+            it?.let{
+                openWhatsAppWithNumber(it,context)
+                viewModel.setCallWhatsappWithPhoneNumberLivedata(null)
+            }
+        }
         viewModel.requestRawInfo.observe(viewLifecycleOwner){
             it?.let {
                 currentRequest = it

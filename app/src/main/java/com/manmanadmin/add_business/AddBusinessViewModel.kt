@@ -12,10 +12,15 @@ class AddBusinessViewModel: ViewModel() {
     get() = _businessSaved
 
      fun saveBusiness(business: Business) {
-        val reference = FirebaseDatabase.getInstance().reference.child("data").child("businesses")
-        reference.push().setValue(business).addOnSuccessListener {
+        val reference = FirebaseDatabase.getInstance().reference.child("data")
+            .child("businesses")
+        reference.child(getNameWithoutSpaces(business.name)).setValue(business).addOnSuccessListener {
             _businessSaved.postValue(true)
         }
+    }
+
+    private fun getNameWithoutSpaces(name: String?): String {
+        return name?.replace(" ","") ?: ""
     }
 
 }

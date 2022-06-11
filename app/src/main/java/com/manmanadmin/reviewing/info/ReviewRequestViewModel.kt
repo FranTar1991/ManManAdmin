@@ -33,8 +33,17 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
     val thisNodeReference: LiveData<DatabaseReference>
         get() = _thisNodeReference
 
+    private val _callWhatsappWithPhoneNumberLivedata = MutableLiveData<String?>()
+    val callWhatsappWithPhoneNumberLivedata: LiveData<String?>
+    get() = _callWhatsappWithPhoneNumberLivedata
+
     fun setNavigateToNextFragment(value: Boolean){
         _navigateToNextFragment.value = value
+    }
+
+
+    fun setCallWhatsappWithPhoneNumberLivedata(phoneNumber: String?){
+        _callWhatsappWithPhoneNumberLivedata.value = phoneNumber
     }
 
     fun setRequestRawInfo(request: ManManRequest?) {

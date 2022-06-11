@@ -7,8 +7,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.manmanadmin.utils.MMServer
 import com.manmanadmin.utils.ManManRequest
 import com.manmanadmin.utils.RequestRemote
+import com.manmanadmin.utils.STATUS
 
 class ServersRepo() {
+    val baseReference = FirebaseDatabase.getInstance().reference
+
     fun setRemoteRequestListener(
         requestReference: DatabaseReference,
         _remoteRequest: MutableLiveData<RequestRemote?>
@@ -16,32 +19,44 @@ class ServersRepo() {
        requestReference.get().addOnSuccessListener {
           val requestRemote = it.getValue(RequestRemote::class.java)
            _remoteRequest.postValue(requestRemote)
-           Log.i("MyRequestToTrack","${requestRemote}")
        }
     }
 
     fun sendBackToQueue(server: MMServer) {
-        val baseReference = FirebaseDatabase.getInstance().reference
+
 
         server.serverId?.let {
             baseReference.child("servers")
                 .child(server.serverId).get().addOnSuccessListener { server_to_remove ->
                     server_to_remove.ref.removeValue().addOnSuccessListener {
-                        copyPasteInQueue(server, baseReference)
+                        copyPasteInQueue(server)
                     }
                 }
         }
 
     }
 
-    private fun copyPasteInQueue(server: MMServer, baseReference: DatabaseReference) {
+    private fun copyPasteInQueue(server: MMServer) {
         val request = getCurrentRequest(server)
 
         val map = mutableMapOf ("comments" to request.comments, "user_id" to request.user_id)
         request.requestId?.let {
             baseReference.child("all_requests")
-                .child(it).setValue(map)
+                .child(it).setValue(map).addOnSuccessListener {
+                    changeTheRequestStatusToReceived(server)
+                }
         }
+    }
+
+    private fun changeTheRequestStatusToReceived(server: MMServer){
+       val ref = baseReference.child("users").child(server.currentUserId ?: "")
+            .child("requests").child(server.currentRequestId ?: "")
+            ref.child("status").setValue(STATUS.Received.name).addOnSuccessListener {
+                ref.child("agentName").setValue(null).addOnSuccessListener {
+                    ref.child("agentPhone").setValue(null)
+                }
+            }
+
     }
 
     private fun getCurrentRequest(item: MMServer): ManManRequest {

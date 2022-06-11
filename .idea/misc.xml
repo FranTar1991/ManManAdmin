@@ -17,6 +17,7 @@
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/drawable-v24/rounded_corners_et.xml" value="0.164" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/drawable-v24/rounded_corners_et_white.xml" value="0.148" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/drawable/ic_baseline_change_circle_24.xml" value="0.1875" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1875" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/drawable/ic_close_blue.xml" value="0.1695" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1565" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/font/archivo.xml" value="0.21354166666666666" />
@@ -32,7 +33,7 @@
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_processing_requests.xml" value="0.22" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_request_with_all_details.xml" value="0.18" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_address.xml" value="0.38979118329466356" />
-        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_info.xml" value="0.25" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_info.xml" value="0.5" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_review_request.xml" value="0.18" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_reviewed_requests.xml" value="0.25" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_server_item.xml" value="0.25" />

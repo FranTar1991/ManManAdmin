@@ -100,6 +100,13 @@
                     app:setTheText="@{viewModel.requestToReview}"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="+50587151530" />
+
+                <ImageView
+                    android:id="@+id/click_to_chat_img"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_baseline_message_24"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
 
