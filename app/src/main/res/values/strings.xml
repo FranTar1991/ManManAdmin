@@ -85,7 +85,9 @@
     <string name="journey_string">%s - %s</string>
     <string name="show_price">C$%s</string>
     <string name="text_for_referece">Atención: Si ves "\"No definido"\" como el precio del servicio, significa que el sistema no pudo calcularlo debido a que no ingresaste 2 direcciones. El repartidor te dirá el precio cuando se comunique contigo.</string>
-    <string name="update_request">Actualizar solicitud</string>
+    <string name="update_send_request">Enviar</string>
+    <string name="update_request">Actualizar</string>
+
     <string name="track_request">Rastrear tu solicitud</string>
     <string name="internet_error">Hubo un error. No se pudo calcular el precio del servicio.</string>
     <string name="price_not_defined">No definido</string>

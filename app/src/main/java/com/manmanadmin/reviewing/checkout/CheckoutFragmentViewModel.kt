@@ -1,7 +1,6 @@
 package com.manmanadmin.reviewing.checkout
 
 import android.content.Context
-import android.provider.ContactsContract
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -86,6 +85,15 @@ class CheckoutFragmentViewModel(private val repository: CheckoutFragmentRepo): V
 
     fun getPriceForCurrentRequest(journey: Journey, customPrices: CustomPrices) {
         repository.getPriceForCurrentRequest(journey, customPrices, _priceForThisRequest)
+    }
+
+    fun updateAndSendRequest(
+        reference: DatabaseReference?,
+        thisNodeReference: DatabaseReference?,
+        baseRef: DatabaseReference,
+        transactionItemLocal: RequestLocal
+    ){
+        repository.updateAndSendRequest(reference, thisNodeReference, baseRef,transactionItemLocal, _writeToDataBaseStatus)
     }
 
     fun updateRequest(

@@ -45,7 +45,7 @@ class CheckoutFragment : Fragment() {
 
         viewModel.transactionItem.observe(viewLifecycleOwner){ transaction ->
               currentRequest = transaction
-                viewModel.getJourney(transaction, context)
+                dealWithPrice()
         }
 
         viewModel.journeyLiveData.observe(viewLifecycleOwner){
@@ -70,19 +70,19 @@ class CheckoutFragment : Fragment() {
 
 
         binding.updateRequestBtn.setOnClickListener {
-            it.isEnabled = false
-            (it as Button).text = getString(R.string.sending_request)
-
-            if (binding.priceEt.text.toString() == ""){
-                showSnackbar(binding.root.rootView,getString(R.string.add_price))
-                it.isEnabled = true
-                (it as Button).text = getString(R.string.update_request)
-                return@setOnClickListener
+            currentRequest.price = if(binding.priceEt.text.toString() != ""){
+                binding.priceEt.text.toString().toDouble()
+            }else{
+                currentRequest.price
             }
+            viewModel.updateRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
+        }
+
+        binding.updateSendRequestBtn.setOnClickListener {
+            if(checkDataIsComplete(it as Button, getString(R.string.update_request))){
                 currentRequest.price = binding.priceEt.text.toString().toDouble()
-                viewModel.updateRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
-
-
+                viewModel.updateAndSendRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
+            }
         }
 
         viewModel.writeToDataBaseStatus.observe(viewLifecycleOwner){
@@ -121,6 +121,31 @@ class CheckoutFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
+    }
+
+    private fun dealWithPrice() {
+        if (currentRequest.price != -1.0){
+            viewModel.setPriceForThisRequest(currentRequest.price)
+        }else{
+            viewModel.getJourney(currentRequest, context)
+        }
+    }
+
+    private fun checkDataIsComplete(button: Button, text: String): Boolean {
+        updateButtonUi(button)
+       return if (binding.priceEt.text.toString() == ""){
+            showSnackbar(binding.root.rootView,getString(R.string.add_price))
+           button.isEnabled = true
+            button.text = text
+           false
+        } else {
+            true
+       }
+    }
+
+    private fun updateButtonUi(it: View) {
+        it.isEnabled = false
+        (it as Button).text = getString(R.string.sending_request)
     }
 
 }

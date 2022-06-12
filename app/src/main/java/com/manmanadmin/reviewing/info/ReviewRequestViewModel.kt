@@ -69,7 +69,7 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
     }
 
     fun deleteThisRequest() {
-        repo.deleteThisRequest(thisNodeReference.value, _navigateToMainFragment)
+        repo.deleteThisRequest(thisNodeReference.value, _navigateToMainFragment, _requestRawInfo)
     }
 
     fun setThisNodeReference(thisNodeReference: DatabaseReference) {

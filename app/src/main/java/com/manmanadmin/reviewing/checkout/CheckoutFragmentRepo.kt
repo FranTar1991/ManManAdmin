@@ -66,6 +66,7 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
         priceForThisRequest: MutableLiveData<Double?>
     ) {
 
+
         val isSameCity = journey.locationBCity == journey.userCity
 
         val priceFoLocationB: Int? = when(journey.locationBCity){
@@ -107,10 +108,11 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
         }
         priceForThisRequest.postValue(priceProcessed)
 
+
     }
 
 
-    fun updateRequest(
+    fun updateAndSendRequest(
         reference: DatabaseReference?,
         thisNodeReference: DatabaseReference?,
         baseRef: DatabaseReference,
@@ -120,13 +122,28 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
         reference?.setValue(fromLocalToRemote(transactionItemLocal))
             ?.addOnSuccessListener {
 
+
                 sendTransactionToTheServers(baseRef, thisNodeReference)
+
                 _navigateToMainFragment.postValue(GeneralStatus.success)
 
 
             }?.addOnFailureListener {
                 _navigateToMainFragment.postValue(GeneralStatus.error)
             }
+    }
+
+    fun updateRequest(reference: DatabaseReference?,
+                      thisNodeReference: DatabaseReference?,
+                      baseRef: DatabaseReference,
+                      transactionItemLocal: RequestLocal,
+                      _navigateToMainFragment: MutableLiveData<GeneralStatus>){
+
+        reference?.setValue(fromLocalToRemote(transactionItemLocal))
+            ?.addOnSuccessListener {
+                _navigateToMainFragment.postValue(GeneralStatus.success)
+            }
+
     }
 
     private fun sendTransactionToTheServers(baseRef:DatabaseReference, thisNodeReference: DatabaseReference?) {

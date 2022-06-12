@@ -5,7 +5,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.manmanadmin.utils.ManManRequest
 import com.manmanadmin.utils.RequestRemote
+import com.manmanadmin.utils.STATUS
+import com.manmanadmin.utils.getRequestReference
 
 class ReviewRequestRepository() {
 
@@ -40,13 +43,27 @@ class ReviewRequestRepository() {
 
     fun deleteThisRequest(
         requestReference: DatabaseReference?,
-        _navigateToNextFragment: MutableLiveData<Boolean>
+        _navigateToNextFragment: MutableLiveData<Boolean>,
+        rawRequestInfo: MutableLiveData<ManManRequest?>
     ) {
         requestReference?.get()?.addOnSuccessListener {
             it.ref.removeValue().addOnSuccessListener {
+                changeRequestStatus(rawRequestInfo)
                 _navigateToNextFragment.postValue(true)
             }
         }
+    }
+
+    private fun changeRequestStatus(rawRequestInfo: MutableLiveData<ManManRequest?>) {
+        val info = rawRequestInfo.value
+        val requestRef = getRequestReference(info?.requestId ?: "",info?.user_id ?: "")
+
+        requestRef.child("status").get().addOnSuccessListener {snapshot ->
+            snapshot.value?.let{
+                snapshot.ref.setValue(STATUS.Canceled.name)
+            }
+        }
+
     }
 
 }

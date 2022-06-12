@@ -177,7 +177,8 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
 }
 
  fun getRequestReference(requestId: String, userId: String): DatabaseReference {
-    return FirebaseDatabase.getInstance().reference.child("users").child(userId).child("requests").child(requestId)
+    return FirebaseDatabase.getInstance().reference.child("users").
+    child(userId).child("requests").child(requestId)
 }
 
  fun setAdapter(query: Query,

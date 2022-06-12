@@ -73,7 +73,6 @@ fun ImageView.decideWhichIcon(type: String?){
 @BindingAdapter("setThePriceText")
 fun EditText.setThePriceText(price: Double?){
     setText(if (price  == -1.0){
-
         ""
     }else{
         price.toString()
@@ -193,6 +192,7 @@ fun ImageView.myClickListener(viewModel: ReviewRequestViewModel?){
                context,true
                ,null){
                viewModel.deleteThisRequest()
+
            }?.show()
        }
     }
