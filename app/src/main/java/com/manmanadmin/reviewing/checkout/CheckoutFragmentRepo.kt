@@ -115,18 +115,13 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
     fun updateAndSendRequest(
         reference: DatabaseReference?,
         thisNodeReference: DatabaseReference?,
-        baseRef: DatabaseReference,
         transactionItemLocal: RequestLocal,
         _navigateToMainFragment: MutableLiveData<GeneralStatus>
     ){
         reference?.setValue(fromLocalToRemote(transactionItemLocal))
             ?.addOnSuccessListener {
-
-
-                sendTransactionToTheServers(baseRef, thisNodeReference)
-
+                sendRequestToNextQueue(thisNodeReference)
                 _navigateToMainFragment.postValue(GeneralStatus.success)
-
 
             }?.addOnFailureListener {
                 _navigateToMainFragment.postValue(GeneralStatus.error)
@@ -135,33 +130,35 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
 
     fun updateRequest(reference: DatabaseReference?,
                       thisNodeReference: DatabaseReference?,
-                      baseRef: DatabaseReference,
+                      manRequest: ManManRequest,
                       transactionItemLocal: RequestLocal,
                       _navigateToMainFragment: MutableLiveData<GeneralStatus>){
 
-        reference?.setValue(fromLocalToRemote(transactionItemLocal))
+        val updatedItem = fromLocalToRemote(transactionItemLocal)
+
+        reference?.setValue(updatedItem)
             ?.addOnSuccessListener {
+                updateThisNode(thisNodeReference, manRequest, updatedItem)
                 _navigateToMainFragment.postValue(GeneralStatus.success)
             }
 
     }
 
-    private fun sendTransactionToTheServers(baseRef:DatabaseReference, thisNodeReference: DatabaseReference?) {
-        thisNodeReference?.get()?.addOnSuccessListener { dataToTransfer ->
-            val formattedDataToPaste = getObjectToPaste(dataToTransfer)
-            dataToTransfer.key?.let { thisKey -> baseRef.child("all_requests")
-                .child(thisKey)
-                .setValue(formattedDataToPaste).addOnSuccessListener {
-                dataToTransfer.ref.removeValue()
-            }}
+    private fun updateThisNode(
+        thisNodeReference: DatabaseReference?,
+        manRequest: ManManRequest,
+        updatedItem: RequestRemote
+    ) {
+        manRequest.apply {
+            comments = updatedItem.comments
+            isReviewed = true
         }
+        thisNodeReference?.setValue(manRequest)
     }
 
-    private fun getObjectToPaste(dataToTransfer: DataSnapshot): ManManRequest? {
-        val userId = dataToTransfer.child("user_id").value.toString()
-        val comments = dataToTransfer.child("comments").value.toString()
-       return ManManRequest(user_id = userId, comments = comments)
-    }
+
+
+
 
     private fun fromLocalToRemote(item: RequestLocal): RequestRemote {
 
@@ -183,6 +180,9 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
             remoteItem.userPhone = it.userPhone
             remoteItem.agentName = it.agentName
             remoteItem.agentPhone = it.agentPhone
+            remoteItem.businessName = it.businessName
+            remoteItem.businessPhoneNumber = it.businessPhoneNumber
+            remoteItem.comments = it.comments
         }
         return remoteItem
     }

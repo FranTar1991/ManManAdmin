@@ -17,6 +17,4 @@ interface ViewModelForAdapterInterface {
     fun saveNewComments(comments: String, reference: DatabaseReference){
         reference.child("comments").setValue(comments)
     }
-
-
 }

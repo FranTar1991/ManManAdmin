@@ -8,6 +8,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
 import com.manmanadmin.databinding.ManManRequestItemBinding
+import com.manmanadmin.pending.PendingRequestsViewModel
 
 class AdapterForRequests(
     private val viewModel: ViewModelForAdapterInterface,
@@ -48,6 +49,15 @@ class AdapterForRequests(
                     viewModel.saveNewComments(binding.commentsEt.text.toString(),reference.child(it) )
                 }
             }
+
+            if (viewModel is PendingRequestsViewModel){
+                binding.isReviewedImg.setOnClickListener {
+                    item.requestId?.let {
+                        viewModel.sendRequestToNextStage(reference.child(it))
+                    }
+                }
+            }
+
         }
 
 

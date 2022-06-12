@@ -22,4 +22,7 @@ data class RequestLocal(var id: String? = null,
                         var locationBAddress: LatLng? = null,
                         var locationBAddressReference: String? = null,
                         var userAddressBitmap: Bitmap? = null,
+                        var businessName: String? = null,
+                        var businessPhoneNumber: String? = null,
+                        var comments: String? = null,
                         var locationBAddressBitmap: Bitmap? = null): Parcelable

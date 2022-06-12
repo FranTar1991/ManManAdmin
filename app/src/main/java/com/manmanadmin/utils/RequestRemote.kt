@@ -29,4 +29,7 @@ data class RequestRemote(var id: String? = "",
                          var userAddressLong: Double? = null,
                          var userAddressReference: String? = null,
                          var locationBAddressReference: String? = null,
+                         var businessName: String? = null,
+                         var businessPhoneNumber: String? = null,
+                         var comments: String? = null,
                          var userAddressLat: Double? = null, ): Parcelable

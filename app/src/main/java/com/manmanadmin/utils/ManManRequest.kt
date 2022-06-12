@@ -7,4 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class ManManRequest(val user_id: String? = null,
                          val requestId: String? = null,
                          val status: String? = null,
-                         val comments: String? = null): Parcelable
+                         var isReviewed: Boolean? = false,
+                         var comments: String? = null): Parcelable

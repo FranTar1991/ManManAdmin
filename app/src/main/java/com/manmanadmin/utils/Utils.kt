@@ -30,6 +30,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
@@ -191,9 +192,12 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
         val userId = snapshot.child("user_id").getValue(String::class.java)
         val status = snapshot.child("status").getValue(String::class.java)
         val comments = snapshot.child("comments").getValue(String::class.java)
+        val isReviewed = snapshot.child("reviewed").getValue(Boolean::class.java)
 
-        ManManRequest(requestId = requestId, user_id = userId, status =  status, comments = comments)
+        ManManRequest(requestId = requestId, user_id = userId, status =  status, comments = comments, isReviewed = isReviewed)
     }
+
+
 
     val options: FirebaseRecyclerOptions<ManManRequest> = FirebaseRecyclerOptions.Builder<ManManRequest>()
         .setQuery(query,snapshotParser)
@@ -202,6 +206,25 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
 
     return AdapterForRequests(viewModel, options, onManManRequestClickListener, query as DatabaseReference)
 
+}
+
+fun getManManRequestToPaste(dataToTransfer: DataSnapshot): ManManRequest? {
+    val userId = dataToTransfer.child("user_id").value.toString()
+    val comments = dataToTransfer.child("comments").value.toString()
+    return ManManRequest(user_id = userId, comments = comments)
+}
+
+fun sendRequestToNextQueue(thisNodeReference: DatabaseReference?) {
+    val baseRef = FirebaseDatabase.getInstance().reference
+
+    thisNodeReference?.get()?.addOnSuccessListener { dataToTransfer ->
+        val formattedDataToPaste = getManManRequestToPaste(dataToTransfer)
+        dataToTransfer.key?.let { thisKey -> baseRef.child("all_requests")
+            .child(thisKey)
+            .setValue(formattedDataToPaste).addOnSuccessListener {
+                dataToTransfer.ref.removeValue()
+            }}
+    }
 }
 
 fun getSumOfMoneyEarnedInRequests(requests: List<RequestRemote>?): Double{

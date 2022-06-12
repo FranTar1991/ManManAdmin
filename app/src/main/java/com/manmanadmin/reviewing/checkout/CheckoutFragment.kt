@@ -22,6 +22,7 @@ import com.manmanadmin.utils.*
 class CheckoutFragment : Fragment() {
     private lateinit var binding: FragmentCheckoutBinding
     private lateinit var viewModel: CheckoutFragmentViewModel
+    private lateinit var manManRequest: ManManRequest
     private val args: CheckoutFragmentArgs by navArgs()
     private lateinit var journey: Journey
     private lateinit var currentRequest: RequestLocal
@@ -63,6 +64,7 @@ class CheckoutFragment : Fragment() {
 
         viewModel.requestRawInfo.observe(viewLifecycleOwner){
             it?.let {
+                manManRequest = it
                 requestReference = it.user_id?.let { it1 -> getRequestReference(it.requestId!!, it1) }
                 thisNodeReference = it.requestId?.let { it1 -> getThisNodeReference(it1) }
             }
@@ -74,16 +76,21 @@ class CheckoutFragment : Fragment() {
                 binding.priceEt.text.toString().toDouble()
             }else{
                 currentRequest.price
+
             }
-            viewModel.updateRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
+            currentRequest.comments = binding.commentsTxt.text.toString()
+            viewModel.updateRequest(requestReference,thisNodeReference,manManRequest,currentRequest)
         }
 
         binding.updateSendRequestBtn.setOnClickListener {
-            if(checkDataIsComplete(it as Button, getString(R.string.update_request))){
+            if(checkDataIsComplete(it as Button, getString(R.string.update_send_request))){
                 currentRequest.price = binding.priceEt.text.toString().toDouble()
-                viewModel.updateAndSendRequest(requestReference,thisNodeReference, databaseReference ,currentRequest)
+                currentRequest.comments = binding.commentsTxt.text.toString()
+                viewModel.updateAndSendRequest(requestReference,thisNodeReference ,currentRequest)
             }
         }
+
+
 
         viewModel.writeToDataBaseStatus.observe(viewLifecycleOwner){
             when(it){

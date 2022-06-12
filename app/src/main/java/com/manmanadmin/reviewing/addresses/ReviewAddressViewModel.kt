@@ -97,6 +97,10 @@ class ReviewAddressViewModel(private val repo: ReviewAddressRepository): ViewMod
             userPhone = transactionItemRemote.userPhone
             agentName = transactionItemRemote.agentName
             agentPhone = transactionItemRemote.agentPhone
+            businessName = transactionItemRemote.businessName
+            businessPhoneNumber = transactionItemRemote.businessPhoneNumber
+            comments = transactionItemRemote.comments
+
         }
 
 

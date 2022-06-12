@@ -43,8 +43,6 @@ class PendingRequestsFragment : Fragment() {
         val requestRv = binding.allItemsRv
         requestRv.adapter = adapter
         requestRv.layoutManager = activity?.let { WrapContentLinearLayoutManager(it) }
-
-
         viewModel.navigateToReviewRequest.observe(viewLifecycleOwner){clickedRequest ->
             clickedRequest?.let{
               this.findNavController().navigate(ContainerFragmentDirections.actionContainerFragmentToReviewRequestFragment(clickedRequest))

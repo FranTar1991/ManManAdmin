@@ -90,19 +90,18 @@ class CheckoutFragmentViewModel(private val repository: CheckoutFragmentRepo): V
     fun updateAndSendRequest(
         reference: DatabaseReference?,
         thisNodeReference: DatabaseReference?,
-        baseRef: DatabaseReference,
         transactionItemLocal: RequestLocal
     ){
-        repository.updateAndSendRequest(reference, thisNodeReference, baseRef,transactionItemLocal, _writeToDataBaseStatus)
+        repository.updateAndSendRequest(reference, thisNodeReference,transactionItemLocal, _writeToDataBaseStatus)
     }
 
     fun updateRequest(
         reference: DatabaseReference?,
         thisNodeReference: DatabaseReference?,
-        baseRef: DatabaseReference,
+        manManRequest: ManManRequest,
         transactionItemLocal: RequestLocal
     ){
-        repository.updateRequest(reference, thisNodeReference, baseRef,transactionItemLocal, _writeToDataBaseStatus)
+        repository.updateRequest(reference, thisNodeReference,manManRequest, transactionItemLocal, _writeToDataBaseStatus)
     }
 
 
