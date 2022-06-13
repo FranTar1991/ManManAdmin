@@ -53,15 +53,29 @@ class ReviewRequestFragment : Fragment() {
         setToolbarUpFunction(binding.myToolbar)
 
         binding.clickToChatImg.setOnClickListener {
-            viewModel.setCallWhatsappWithPhoneNumberLivedata(binding.phoneEt.text.toString())
+            viewModel.setCallWhatsappWithUserPhoneNumberLivedata(binding.phoneEt.text.toString())
         }
 
-        viewModel.callWhatsappWithPhoneNumberLivedata.observe(viewLifecycleOwner){
+        binding.clickToChatToBusinessImg.setOnClickListener {
+            viewModel.setCallWhatsappWithBusinessPhoneNumberLivedata(binding.businessPhoneEt.text.toString())
+        }
+
+        viewModel.callWhatsappWithUserPhoneNumberLivedata.observe(viewLifecycleOwner){
             it?.let{
                 openWhatsAppWithNumber(it,context)
-                viewModel.setCallWhatsappWithPhoneNumberLivedata(null)
+                viewModel.setCallWhatsappWithUserPhoneNumberLivedata(null)
             }
         }
+
+        viewModel.callWhatsappWithBusinessPhoneNumberLivedata.observe(viewLifecycleOwner){
+            it?.let{
+                val information = getDataFromTheEditTexts()
+                openWhatsAppWithInfo(it,information,context)
+                viewModel.setCallWhatsappWithBusinessPhoneNumberLivedata(null)
+            }
+        }
+
+
         viewModel.requestRawInfo.observe(viewLifecycleOwner){
             it?.let {
                 currentRequest = it
@@ -84,6 +98,12 @@ class ReviewRequestFragment : Fragment() {
         return binding.root
     }
 
+    private fun getDataFromTheEditTexts(): String {
+       return getString(R.string.request_string_to_businesses,
+        binding.nameEt.text.toString(),
+        binding.phoneEt.text.toString(),
+           binding.detailsEt.text.toString())
+    }
 
 
     private fun setContinueListener() {

@@ -218,6 +218,8 @@
     <string name="business_added">Negocio agregado</string>
     <string name="add_coordinate">Coordenadas (lat, long)</string>
     <string name="send_back_to_queue">¿Seguro que deseas enviar esta solicitud de regreso a la fila?</string>
+    <string name="business_info">Información del negocio</string>
+    <string name="request_string_to_businesses">"Nombre del cliente: %s \n\nNum. de tel: %s \n\nDetalles: %s "</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

@@ -23,7 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:elevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/customer_info_container"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -32,8 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:elevation="4dp"
-                    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                     android:theme="@style/ToolBarStyle"
+                    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                     <TextView
@@ -43,52 +45,54 @@
                         android:text="@string/details_label"
                         android:textColor="@color/white"
                         android:textSize="24sp"
-                        tools:text="@string/details_label"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="@string/details_label" />
 
                     <ImageView
                         android:id="@+id/delete_transaction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        app:myClickListener="@{viewModel}"
                         android:paddingEnd="16dp"
-                        android:src="@drawable/ic_delete_forever_normal" />
+                        android:src="@drawable/ic_delete_forever_normal"
+                        app:myClickListener="@{viewModel}" />
 
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/customer_info_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/business_info_container"
                 app:layout_constraintEnd_toEndOf="@+id/inside_main"
+
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/inside_main"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
 
-                    <EditText
-                        style="@style/type_txt_details"
-                        android:id="@+id/name_et"
-                        android:background="@drawable/rounded_corners_et_white"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:maxLines="1"
-                        android:inputType="text"
-                        android:scrollbars="horizontal"
-                        android:layout_weight="2"
-                        android:layout_gravity="center"
-                        android:padding="16dp"
-                        android:text="@{viewModel.requestToReview.userName}"
-                        app:layout_constraintStart_toStartOf="parent" />
-
+                <EditText
+                    android:id="@+id/name_et"
+                    style="@style/type_txt_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/rounded_corners_et_white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="16dp"
+                    android:scrollbars="horizontal"
+                    android:text="@{viewModel.requestToReview.userName}"
+                    app:layout_constraintStart_toStartOf="parent" />
 
 
                 <EditText
+                    android:id="@+id/phone_et"
                     style="@style/type_txt_details"
                     android:layout_width="0dp"
-                    android:id="@+id/phone_et"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
@@ -96,18 +100,93 @@
                     android:background="@drawable/rounded_corners_et_white"
                     android:gravity="center"
                     android:padding="16dp"
-                    app:setTheText="@{viewModel.requestToReview}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:setTheText="@{viewModel.requestToReview}"
                     tools:text="+50587151530" />
 
                 <ImageView
                     android:id="@+id/click_to_chat_img"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:src="@drawable/ic_baseline_message_24"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_message_24" />
             </LinearLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/business_info_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_et_white"
+                android:padding="4dp"
+                android:visibility="@{viewModel.requestToReview.businessPhoneNumber != null &amp;&amp; viewModel.requestToReview.businessName != null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@+id/inside_main"
+                app:layout_constraintEnd_toEndOf="@+id/inside_main"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/inside_main"
+                app:layout_constraintTop_toBottomOf="@+id/customer_info_container"
+                app:layout_constraintVertical_chainStyle="spread_inside">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:id="@+id/business_info_label"
+                    android:text="@string/business_info"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/type_txt_details"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/business_name_et"
+                    style="@style/type_txt_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded_corners_et"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="16dp"
+                    android:scrollbars="horizontal"
+                    android:text="@{viewModel.requestToReview.businessName}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/business_phone_et"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/business_info_label" />
+
+
+                <EditText
+                    android:id="@+id/business_phone_et"
+                    style="@style/type_txt_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded_corners_et"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="@{viewModel.requestToReview.businessPhoneNumber}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/click_to_chat_to_business_img"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/business_name_et"
+                    app:layout_constraintTop_toBottomOf="@+id/business_info_label"
+                    tools:text="+50587151530" />
+
+                <ImageView
+                    android:id="@+id/click_to_chat_to_business_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_message_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/business_phone_et"
+                    app:layout_constraintTop_toBottomOf="@+id/business_info_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/inside_main"
@@ -119,8 +198,9 @@
                 android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                app:layout_constraintTop_toBottomOf="@+id/business_info_container">
 
                 <EditText
                     android:id="@+id/title_et"
@@ -167,12 +247,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    app:setTheText="@{viewModel.requestToReview.status}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/details_et" />
+                    app:layout_constraintTop_toBottomOf="@+id/details_et"
+                    app:setTheText="@{viewModel.requestToReview.status}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

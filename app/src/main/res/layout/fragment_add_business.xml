@@ -58,23 +58,35 @@
 
                 <EditText
                     android:id="@+id/category_et"
+                    style="@style/business_style"
                     android:hint="@string/category"
-                    app:layout_constraintBottom_toTopOf="@+id/business_name"
-                    app:layout_constraintEnd_toEndOf="@+id/business_name"
                     android:text="@string/food"
+                    app:layout_constraintBottom_toTopOf="@+id/business_name"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/business_name"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/business_style" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/business_name"
                     style="@style/business_style"
-                    android:inputType="text"
+                    android:layout_margin="4dp"
                     android:hint="@string/business_name"
-                    app:layout_constraintBottom_toTopOf="@+id/logo_url_et"
-                    app:layout_constraintEnd_toEndOf="@+id/logo_url_et"
-                    app:layout_constraintStart_toStartOf="@+id/logo_url_et"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toStartOf="@+id/business_phone_et"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/category_et" />
+
+                <EditText
+                    android:id="@+id/business_phone_et"
+                    style="@style/business_style"
+                    android:hint="@string/business_name"
+                    android:inputType="text"
+                    android:layout_margin="4dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/business_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/business_name" />
 
                 <EditText
                     android:id="@+id/logo_url_et"
@@ -111,9 +123,9 @@
                 <EditText
                     android:id="@+id/longitude_et"
                     style="@style/business_style"
-                    android:hint="@string/longitude"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:hint="@string/longitude"
                     android:inputType="text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

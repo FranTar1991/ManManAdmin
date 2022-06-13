@@ -225,6 +225,7 @@ fun EditText.setTheText(requestRemote: RequestRemote?){
 }
 
 
+
 @BindingAdapter("setVisibility")
 fun ImageView.setVisibility(status: STATUS?){
     status?.let {

@@ -24,6 +24,7 @@ class AddBusinessFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBusinessBinding
     private lateinit var nameEt: EditText
+    private lateinit var phoneEt: EditText
     private lateinit var categoryEt: EditText
     private lateinit var imageLogo: ImageView
     private lateinit var latEt: EditText
@@ -40,6 +41,7 @@ class AddBusinessFragment : Fragment() {
         binding = FragmentAddBusinessBinding.inflate(inflater,container,false)
 
         nameEt = binding.businessName
+        phoneEt = binding.businessPhoneEt
         categoryEt = binding.categoryEt
         imageLogo = binding.logoImg
         latEt = binding.latitudeEt
@@ -100,6 +102,7 @@ class AddBusinessFragment : Fragment() {
 
     private fun getBusinessInfo(): Business? {
        if(categoryEt.checkIfEmpty() ||
+           phoneEt.checkIfEmpty() ||
         nameEt.checkIfEmpty() ||
         imageUrlEt.checkIfEmpty() ||
         latEt.checkIfEmpty() ||
@@ -112,7 +115,8 @@ class AddBusinessFragment : Fragment() {
             latEt.text.toString().trim().toDouble(),
             longEt.text.toString().trim().toDouble(),
             categoryEt.text.toString(),
-            imageUrlEt.text.toString())
+            imageUrlEt.text.toString(),
+            phoneEt.text.toString())
     }
 
 
