@@ -36,7 +36,7 @@
     <string name="ok">Ok</string>
 
     <string name="user_name">Nombre</string>
-    <string name="user_phone_number">Cel. con código de área</string>
+    <string name="user_phone_number">Num. De Tel.</string>
     <string name="add_address">Direcciones</string>
     <string name="save">Guardar</string>
     <string name="preference_file_key">my_shared_preferences</string>
@@ -220,6 +220,8 @@
     <string name="send_back_to_queue">¿Seguro que deseas enviar esta solicitud de regreso a la fila?</string>
     <string name="business_info">Información del negocio</string>
     <string name="request_string_to_businesses">"Nombre del cliente: %s \n\nNum. de tel: %s \n\nDetalles: %s "</string>
+    <string name="filter_result">%s,%s</string>
+    <string name="enter_valid_coodinates">"Una coordenada válida se ve así: 11.854708606565367, -86.24616103863144 "</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

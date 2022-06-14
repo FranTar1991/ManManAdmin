@@ -80,8 +80,8 @@
                 <EditText
                     android:id="@+id/business_phone_et"
                     style="@style/business_style"
-                    android:hint="@string/business_name"
-                    android:inputType="text"
+                    android:hint="@string/user_phone_number"
+                    android:inputType="phone"
                     android:layout_margin="4dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/business_name"
                     app:layout_constraintEnd_toEndOf="parent"

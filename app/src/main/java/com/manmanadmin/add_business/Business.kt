@@ -2,11 +2,13 @@ package com.manmanadmin.add_business
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlin.random.Random
 
 @Parcelize
-data class Business(val name: String? = null,
-                    val lat: Double? = null,
-                    val long: Double? = null,
-                    val category: String? = null,
-                    val imageUrl: String? = null,
-                    val businessPhoneNumber: String? = null): Parcelable
+data class Business(var name: String? = null,
+                    var lat: Double? = null,
+                    var long: Double? = null,
+                    var category: String? = null,
+                    var imageUrl: String? = null,
+                    var businessPhoneNumber: String? = null,
+                    var id: Long = Random.nextLong(100000000000),): Parcelable

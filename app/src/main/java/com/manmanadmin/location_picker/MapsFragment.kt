@@ -7,11 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.SearchView.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -21,13 +18,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.manchasdelivery.location_picker.LocationPickerViewModelFactory
 import com.manmanadmin.R
+import com.manmanadmin.add_business.Business
 import com.manmanadmin.databinding.LocationPickerBinding
 import com.manmanadmin.utils.*
 
@@ -47,7 +44,7 @@ class MapsFragment : Fragment(){
     private var myMap: GoogleMap? = null
     private lateinit var binding: LocationPickerBinding
     private lateinit var referenceEt: EditText
-
+    private lateinit var lisOfBusiness: MutableList<Business>
 
 
     private val args: MapsFragmentArgs by navArgs()
@@ -103,6 +100,18 @@ class MapsFragment : Fragment(){
             currentTransactionItem = it
         }
 
+        viewModel.businessArrayLiveData.observe(viewLifecycleOwner){
+            it?.let {
+
+                lisOfBusiness = it
+//                for(busines in it){
+//               //     lisOfBusinessNames.add(busines?.name)
+//                }
+                setSearchCoordinateView()
+
+            }
+        }
+
         callingFragment = args.callingFragment
         viewModel.setCallingFragment(args.callingFragment)
         viewModel.callingF.observe(viewLifecycleOwner){
@@ -116,8 +125,6 @@ class MapsFragment : Fragment(){
           )
 
         }
-
-      setSearchCoordinateView()
 
 
         binding.saveLocationBtn.setOnClickListener {
@@ -191,8 +198,13 @@ class MapsFragment : Fragment(){
 
     private fun setSearchCoordinateView() {
        val editText = binding.searchEt
+       setCustomAdapter(editText)
 
         binding.coordinatesSV.setStartIconOnClickListener{
+            if (editText.text.toString().isEmpty()){
+                return@setStartIconOnClickListener
+            }
+
             val coordinateLatLang = getCoordinatesInLatLang(editText.text.toString())
 
             coordinateLatLang?.let {
@@ -202,13 +214,27 @@ class MapsFragment : Fragment(){
         }
     }
 
+    private fun setCustomAdapter(editText: AutoCompleteTextView) {
+        val adapter = BusinessInfoAdapter(requireContext(), R.layout.business_data_item, lisOfBusiness)
+        (editText as? AutoCompleteTextView)?.apply {
+            setAdapter(adapter)
+        }
+    }
+
     private fun getCoordinatesInLatLang(coordinatesString: String?): LatLng? {
         var coordinates: LatLng? = null
-        val array = coordinatesString?.split(",")?.map { it.trim().toDouble() }
 
-        array?.let {
-           coordinates =  LatLng(array[0], array[1])
+        try {
+            val array = coordinatesString?.split(",")?.map { it.trim().toDouble() }
+
+            array?.let {
+                coordinates =  LatLng(array[0], array[1])
+            }
+        }catch (exeption: NumberFormatException){
+            showSnackbar(binding.root.rootView,getString(R.string.enter_valid_coodinates))
         }
+
+
         return coordinates
     }
 

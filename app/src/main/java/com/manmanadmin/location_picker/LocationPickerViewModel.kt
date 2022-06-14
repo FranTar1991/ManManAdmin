@@ -17,13 +17,17 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.database.FirebaseDatabase
 import com.manmanadmin.R
+import com.manmanadmin.add_business.Business
 import com.manmanadmin.utils.CITIES
 import com.manmanadmin.utils.RequestLocal
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
- val DEFAULT_LOCATION = CITIES.Jinotepe.latLng
+val DEFAULT_LOCATION = CITIES.Jinotepe.latLng
  const val DEFAULT_ZOOM = 15
  const val ZOOM_BUILDING_LEVEL = 18
 private const val TAG: String = "LOCATION CLASS"
@@ -38,7 +42,9 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
     val isLocationPermissionGranted: LiveData<Boolean>
         get() = _isLocationPermissionGranted
 
-
+    private val _businessArrayLiveData = MutableLiveData<MutableList<Business>?>()
+    val businessArrayLiveData: LiveData<MutableList<Business>?>
+    get() = _businessArrayLiveData
 
     private val _locationSelected = MutableLiveData<LatLng>()
     val locationSelected: LiveData<LatLng>
@@ -62,7 +68,7 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
         get() = _referenceToShow
 
     init {
-
+        setBusinessData()
     }
 
     fun setReferenceToShow(value: String?){
@@ -96,6 +102,25 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
         override fun onNothingSelected(p0: AdapterView<*>?) {
 
         }
+
+    }
+
+    private fun setBusinessData(){
+
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                FirebaseDatabase.getInstance().reference.child("data")
+                    .child("businesses").get().addOnSuccessListener { snapshot ->
+                        val listOfBusinesses = mutableListOf<Business>()
+                        for(business in snapshot.children){
+                            business.getValue(Business::class.java)
+                                ?.let { listOfBusinesses.add(it) }
+                        }
+                        _businessArrayLiveData.postValue(listOfBusinesses)
+                    }
+            }
+        }
+
 
     }
 

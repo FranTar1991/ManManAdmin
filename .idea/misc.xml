@@ -23,6 +23,8 @@
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/font/archivo.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/activity_main.xml" value="0.10461956521739131" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/address_section_layout.xml" value="0.10461956521739131" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/business.xml" value="0.1" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/business_data_item.xml" value="0.25" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/change_busines_status_dialog.xml" value="0.12" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_add_business.xml" value="0.22" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_checkout.xml" value="0.25" />
@@ -42,6 +44,7 @@
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_transaction_addresses.xml" value="0.22" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/fragment_transaction_info.xml" value="0.10461956521739131" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/layout_man_man_request_item.xml" value="0.22" />
+        <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/list_item.xml" value="0.18" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/location_picker.xml" value="0.25" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/man_man_request_item.xml" value="0.25" />
         <entry key="..\:/Users/frank/Desktop/ManManAdmin/app/src/main/res/layout/spinner_item_layout.xml" value="0.10461956521739131" />

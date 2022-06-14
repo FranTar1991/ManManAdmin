@@ -3,6 +3,7 @@ package com.manmanadmin.add_business
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,9 @@ import com.manmanadmin.databinding.FragmentAddBusinessBinding
 import com.manmanadmin.utils.checkIfEmpty
 import com.manmanadmin.utils.setEmpty
 import com.manmanadmin.utils.showSnackbar
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 
 class AddBusinessFragment : Fragment() {
@@ -62,7 +65,7 @@ class AddBusinessFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                loadImageWithPicasso(getNewImageUrl(p0.toString()))
+                loadImageWithPicasso(p0.toString())
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -77,6 +80,8 @@ class AddBusinessFragment : Fragment() {
             }
         }
 
+
+
         return binding.root
     }
 
@@ -86,6 +91,8 @@ class AddBusinessFragment : Fragment() {
         latEt.setEmpty()
         longEt.setEmpty()
         imageUrlEt.setEmpty()
+        phoneEt.setEmpty()
+        imageLogo.setImageBitmap(null)
         showSnackbar(binding.root.rootView, getString(R.string.business_added))
 
     }
@@ -93,9 +100,18 @@ class AddBusinessFragment : Fragment() {
     private fun loadImageWithPicasso(url: String?) {
         if (url?.isNotEmpty() == true){
             Picasso.get().load(url)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_launcher_background)
                 .error(R.mipmap.ic_launcher)
-                .into(imageLogo)
+                .into(imageLogo,  object : Callback {
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(exception: Exception?) {
+                        Log.i("MyPicassoImage", "exception: $exception" )
+                    }
+
+                })
         }
 
     }
@@ -111,7 +127,7 @@ class AddBusinessFragment : Fragment() {
            return null
        }
 
-     return   Business(nameEt.text.toString(),
+     return   Business( nameEt.text.toString(),
             latEt.text.toString().trim().toDouble(),
             longEt.text.toString().trim().toDouble(),
             categoryEt.text.toString(),
@@ -120,17 +136,5 @@ class AddBusinessFragment : Fragment() {
     }
 
 
-
-    private fun getNewImageUrl(url: String): String {
-        return    try {
-            val p = url.split("/").toTypedArray()
-            "https://drive.google.com/uc?export=download&id=" + p[5]
-        }catch (error: IndexOutOfBoundsException){
-            ""
-        }
-
-
-
-    }
 
 }
