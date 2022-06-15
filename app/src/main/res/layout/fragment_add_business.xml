@@ -102,7 +102,6 @@
                 <ImageView
                     android:id="@+id/logo_img"
                     style="@style/business_style"
-                    app:layout_constraintBottom_toTopOf="@+id/latitude_et"
                     app:layout_constraintEnd_toEndOf="@+id/latitude_et"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/latitude_et"
@@ -110,27 +109,28 @@
                     tools:src="@tools:sample/avatars" />
 
                 <EditText
-                    android:id="@+id/latitude_et"
-                    style="@style/business_style"
-                    android:hint="@string/lat"
-                    android:inputType="text"
-                    app:layout_constraintBottom_toTopOf="@+id/longitude_et"
-                    app:layout_constraintEnd_toEndOf="@+id/longitude_et"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/longitude_et"
-                    app:layout_constraintTop_toBottomOf="@+id/logo_img" />
+                    android:id="@+id/menu_links_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded_corners_et"
+                    android:hint="@string/menu_links"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
+                    android:scrollbars="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/logo_img"
+                    tools:layout_editor_absoluteX="8dp" />
 
                 <EditText
-                    android:id="@+id/longitude_et"
+                    android:id="@+id/latitude_et"
                     style="@style/business_style"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:hint="@string/longitude"
+                    android:layout_margin="8dp"
+                    android:hint="@string/lat"
                     android:inputType="text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/latitude_et" />
+                    app:layout_constraintTop_toBottomOf="@+id/menu_links_et" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

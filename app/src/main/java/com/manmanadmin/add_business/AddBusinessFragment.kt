@@ -11,27 +11,27 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
+import com.google.android.gms.maps.model.LatLng
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentAddBusinessBinding
+import com.manmanadmin.utils.BusinessMenu
 import com.manmanadmin.utils.checkIfEmpty
 import com.manmanadmin.utils.setEmpty
 import com.manmanadmin.utils.showSnackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
-import java.lang.IndexOutOfBoundsException
 
 class AddBusinessFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBusinessBinding
     private lateinit var nameEt: EditText
+    private lateinit var menuLinksEt: EditText
     private lateinit var phoneEt: EditText
     private lateinit var categoryEt: EditText
     private lateinit var imageLogo: ImageView
-    private lateinit var latEt: EditText
-    private lateinit var longEt: EditText
+    private lateinit var latLongEt: EditText
+
     private lateinit var imageUrlEt: EditText
     private val viewModel: AddBusinessViewModel by viewModels()
 
@@ -45,10 +45,11 @@ class AddBusinessFragment : Fragment() {
 
         nameEt = binding.businessName
         phoneEt = binding.businessPhoneEt
+        menuLinksEt = binding.menuLinksEt
         categoryEt = binding.categoryEt
         imageLogo = binding.logoImg
-        latEt = binding.latitudeEt
-        longEt = binding.longitudeEt
+        latLongEt = binding.latitudeEt
+
         imageUrlEt = binding.logoUrlEt
 
         binding.saveBusinessBtn.setOnClickListener {
@@ -88,10 +89,10 @@ class AddBusinessFragment : Fragment() {
     private fun emptyEditTexts() {
         nameEt.setEmpty()
         categoryEt.setEmpty()
-        latEt.setEmpty()
-        longEt.setEmpty()
+        latLongEt.setEmpty()
         imageUrlEt.setEmpty()
         phoneEt.setEmpty()
+        menuLinksEt.setEmpty()
         imageLogo.setImageBitmap(null)
         showSnackbar(binding.root.rootView, getString(R.string.business_added))
 
@@ -121,20 +122,37 @@ class AddBusinessFragment : Fragment() {
            phoneEt.checkIfEmpty() ||
         nameEt.checkIfEmpty() ||
         imageUrlEt.checkIfEmpty() ||
-        latEt.checkIfEmpty() ||
-        longEt.checkIfEmpty()){
+        latLongEt.checkIfEmpty()){
 
            return null
        }
 
-     return   Business( nameEt.text.toString(),
-            latEt.text.toString().trim().toDouble(),
-            longEt.text.toString().trim().toDouble(),
-            categoryEt.text.toString(),
-            imageUrlEt.text.toString(),
-            phoneEt.text.toString())
+        val businessLocation = getBusinessLatLng()
+
+     return   Business( name = nameEt.text.toString(),
+            lat = businessLocation.latitude,
+            long=  businessLocation.longitude,
+            category = categoryEt.text.toString(),
+         imageUrl= imageUrlEt.text.toString(),
+         businessPhoneNumber = phoneEt.text.toString(), menu =  getArrayWIthMenuLinks())
     }
 
+    private fun getBusinessLatLng(): LatLng {
+        val arrayOfDoubles = latLongEt.text.split(",").map { it.trim().toDouble() }
+        return LatLng(arrayOfDoubles[0], arrayOfDoubles[1])
+    }
+
+    private fun getArrayWIthMenuLinks(): ArrayList<BusinessMenu> {
+        val arrayOfBusinessMenu = arrayListOf<BusinessMenu>()
+        val arrayOfStrings = menuLinksEt.text.toString().split(",").map { it.trim() }
+
+        for (link in arrayOfStrings){
+            arrayOfBusinessMenu.add(BusinessMenu(link))
+        }
+
+        return arrayOfBusinessMenu
+
+    }
 
 
 }

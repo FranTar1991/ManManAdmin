@@ -17,15 +17,19 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.manmanadmin.R
 import com.manmanadmin.add_business.Business
+import com.manmanadmin.utils.BusinessMenu
 import com.manmanadmin.utils.CITIES
 import com.manmanadmin.utils.RequestLocal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
+
 
 val DEFAULT_LOCATION = CITIES.Jinotepe.latLng
  const val DEFAULT_ZOOM = 15
@@ -113,7 +117,7 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
                     .child("businesses").get().addOnSuccessListener { snapshot ->
                         val listOfBusinesses = mutableListOf<Business>()
                         for(business in snapshot.children){
-                            business.getValue(Business::class.java)
+                           getBusinessObject(snapshot)
                                 ?.let { listOfBusinesses.add(it) }
                         }
                         _businessArrayLiveData.postValue(listOfBusinesses)
@@ -123,6 +127,18 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
 
 
     }
+
+    private fun getBusinessObject(snapshot: DataSnapshot?): Business? {
+        return Business(name = snapshot?.child("name")?.getValue(String::class.java),
+        lat = snapshot?.child("lat")?.getValue(Double::class.java),
+            long = snapshot?.child("long")?.getValue(Double::class.java),
+            category = snapshot?.child("category")?.getValue(String::class.java),
+            imageUrl = snapshot?.child("imageUrl")?.getValue(String::class.java),
+            businessPhoneNumber = snapshot?.child("businessPhoneNumber")?.getValue(String::class.java),
+            id = snapshot?.child("id")?.getValue(Long::class.java) ?: Random.nextLong(100000000000),
+            menu = null)
+    }
+
 
     fun setIsLocationPermissionGranted(result: Boolean){
         _isLocationPermissionGranted.value = result

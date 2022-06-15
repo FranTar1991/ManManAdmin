@@ -1,4 +1,4 @@
-package com.manmanadmin.utils
+package com.manmanadmin.servers
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

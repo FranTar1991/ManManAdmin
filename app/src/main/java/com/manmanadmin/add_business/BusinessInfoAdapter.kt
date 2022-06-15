@@ -1,19 +1,16 @@
-package com.manmanadmin.utils
+package com.manmanadmin.add_business
 
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.manmanadmin.R
-import com.manmanadmin.add_business.Business
 
 class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: Int,
                           private val listOfBusinesses: MutableList<Business>): ArrayAdapter<Business>(ctx,layoutResource, listOfBusinesses) {

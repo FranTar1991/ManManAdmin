@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.manmanadmin.databinding.FragmentServerItemBinding
-import com.manmanadmin.utils.MMServer
 
 class ServersAdapter  (private val viewModel: ServersViewModel,
                        private val activity: Activity?,

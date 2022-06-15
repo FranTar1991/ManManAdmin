@@ -12,8 +12,7 @@ import com.manmanadmin.location_picker.DEFAULT_LOCATION
 import com.manmanadmin.location_picker.DEFAULT_ZOOM
 import com.manmanadmin.tracking_function.animation.LatLngInterpolator
 import com.manmanadmin.tracking_function.animation.MarkerAnimation
-import com.manmanadmin.utils.MMServer
-import com.manmanadmin.utils.ManManRequest
+import com.manmanadmin.servers.MMServer
 import com.manmanadmin.utils.RequestRemote
 import com.manmanadmin.utils.getBitmapFromVector
 

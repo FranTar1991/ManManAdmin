@@ -211,7 +211,7 @@
     <string name="set_business">Agrega un negocio</string>
     <string name="business_name">Nombre</string>
     <string name="image_url">URL del logo</string>
-    <string name="lat">Latitude</string>
+    <string name="lat">Latitud y longitude</string>
     <string name="longitude">Longitud</string>
     <string name="category">Categoría</string>
     <string name="food">Food</string>
@@ -222,6 +222,7 @@
     <string name="request_string_to_businesses">"Nombre del cliente: %s \n\nNum. de tel: %s \n\nDetalles: %s "</string>
     <string name="filter_result">%s,%s</string>
     <string name="enter_valid_coodinates">"Una coordenada válida se ve así: 11.854708606565367, -86.24616103863144 "</string>
+    <string name="menu_links">Menus</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.manchasdelivery.location_picker.LocationPickerViewModelFactory
 import com.manmanadmin.R
 import com.manmanadmin.add_business.Business
+import com.manmanadmin.add_business.BusinessInfoAdapter
 import com.manmanadmin.databinding.LocationPickerBinding
 import com.manmanadmin.utils.*
 
