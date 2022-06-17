@@ -115,12 +115,7 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
             withContext(Dispatchers.IO){
                 FirebaseDatabase.getInstance().reference.child("data")
                     .child("businesses").get().addOnSuccessListener { snapshot ->
-                        val listOfBusinesses = mutableListOf<Business>()
-                        for(business in snapshot.children){
-                           getBusinessObject(snapshot)
-                                ?.let { listOfBusinesses.add(it) }
-                        }
-                        _businessArrayLiveData.postValue(listOfBusinesses)
+                        _businessArrayLiveData.postValue(getBusinessObject(snapshot))
                     }
             }
         }
@@ -128,15 +123,28 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
 
     }
 
-    private fun getBusinessObject(snapshot: DataSnapshot?): Business? {
-        return Business(name = snapshot?.child("name")?.getValue(String::class.java),
-        lat = snapshot?.child("lat")?.getValue(Double::class.java),
-            long = snapshot?.child("long")?.getValue(Double::class.java),
-            category = snapshot?.child("category")?.getValue(String::class.java),
-            imageUrl = snapshot?.child("imageUrl")?.getValue(String::class.java),
-            businessPhoneNumber = snapshot?.child("businessPhoneNumber")?.getValue(String::class.java),
-            id = snapshot?.child("id")?.getValue(Long::class.java) ?: Random.nextLong(100000000000),
-            menu = null)
+    private fun getBusinessObject(dataSnapshot: DataSnapshot): ArrayList<Business> {
+
+
+        val listOfBusinesses = ArrayList<Business>()
+
+        for (childSnapshot in dataSnapshot.children){
+            val businessItem = Business(name = childSnapshot?.child("name")?.getValue(String::class.java),
+                lat = childSnapshot?.child("lat")?.getValue(Double::class.java),
+                long = childSnapshot?.child("long")?.getValue(Double::class.java),
+                category = childSnapshot?.child("category")?.getValue(String::class.java),
+                imageUrl = childSnapshot?.child("imageUrl")?.getValue(String::class.java),
+                businessPhoneNumber = childSnapshot?.child("businessPhoneNumber")?.getValue(String::class.java),
+                id = childSnapshot?.child("id")?.getValue(Long::class.java) ?: Random.nextLong(100000000000),
+                menu = null)
+
+         listOfBusinesses.add(businessItem)
+        }
+
+
+        return listOfBusinesses
+
+
     }
 
 

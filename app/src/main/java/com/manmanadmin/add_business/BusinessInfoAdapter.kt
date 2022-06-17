@@ -51,7 +51,7 @@ class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: I
                     val businessesSuggestion: MutableList<Business> = ArrayList()
                     for (business in listOfBusinesses) {
 
-                        if (business.name?.lowercase()?.startsWith(constraint.toString().lowercase()) == true) {
+                        if (business.name?.lowercase()?.contains(constraint.toString().lowercase()) == true) {
                             businessesSuggestion.add(business)
                         }
                     }
@@ -88,7 +88,7 @@ class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: I
         val coordinateTxt = view.findViewById<TextView>(R.id.coordinates_txt)
         nameTxt.text = businesses[position].name
         coordinateTxt.text = businesses[position].businessPhoneNumber
-        Log.i("MyBusinessItem","${nameTxt.text}")
+
 
         return view
     }
