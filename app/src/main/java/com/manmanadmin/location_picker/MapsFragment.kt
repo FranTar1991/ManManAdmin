@@ -105,9 +105,6 @@ class MapsFragment : Fragment(){
             it?.let {
 
                 lisOfBusiness = it
-//                for(busines in it){
-//               //     lisOfBusinessNames.add(busines?.name)
-//                }
                 setSearchCoordinateView()
 
             }

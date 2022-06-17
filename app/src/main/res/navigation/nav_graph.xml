@@ -191,7 +191,7 @@
             android:defaultValue="@null" />
         <argument
             android:name="server"
-            app:argType="com.manmanadmin.utils.MMServer"
+            app:argType="com.manmanadmin.servers.MMServer"
             app:nullable="true" />
     </fragment>
     <fragment

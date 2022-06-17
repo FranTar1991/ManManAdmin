@@ -2,6 +2,7 @@ package com.manmanadmin.add_business
 
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,8 @@ class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: I
 
     private val businesses = ArrayList(listOfBusinesses)
     private val allBusinesses = ArrayList(listOfBusinesses)
+
+
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createViewFromResource(position,convertView,parent)
@@ -85,6 +88,7 @@ class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: I
         val coordinateTxt = view.findViewById<TextView>(R.id.coordinates_txt)
         nameTxt.text = businesses[position].name
         coordinateTxt.text = businesses[position].businessPhoneNumber
+        Log.i("MyBusinessItem","${nameTxt.text}")
 
         return view
     }
