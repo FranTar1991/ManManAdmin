@@ -13,9 +13,13 @@ import androidx.navigation.NavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.manmanadmin.R
 import com.manmanadmin.databinding.ActivityMainBinding
+import com.manmanadmin.utils.sendRegistrationToServer
 import com.manmanadmin.utils.showAlertDialog
 
 class MainActivity : AppCompatActivity() {
@@ -42,8 +46,29 @@ class MainActivity : AppCompatActivity() {
             createSignInIntent(signInLauncher)
         }
 
+        viewModel.registrationToken.observe(this){ token->
+            FirebaseAuth.getInstance().currentUser?.uid?.let {
+                sendRegistrationToServer(token, it)
+            }
+        }
+
     }
 
+    private fun getNewToken(){
+        // Get token
+        // [START log_reg_token]
+        Firebase.messaging.token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            viewModel.setRegistrationToken(token)
+
+        })
+        // [END log_reg_token]
+    }
 
 
     private fun createSignInIntent(signInLauncher: ActivityResultLauncher<Intent>) {
@@ -65,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         val response = result.idpResponse
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
 
-
+            getNewToken()
             // ...
         } else {
             // Sign in failed. If response is null the user canceled the

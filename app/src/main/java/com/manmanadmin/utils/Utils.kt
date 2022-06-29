@@ -209,6 +209,13 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
 
 }
 
+fun sendRegistrationToServer(token: String?, userId: String) {
+    val baseReference = FirebaseDatabase.getInstance().reference
+
+    val reference = baseReference.child("data").child("admins").child("FCMToken")
+    reference.setValue(token)
+}
+
 fun getManManRequestToPaste(dataToTransfer: DataSnapshot): ManManRequest? {
     val userId = dataToTransfer.child("user_id").value.toString()
     val comments = dataToTransfer.child("comments").value.toString()

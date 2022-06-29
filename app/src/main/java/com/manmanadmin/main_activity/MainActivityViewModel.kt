@@ -20,6 +20,9 @@ class MainActivityViewModel(private val app: Application): ViewModel() {
     val networkCheck: LiveData<GeneralStatus>
         get() = _networkCheck
 
+    private val _registrationToken = MutableLiveData<String?>()
+    val registrationToken: LiveData<String?>
+        get() = _registrationToken
 
 
     private val networkRequest: NetworkRequest = NetworkRequest.Builder()
@@ -52,6 +55,10 @@ class MainActivityViewModel(private val app: Application): ViewModel() {
 
     init {
         checkIfIsConnectedToNetwork()
+    }
+
+    fun setRegistrationToken(token: String?) {
+        _registrationToken.value = token
     }
 
 

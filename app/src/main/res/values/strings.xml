@@ -137,8 +137,8 @@
     <string name="R">R</string>
     <string name="P">P</string>
     <string name="F">F</string>
-    <string name="default_notification_channel_id">696969</string>
-    <string name="fcm_message">Solicitud actualizada</string>
+    <string name="default_notification_channel_id">786969</string>
+    <string name="fcm_message">Nueva Solicitud</string>
     <string name="msg_token_fmt">Token: %s</string>
     <string name="request_updated">Solicitud actualizada.</string>
     <string name="in_progress_notification">Ya estamos procesando tu solicitud. El repartidor se comunicará contigo en breve.</string>
