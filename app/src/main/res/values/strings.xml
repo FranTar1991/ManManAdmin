@@ -11,7 +11,7 @@
 
 
     <string name="your_address">Tu dirección es:</string>
-    <string name="user_location">Tu ubicación actual es:</string>
+    <string name="user_location">La ubicación del cliente es:</string>
     <string name="add_address_b">Direccion adicional:</string>
     <string name="add_address_to_know_price">Importante para calcular el precio del servicio.</string>
     <string name="explain_pick_up_address_empty">Recomiendamos agregar la dirección del negocio o lugar a donde el cliente desea que se le haga el mandado.</string>
@@ -64,7 +64,7 @@
     <string name="choose_type">¿Que quieres hacer?</string>
     <string name="select_type">Selecciona una opción</string>
 
-    <string name="not_recognized">Algo anda mal</string>
+    <string name="not_recognized"> </string>
 
 
     <string name="purchase">Título de la compra.</string>
@@ -223,6 +223,7 @@
     <string name="filter_result">%s,%s</string>
     <string name="enter_valid_coodinates">"Una coordenada válida se ve así: 11.854708606565367, -86.24616103863144 "</string>
     <string name="menu_links">Menus</string>
+    <string name="save_exit">G y S</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

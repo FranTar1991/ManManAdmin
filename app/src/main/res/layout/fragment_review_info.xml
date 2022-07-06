@@ -246,12 +246,26 @@
                     style="@style/my_btn_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_margin="4dp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/save_exit_btn"
+                    app:setTheText="@{viewModel.requestToReview.status}" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save_exit_btn"
+                    style="@style/my_btn_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/continue_btn_to_addresses"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/details_et"
+                    app:layout_constraintTop_toTopOf="@+id/continue_btn_to_addresses"
                     app:setTheText="@{viewModel.requestToReview.status}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

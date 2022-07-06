@@ -7,8 +7,11 @@ import com.manmanadmin.R
 import com.manmanadmin.utils.STATUS.*
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModel
+import com.manmanadmin.pending.PendingRequestsViewModel
 import com.manmanadmin.reviewing.info.ReviewRequestViewModel
 import java.text.DateFormat.getTimeInstance
 import java.text.SimpleDateFormat
@@ -200,13 +203,24 @@ fun ImageView.myClickListener(viewModel: ReviewRequestViewModel?){
 
 @BindingAdapter("setTheText")
 fun Button.setTheText(status: String?){
-    status?.let {
-        text = if(status == Canceled.name){
-           context.getString(R.string.skip_request)
-        }else{
-            context.getString(R.string.continue_btn)
+    text = if(status == Canceled.name){
+        context.getString(R.string.skip_request)
+    }else{
+        when(id){
+            R.id.continue_btn_to_addresses -> {  status?.let {
+                context.getString(R.string.continue_btn)
+            }}
+            R.id.save_exit_btn ->{
+                status?.let {
+                        context.getString(R.string.save_exit)
+                }
+            }
+            else -> {""}
         }
     }
+
+
+
 
 
 }
@@ -215,7 +229,7 @@ fun Button.setTheText(status: String?){
 fun EditText.setTheText(requestRemote: RequestRemote?){
     requestRemote?.status?.let {status ->
        setText(if(status != Canceled.name){
-            requestRemote.userPhone.toString()
+            requestRemote.userPhone.toString().trim().filter { !it.isWhitespace() }
         }else{
             context.getString(R.string.skip_request)
         })

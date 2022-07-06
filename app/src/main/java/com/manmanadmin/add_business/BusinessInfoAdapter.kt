@@ -12,9 +12,11 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.manmanadmin.R
+import com.manmanadmin.location_picker.LocationPickerViewModel
 
 class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: Int,
-                          private val listOfBusinesses: MutableList<Business>): ArrayAdapter<Business>(ctx,layoutResource, listOfBusinesses) {
+                          private val listOfBusinesses: MutableList<Business>, private val viewModel: LocationPickerViewModel
+): ArrayAdapter<Business>(ctx,layoutResource, listOfBusinesses) {
 
     private val businesses = ArrayList(listOfBusinesses)
     private val allBusinesses = ArrayList(listOfBusinesses)
@@ -41,7 +43,7 @@ class BusinessInfoAdapter(ctx: Context, @LayoutRes private val layoutResource: I
         return object : Filter(){
             override fun convertResultToString(resultValue: Any?): CharSequence {
                 val businessSelected = (resultValue as Business)
-
+                viewModel.setBusinessSelected(businessSelected)
                 return context.getString(R.string.filter_result, businessSelected.lat.toString(),businessSelected.long.toString() )
             }
 

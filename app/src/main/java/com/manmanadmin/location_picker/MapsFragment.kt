@@ -47,6 +47,7 @@ class MapsFragment : Fragment(){
     private lateinit var binding: LocationPickerBinding
     private lateinit var referenceEt: EditText
     private lateinit var lisOfBusiness: MutableList<Business>
+    private var businessSelected: Business? = null
 
 
     private val args: MapsFragmentArgs by navArgs()
@@ -100,6 +101,10 @@ class MapsFragment : Fragment(){
         viewModel.setCurrentTransactionItem(args.currentTransactionItem)
         viewModel.currentTransactionItem.observe(viewLifecycleOwner){
             currentTransactionItem = it
+        }
+
+        viewModel.businessSelected.observe(viewLifecycleOwner){
+            businessSelected = it
         }
 
         viewModel.businessArrayLiveData.observe(viewLifecycleOwner){
@@ -211,11 +216,13 @@ class MapsFragment : Fragment(){
                 //myMap?.moveCamera(CameraUpdateFactory.newLatLng(coordinateLatLang))
                 viewModel.setLocationSelected(coordinateLatLang)
             }
+
+            binding.referenceEt.setText(businessSelected?.name)
         }
     }
 
     private fun setCustomAdapter(editText: AutoCompleteTextView) {
-        val adapter = BusinessInfoAdapter(requireContext(), R.layout.business_data_item, lisOfBusiness)
+        val adapter = BusinessInfoAdapter(requireContext(), R.layout.business_data_item, lisOfBusiness, viewModel)
         (editText as? AutoCompleteTextView)?.apply {
             setAdapter(adapter)
         }

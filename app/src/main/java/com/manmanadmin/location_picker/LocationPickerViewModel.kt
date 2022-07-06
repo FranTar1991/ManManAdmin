@@ -67,6 +67,10 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
     val callingF: LiveData<String?>
         get() = _callingF
 
+    private val _businessSelected = MutableLiveData<Business?>()
+    val businessSelected: LiveData<Business?>
+        get() = _businessSelected
+
     private val _referenceToShow = MutableLiveData<String?>()
     val referenceToShow: LiveData<String?>
         get() = _referenceToShow
@@ -236,6 +240,9 @@ class LocationPickerViewModel(private val app: Application):AndroidViewModel(app
         myGoogleMap.value?.uiSettings?.isMyLocationButtonEnabled = true
     }
 
+    fun setBusinessSelected(businessSelected: Business) {
+        _businessSelected.value = businessSelected
+    }
 
 
 }

@@ -38,6 +38,8 @@ import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.change_business_status.ChangeBusinessStatusDialog
 import com.manmanadmin.databinding.ToolBarIncludedLayoutBinding
+import java.text.DateFormat
+import java.util.*
 
 const val PROFILE_FRAGMENT = "profile_fragment"
 const val USER_DELIVERY_ADDRESS = "delivery address"
@@ -206,6 +208,11 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
         .build()
 
     return AdapterForRequests(viewModel, options, onManManRequestClickListener, query as DatabaseReference)
+
+}
+
+fun getDate(): String{
+    return DateFormat.getDateInstance().format(Date())
 
 }
 

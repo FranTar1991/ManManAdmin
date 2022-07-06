@@ -28,7 +28,8 @@ class PendingRequestsFragment : Fragment() {
 
         val factory = PendingRequestsViewModelFactory()
         viewModel = ViewModelProvider(this,factory)[PendingRequestsViewModel::class.java]
-        binding.viewModel = viewModel
+        binding.viewModel = viewModel as ViewModelForAdapterInterface
+        binding.viewModel2 = viewModel as PendingRequestsViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         val query: Query = FirebaseDatabase.getInstance()
@@ -39,6 +40,12 @@ class PendingRequestsFragment : Fragment() {
             viewModel.setNavigateToReviewRequestFragment(request)
         }
         val adapter = setAdapter(query, listener, viewLifecycleOwner, viewModel)
+
+
+        binding.fab.setOnClickListener {
+            viewModel.setItemInsert(false)
+            viewModel.setEmptyRequest(RequestLocal(title = "Admin/", price = -1.0, status = STATUS.Received.name, date = getDate(), userPhone = ""))
+        }
 
         val requestRv = binding.allItemsRv
         requestRv.adapter = adapter

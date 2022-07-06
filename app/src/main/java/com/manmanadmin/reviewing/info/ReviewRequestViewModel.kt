@@ -72,9 +72,15 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
         details: String?,
         title: String?,
         userName: String,
-        userPhone: String
+        userPhone: String,
+        navigateToMainFragment: Boolean = false
     ){
-        repo.updateRequestInfo(reference,_navigateToNextFragment, details, title, userName, userPhone)
+        if (navigateToMainFragment){
+            repo.updateRequestInfo(reference,_navigateToMainFragment , details, title, userName, userPhone)
+        }else{
+            repo.updateRequestInfo(reference,_navigateToNextFragment, details, title, userName, userPhone)
+        }
+
     }
 
     fun deleteThisRequest() {

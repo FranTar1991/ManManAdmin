@@ -42,6 +42,7 @@ class ReviewRequestFragment : Fragment() {
         continueBtn = binding.continueBtnToAddresses
 
         setContinueListener()
+        setSaveAndExitListener()
         viewModel.setRequestRawInfo(args.request)
 
         viewModel.navigateToNextFragment.observe(viewLifecycleOwner){
@@ -125,6 +126,26 @@ class ReviewRequestFragment : Fragment() {
             }
 
 
+        }
+    }
+
+
+    private fun setSaveAndExitListener(){
+        binding.saveExitBtn.setOnClickListener {
+            if (requestToReview?.status == STATUS.Canceled.name){
+
+                showAlertDialog(getString(R.string.alert),getString(R.string.want_to_skip_request),activity,true,null){
+                    currentRequest?.requestId?.let {
+                        viewModel.deleteThisRequest()
+                    }
+                }?.show()
+            } else if (requestToReview?.status == STATUS.Received.name){
+                viewModel.updateRequestInfo(requestReference,
+                    binding.detailsEt.text.toString(),
+                    binding.titleEt.text.toString(),
+                    binding.nameEt.text.toString(),
+                    binding.phoneEt.text.toString(), true)
+            }
         }
     }
 
