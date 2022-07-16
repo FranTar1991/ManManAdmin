@@ -277,35 +277,20 @@ fun shake(view: View?, context: Context?) {
 }
 
  fun openWhatsAppWithNumber(number: String, context: Context?){
-    val pm: PackageManager? = context?.packageManager
 
-    try {
-        // Raise exception if whatsapp doesn't exist
-        val info = pm?.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA)
         val url = "https://wa.me/$number"
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         context?.startActivity(intent)
-    } catch (e: PackageManager.NameNotFoundException) {
-        Toast.makeText(context, "Please install whatsapp app", Toast.LENGTH_SHORT)
-            .show()
-    }
+
 }
 
 fun openWhatsAppWithInfo(number: String, information: String, context: Context?){
-    val pm: PackageManager? = context?.packageManager
-
-    try {
-        // Raise exception if whatsapp doesn't exist
-        val info = pm?.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA)
         val url = "https://wa.me/$number?text=$information"
         Log.i("MyMessage","$url")
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         context?.startActivity(intent)
-    } catch (e: PackageManager.NameNotFoundException) {
-        Toast.makeText(context, "Please install whatsapp app", Toast.LENGTH_SHORT)
-            .show()
-    }
+
 }
 

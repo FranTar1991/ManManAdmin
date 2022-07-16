@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -100,8 +101,13 @@ class ReviewAddressFragment : Fragment() {
                 currentRequest))
         }
 
+        binding.userAddressReference.addTextChangedListener {
+            currentTransactionItem?.userAddressReference = it.toString()
+            viewModel.updateTransactionItem(currentTransactionItem)
+        }
+
         binding.continueBtn.setOnClickListener {
-            if (currentTransactionItem?.userAddress == null){
+            if (currentTransactionItem?.userAddressReference == null){
                 showSnackbar(binding.root.rootView, getString(R.string.select_your_location))
                 context?.let {
                     binding.userAddressLayout.emptyViewLayout.setBackgroundColor(ContextCompat.getColor(it,R.color.pending_color));
@@ -132,7 +138,9 @@ class ReviewAddressFragment : Fragment() {
 
 
         viewModel.transactionItem.observe(viewLifecycleOwner){
+
             setTheUserAddressLayout(it)
+
             setTheLocationBLayout(it)
             addAnotherAddressChk.isChecked = currentTransactionItem?.locationBAddress != null
         }

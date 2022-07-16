@@ -27,10 +27,8 @@
             <include
                 android:id="@+id/user_address_layout"
                 layout="@layout/address_section_layout"
-                android:layout_width="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/location_b_address_layout"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/included_toolbar_layout" />
@@ -38,41 +36,59 @@
             <CheckBox
                 android:id="@+id/add_another_address_chk"
                 android:layout_width="match_parent"
-                android:background="@drawable/rounded_corners_et_white"
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"
+                android:background="@drawable/rounded_corners_et_white"
                 android:elevation="10dp"
-                android:textSize="12sp"
                 android:text="@string/add_address_if_necessary"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/location_b_address_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/user_address_layout"
-                app:layout_constraintTop_toBottomOf="@+id/user_address_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/user_address_reference" />
 
             <include
                 android:id="@+id/location_b_address_layout"
-                android:layout_marginBottom="16dp"
-                android:visibility="@{addAnotherAddressChk.checked ? View.VISIBLE : View.GONE}"
                 layout="@layout/address_section_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/continue_btn"
+                android:visibility="@{addAnotherAddressChk.checked ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_address_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/add_another_address_chk" />
 
             <Button
                 android:id="@+id/continue_btn"
+                style="@style/my_btn_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_margin="32dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/continue_btn"
-                style="@style/my_btn_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_b_address_layout" />
+
+            <EditText
+                android:id="@+id/user_address_reference"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:background="@drawable/rounded_corners_et_white"
+                android:ems="10"
+                android:text="@{viewModel.transactionItem.userAddressReference}"
+                style="@style/edit_text_white"
+                android:layout_margin="30dp"
+                android:padding="16dp"
+                android:inputType="textMultiLine"
+                android:gravity="start|top"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/add_another_address_chk"
+                android:hint="@string/add_user_address_reference"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_address_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

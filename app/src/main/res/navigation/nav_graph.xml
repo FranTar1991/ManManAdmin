@@ -47,7 +47,9 @@
             app:enterAnim="@anim/fui_slide_in_right"
             app:exitAnim="@anim/fui_slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/reviewRequestFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
@@ -100,7 +102,9 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/reviewRequestFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="currentManManRequest"
             app:argType="com.manmanadmin.utils.ManManRequest"
@@ -129,7 +133,9 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/transactionAddressesFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="callingFragment"
             app:argType="string"

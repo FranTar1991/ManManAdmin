@@ -18,7 +18,7 @@ import com.manmanadmin.utils.getBitmapFromVector
 
 
 class TrackingViewModel(private val repo: TrackingRepo): ViewModel() {
-    private var marker: Marker? = null
+    private var biker: Marker? = null
     private val _myGoogleMap = MutableLiveData<GoogleMap>()
     val myGoogleMap: LiveData<GoogleMap>
         get() = _myGoogleMap
@@ -63,17 +63,30 @@ class TrackingViewModel(private val repo: TrackingRepo): ViewModel() {
 
     }
 
-    fun setMarker(context: Context){
-        marker = _myGoogleMap.value?.addMarker(MarkerOptions()
+    fun setBikerIcon(context: Context){
+        biker = _myGoogleMap.value?.addMarker(MarkerOptions()
             .icon(getBitmapFromVector(context, R.drawable.ic_delivery_icon))
             .position(DEFAULT_LOCATION)
             .draggable(false))
     }
 
+    fun setPlaceMarker(context: Context, position: LatLng, title: String?, isUserAddress : Boolean = false){
+        val markerOptions = MarkerOptions()
+            .position(position)
+            .title(title)
+            .draggable(false)
+
+        if (isUserAddress){
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+        }
+
+        _myGoogleMap.value?.addMarker(markerOptions)
+    }
+
     fun updateTheMarkerPosition(newPosition: LatLng = DEFAULT_LOCATION){
-//        marker?.position = newPosition
+       // marker?.position = newPosition
         updateMapCamera(newPosition)
-        MarkerAnimation.animateMarkerToGB(marker, newPosition, LatLngInterpolator.Spherical());
+        MarkerAnimation.animateMarkerToGB(biker, newPosition, LatLngInterpolator.Spherical());
 
     }
 

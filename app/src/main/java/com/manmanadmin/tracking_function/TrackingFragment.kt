@@ -11,10 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentTrackingBinding
+import com.manmanadmin.utils.RequestLocal
+import com.manmanadmin.utils.RequestRemote
 import com.manmanadmin.utils.initMap
 import com.manmanadmin.utils.setToolbarUpFunction
 
@@ -23,6 +26,7 @@ class TrackingFragment : Fragment() {
     private lateinit var myMap: GoogleMap
     private lateinit var viewModel: TrackingViewModel
     private val args: TrackingFragmentArgs by navArgs()
+    private lateinit var currentTransaction: RequestRemote
 
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
@@ -48,9 +52,18 @@ class TrackingFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.setServer(mmServer)
+
+
+        viewModel.currentTransaction.observe(viewLifecycleOwner){
+            it?.let {
+             currentTransaction = it
+            }
+        }
+
         viewModel.myGoogleMap.observe(viewLifecycleOwner, Observer { map->
             viewModel.updateMapCamera()
-            context?.let { viewModel.setMarker(it) }
+            context?.let { viewModel.setBikerIcon(it)}
+            setTheLocationMarkers()
         })
 
         viewModel.updatedRequestLocation.observe(viewLifecycleOwner){newLocation ->
@@ -66,6 +79,23 @@ class TrackingFragment : Fragment() {
         viewModel.setCurrentTransaction(transactionItemPassed)
 
         return binding.root
+    }
+
+    private fun setTheLocationMarkers() {
+
+        context?.let { ctx ->
+
+            currentTransaction.apply {
+
+                viewModel.setPlaceMarker(ctx, getLatLngForLocation(userAddressLat, userAddressLong),userAddressReference, true)
+                viewModel.setPlaceMarker(ctx, getLatLngForLocation(locationBAddressLat, locationBAddressLong),locationBAddressReference)
+
+            }
+        }
+    }
+
+    private fun getLatLngForLocation(lat: Double?, long: Double?): LatLng {
+        return LatLng(lat ?: 0.0,long ?: 0.0)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

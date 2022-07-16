@@ -224,6 +224,7 @@
     <string name="enter_valid_coodinates">"Una coordenada válida se ve así: 11.854708606565367, -86.24616103863144 "</string>
     <string name="menu_links">Menus</string>
     <string name="save_exit">G y S</string>
+    <string name="add_user_address_reference">Agregar la dirección del cliente</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>
