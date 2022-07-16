@@ -81,7 +81,7 @@ class ReviewRequestFragment : Fragment() {
             it?.let {
                 currentRequest = it
                  requestReference = it.user_id?.let { it1 -> getRequestReference(it.requestId!!, it1) }
-                viewModel.setRequestListener(requestReference)
+                viewModel.setRequestListener(requestReference, it.comments)
                 viewModel.setThisNodeReference(getThisNodeReference(it.requestId!!))
             }
         }
@@ -122,7 +122,8 @@ class ReviewRequestFragment : Fragment() {
                     binding.detailsEt.text.toString(),
                     binding.titleEt.text.toString(),
                     binding.nameEt.text.toString(),
-                    binding.phoneEt.text.toString())
+                    binding.phoneEt.text.toString(),
+                    requestToReview?.comments)
             }
 
 
@@ -144,7 +145,9 @@ class ReviewRequestFragment : Fragment() {
                     binding.detailsEt.text.toString(),
                     binding.titleEt.text.toString(),
                     binding.nameEt.text.toString(),
-                    binding.phoneEt.text.toString(), true)
+                    binding.phoneEt.text.toString(),
+                    requestToReview?.comments,
+                    true)
             }
         }
     }

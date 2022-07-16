@@ -12,10 +12,15 @@ import com.manmanadmin.utils.getRequestReference
 
 class ReviewRequestRepository() {
 
-    fun setRequestListener(reference: DatabaseReference?, callback: MutableLiveData<RequestRemote>){
+    fun setRequestListener(
+        reference: DatabaseReference?,
+        callback: MutableLiveData<RequestRemote>,
+        comments: String?
+    ){
         reference?.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val remoteRequest = snapshot.getValue(RequestRemote::class.java)
+                remoteRequest?.comments = comments
                 callback.postValue(remoteRequest)
             }
 
@@ -27,13 +32,15 @@ class ReviewRequestRepository() {
 
     fun updateRequestInfo(
         reference: DatabaseReference?, callback: MutableLiveData<Boolean>, details: String?,
-        title: String?, userName: String, userPhone: String
+        title: String?, userName: String, userPhone: String, comments: String?
     ){
         reference?.child("details")?.setValue(details)?.addOnSuccessListener {
             reference.child("title").setValue(title).addOnSuccessListener {
                 reference.child("userName").setValue(userName).addOnSuccessListener {
                     reference.child("userPhone").setValue(userPhone).addOnSuccessListener {
-                        callback.postValue(true)
+                        reference.child("comments").setValue(comments).addOnSuccessListener {
+                            callback.postValue(true)
+                        }
                     }
                 }
             }

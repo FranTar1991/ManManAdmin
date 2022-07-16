@@ -59,8 +59,8 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
        _requestRawInfo.value = request
     }
 
-    fun setRequestListener(reference: DatabaseReference?){
-        repo.setRequestListener(reference, _requestToReview)
+    fun setRequestListener(reference: DatabaseReference?, comments: String?){
+        repo.setRequestListener(reference, _requestToReview, comments)
     }
 
     override fun setNavigateToMainFragment(value: Boolean) {
@@ -73,12 +73,13 @@ class ReviewRequestViewModel(private val repo: ReviewRequestRepository): ViewMod
         title: String?,
         userName: String,
         userPhone: String,
+        comments: String?,
         navigateToMainFragment: Boolean = false
     ){
         if (navigateToMainFragment){
-            repo.updateRequestInfo(reference,_navigateToMainFragment , details, title, userName, userPhone)
+            repo.updateRequestInfo(reference,_navigateToMainFragment , details, title, userName, userPhone, comments)
         }else{
-            repo.updateRequestInfo(reference,_navigateToNextFragment, details, title, userName, userPhone)
+            repo.updateRequestInfo(reference,_navigateToNextFragment, details, title, userName, userPhone, comments)
         }
 
     }
