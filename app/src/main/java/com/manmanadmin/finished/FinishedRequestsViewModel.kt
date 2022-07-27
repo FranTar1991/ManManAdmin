@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FinishedRequestsViewModel (): ViewModel() {
+class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewModel() {
 
     private val _navigateToFinishedRequestWithDetailsFragment = MutableLiveData<RequestRemote?>()
             val navigateToFinishedRequestWithDetailsFragment: LiveData<RequestRemote?>
@@ -21,19 +21,27 @@ class FinishedRequestsViewModel (): ViewModel() {
     val itemsDeleted: LiveData<Boolean>
         get() = _itemsDeleted
 
-    private val _allRequestsFinished = MutableLiveData<List<RequestRemote>?>()
-    val allRequestsFinished: LiveData<List<RequestRemote>?>
+    private val _allRequestsFinished = MutableLiveData<MutableList<RequestRemote?>?>()
+    val allRequestsFinished: LiveData<MutableList<RequestRemote?>?>
         get() = _allRequestsFinished
 
-    private val _adapterQuery= MutableLiveData<Query>()
-    val adapterQuery: LiveData<Query>
-        get() = _adapterQuery
+    private val _newAdapterQuery= MutableLiveData<Query>()
+    val newAdapterQuery: LiveData<Query>
+        get() = _newAdapterQuery
 
    private val _numberOfRequests = MutableLiveData<Int?>()
     val numberOfRequests: LiveData<Int?>
         get() = _numberOfRequests
 
+    private var _itemDeletedCallback = MutableLiveData<Boolean>()
+    val itemDeletedCallback: LiveData<Boolean>
+    get() = _itemDeletedCallback
 
+
+
+     fun fetchFinishedRequests(query: Query){
+        repo.fetchFinishedRequests(query, _allRequestsFinished)
+    }
 
     fun setNumberOfRequests(numberOfPendingRequests: Int?) {
         _numberOfRequests.value = numberOfPendingRequests
@@ -43,10 +51,21 @@ class FinishedRequestsViewModel (): ViewModel() {
        _navigateToFinishedRequestWithDetailsFragment.value = item
     }
 
-    fun setAllRequestsFinished(allFinishedRequests : List<RequestRemote>?){
+    fun setAllRequestsFinished(allFinishedRequests : MutableList<RequestRemote?>?){
         _allRequestsFinished.value = allFinishedRequests
 
     }
+
+    fun deleteThisItem(
+        item: RequestRemote
+    ) {
+        item.id?.let {
+            repo.deleteRequest(it, _itemDeletedCallback)
+        }
+
+    }
+
+
     fun removeAllRequests(finishedRequestReference: DatabaseReference) {
 
         viewModelScope.launch {
@@ -58,8 +77,8 @@ class FinishedRequestsViewModel (): ViewModel() {
 
     }
 
-    fun setQuery(mainQuery: Query) {
-        _adapterQuery.value = mainQuery
+    fun setNewQuery(newQuery: Query) {
+        _newAdapterQuery.value = newQuery
     }
 
 }

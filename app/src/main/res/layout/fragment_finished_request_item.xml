@@ -10,7 +10,7 @@
             type="com.manmanadmin.utils.RequestRemote" />
         <variable
             name="clickListener"
-            type="com.manmanadmin.finished.OnFinishedRequestClickListener" />
+            type="com.manmanadmin.finished.adapters.OnFinishedRequestClickListener2" />
         <variable
             name="viewModel"
             type="com.manmanadmin.finished.FinishedRequestsViewModel" />

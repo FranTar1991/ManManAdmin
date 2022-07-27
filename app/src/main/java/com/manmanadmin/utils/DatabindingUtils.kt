@@ -7,15 +7,28 @@ import com.manmanadmin.R
 import com.manmanadmin.utils.STATUS.*
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
+import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
 import com.manmanadmin.pending.PendingRequestsViewModel
 import com.manmanadmin.reviewing.info.ReviewRequestViewModel
 import java.text.DateFormat.getTimeInstance
 import java.text.SimpleDateFormat
 import java.util.*
+
+
+@SuppressLint("NotifyDataSetChanged")
+@BindingAdapter("listData")
+fun RecyclerView.listData(data: MutableList<RequestRemote?>?){
+    val adapter = adapter as AdapterForFinishedRequests2
+    Log.i("My_LIst",data.toString())
+    adapter.submitList(data)
+    adapter.notifyDataSetChanged()
+}
 
 @BindingAdapter("myListener")
 fun Spinner.myListener(listener: AdapterView.OnItemSelectedListener?){

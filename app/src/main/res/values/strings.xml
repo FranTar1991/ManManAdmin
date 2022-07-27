@@ -147,7 +147,7 @@
     <string name="request_title">%s</string>
     <string name="C">C</string>
     <string name="canceled_notification">Solicitud cancelada con éxito :(</string>
-    <string name="item_deleted">Solicitud borrada con éxito</string>
+    <string name="item_deleted">Item borrado con éxito</string>
     <string name="want_to_delete">¿Quieres borrar esto permanentemente?</string>
     <string name="checking_internet_connection">Verificando conección…</string>
     <string name="back_online">Está conectado :)</string>

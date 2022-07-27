@@ -1,32 +1,33 @@
 package com.manmanadmin.finished
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentFinishedRequestsBinding
+import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
+import com.manmanadmin.finished.adapters.OnFinishedRequestClickListener2
 import com.manmanadmin.main_container.ContainerFragmentDirections
 import com.manmanadmin.utils.*
-import java.util.*
 
 class FinishedRequestsFragment : Fragment() {
 
-    private lateinit var adapter: AdapterForFinishedRequests
+    private var adapter2: AdapterForFinishedRequests2? = null
+
+
     private lateinit var binding: FragmentFinishedRequestsBinding
     private lateinit var viewModel: FinishedRequestsViewModel
     private lateinit var bottomBar: BottomAppBar
     private lateinit var finishedRequestReference: DatabaseReference
-    private lateinit var mainQuery: Query
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,17 +35,21 @@ class FinishedRequestsFragment : Fragment() {
     ): View? {
        binding = FragmentFinishedRequestsBinding.inflate(inflater,container,false)
 
-        val factory = FinishedRequestsViewModelFactory()
-        viewModel = ViewModelProvider(this,factory).get(FinishedRequestsViewModel::class.java)
+        finishedRequestReference = FirebaseDatabase.getInstance().reference.child("data").child("finished_requests")
+        val repo = FinishedRequestsRepo(finishedRequestReference)
+
+        val factory = FinishedRequestsViewModelFactory(repo)
+        viewModel = ViewModelProvider(this,factory)[FinishedRequestsViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.fetchFinishedRequests(finishedRequestReference)
 
         bottomBar = binding.bottomAppBar
         setBottomBarListeners()
 
-        finishedRequestReference = FirebaseDatabase.getInstance().reference.child("data").child("finished_requests")
 
-        val listener = OnFinishedRequestClickListener { view, item ->
+        val listener = OnFinishedRequestClickListener2 { view, item ->
             viewModel.setNavigateToFinishedRequestWithDetailsFragment(item)
         }
 
@@ -57,22 +62,7 @@ class FinishedRequestsFragment : Fragment() {
         }
 
         val requestRv = binding.allItemsRv
-        requestRv.layoutManager = activity?.let { WrapContentLinearLayoutManager(it) }
-        mainQuery = FirebaseDatabase.getInstance()
-            .reference
-            .child("data")
-            .child("finished_requests")
-
-
-
-        viewModel.setQuery(mainQuery)
-
-        viewModel.adapterQuery.observe(viewLifecycleOwner){
-
-            adapter = setFinishedRequestAdapter(it,listener, viewLifecycleOwner,viewModel)
-            requestRv.adapter = adapter
-        }
-
+        setAdapterForFinishedRequests(requestRv, listener)
 
 
         viewModel.itemsDeleted.observe(viewLifecycleOwner){
@@ -81,23 +71,36 @@ class FinishedRequestsFragment : Fragment() {
             }
         }
 
+        viewModel.allRequestsFinished.observe(viewLifecycleOwner){
+            it?.let {
+                viewModel.setNumberOfRequests(it.size)
+            }
+        }
+
+
+        viewModel.itemDeletedCallback.observe(viewLifecycleOwner){
+            if (it){
+                showSnackbar(binding.root.rootView,getString(R.string.item_deleted))
+            }
+        }
+
+
+        viewModel.newAdapterQuery.observe(viewLifecycleOwner){
+            viewModel.fetchFinishedRequests(it)
+        }
+
         return binding.root
     }
 
-    private fun setFinishedRequestAdapter(query: Query,
-                   onManManRequestClickListener: OnFinishedRequestClickListener,
-                   viewLifecycleOwner: LifecycleOwner,
-                   viewModel: FinishedRequestsViewModel
-    ): AdapterForFinishedRequests {
+    private fun setAdapterForFinishedRequests(
+        recyclerView: RecyclerView,
+        listener: OnFinishedRequestClickListener2
+    ) {
 
-
-        val options: FirebaseRecyclerOptions<RequestRemote> = FirebaseRecyclerOptions.Builder<RequestRemote>()
-            .setQuery(query,RequestRemote::class.java)
-            .setLifecycleOwner(viewLifecycleOwner)
-            .build()
-
-        return AdapterForFinishedRequests(viewModel, activity,options,  onManManRequestClickListener)
-
+        adapter2 = context?.let { AdapterForFinishedRequests2(it,activity,viewModel, listener) }
+        val linerLayoutManager = LinearLayoutManager(activity)
+        recyclerView.adapter = adapter2
+        recyclerView.layoutManager = linerLayoutManager
     }
 
     private fun setBottomBarListeners() {
@@ -111,9 +114,6 @@ class FinishedRequestsFragment : Fragment() {
             }
         }
     }
-
-
-
     private fun setFilter(menuItem: MenuItem): Boolean {
         val filterView = menuItem.actionView as SearchView
         filterView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -129,12 +129,20 @@ class FinishedRequestsFragment : Fragment() {
         })
         return true
     }
-
     private fun filterRequestsWithText(newText: String?) {
 
-        val newQuery: Query = mainQuery.orderByChild("agentName").startAt(newText).endAt(newText+ "uf8ff")
+        if (newText?.isEmpty() == true){
+            viewModel.fetchFinishedRequests(finishedRequestReference)
+        }else{
+            callNewQuery(newText)
+        }
 
-        viewModel.setQuery(newQuery)
+    }
+
+    private fun callNewQuery(newText: String?) {
+        val newQuery = finishedRequestReference.orderByChild("date").startAt(newText).endAt(newText+ "uf8ff")
+
+        viewModel.setNewQuery(newQuery)
     }
 
     private fun deleteAllRequests(): Boolean {

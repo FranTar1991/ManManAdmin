@@ -34,6 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:listData="@{viewModel.allRequestsFinished}"
             app:layout_constraintTop_toBottomOf="@+id/filter_view"
             tools:listitem="@layout/man_man_request_item" />
 
