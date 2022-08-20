@@ -13,6 +13,7 @@ class FragmentAdapter(activity: FragmentActivity) : FragmentStateAdapter(activit
         return 4
     }
 
+
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> PendingRequestsFragment()

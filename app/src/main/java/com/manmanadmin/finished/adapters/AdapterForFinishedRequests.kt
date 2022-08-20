@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentFinishedRequestItemBinding
 import com.manmanadmin.finished.FinishedRequestsViewModel
@@ -52,6 +53,7 @@ class AdapterForFinishedRequests2(
                 activity?.apply {
                     showAlertDialog(getString(R.string.alert),getString(R.string.want_to_delete),activity,true,null){
                        viewModel.deleteThisItem(item)
+
                     }?.show()
                 }
 

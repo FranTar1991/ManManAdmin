@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.manmanadmin.finished.FinishedRequestsViewModel
 import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
 import com.manmanadmin.pending.PendingRequestsViewModel
 import com.manmanadmin.reviewing.info.ReviewRequestViewModel
@@ -22,11 +23,11 @@ import java.util.*
 
 
 @SuppressLint("NotifyDataSetChanged")
-@BindingAdapter("listData")
-fun RecyclerView.listData(data: MutableList<RequestRemote?>?){
+@BindingAdapter("listData", "setViewModel")
+fun RecyclerView.listData(data: MutableList<RequestRemote?>?, viewModel: FinishedRequestsViewModel?){
     val adapter = adapter as AdapterForFinishedRequests2
-    Log.i("My_LIst",data.toString())
     adapter.submitList(data)
+    viewModel?.setMarkersForFilteredRequests(data)
     adapter.notifyDataSetChanged()
 }
 
@@ -150,9 +151,9 @@ fun TextView.setTheTitleText(title: String?){
 }
 
 @BindingAdapter("setTheItemCountText")
-fun TextView.setTheItemCountText(itemCount: Int?){
-    itemCount?.let {
-        text = context.getString(R.string.item_count, itemCount.toString())
+fun TextView.setTheItemCountText(filteredRequests: List<RequestRemote?>?){
+    filteredRequests?.size.let {
+        text = context.getString(R.string.item_count, it.toString())
     }
 }
 

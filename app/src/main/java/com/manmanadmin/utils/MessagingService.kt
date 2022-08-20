@@ -6,9 +6,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -23,11 +22,14 @@ class MessagingService : FirebaseMessagingService(){
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
         if (remoteMessage.data.isNotEmpty()) {
+
             val isToReview = remoteMessage.data["isToReview"]
             val body = remoteMessage.data["body"]
-            if (isToReview == "is To Review"){
-                sendNotification(body.toString())
-            }
+            val title = remoteMessage.data["title"]
+
+
+                sendNotification(body.toString(), isToReview, title)
+
         }
 
         // Check if message contains a notification payload.
@@ -45,17 +47,16 @@ class MessagingService : FirebaseMessagingService(){
 
 
 
-    private fun sendNotification(messageBody: String) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    private fun sendNotification(messageBody: String, isToReview: String?, title: String?) {
 
-        val pendingIntent = PendingIntent.getActivity(this, createRandomCode(3), intent,
-            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
+
+
+        val pendingIntent = getPendingIntent(isToReview, messageBody)
 
         val channelId = getString(R.string.default_notification_channel_id)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(getString(R.string.fcm_message))
+            .setContentTitle(title)
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -78,6 +79,25 @@ class MessagingService : FirebaseMessagingService(){
 
         notificationManager.notify(createRandomCode(3), notification)
     }
+
+    private fun getPendingIntent(isToReview: String?, orderId: String): PendingIntent? {
+        val intent = if(isToReview == "is to review"){
+            Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            }
+
+        }else{
+         Intent(Intent.ACTION_VIEW).apply {
+                val url = "app://deleted/$orderId"
+                data = Uri.parse(url)
+            }
+        }
+
+        return PendingIntent.getActivity(this, createRandomCode(3), intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
+    }
+
+
 
     fun createRandomCode(codeLength: Int): Int {
         val chars = "1234567890".toCharArray()

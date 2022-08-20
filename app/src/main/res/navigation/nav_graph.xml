@@ -50,18 +50,20 @@
             app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/reviewRequestFragment"
             app:popUpToInclusive="false" />
+
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
         android:name="com.manmanadmin.main_container.ContainerFragment"
-        android:label="ContainerFragment" >
+        android:label="ContainerFragment"
+        tools:layout="@layout/fragment_container">
         <action
             android:id="@+id/action_containerFragment_to_reviewRequestFragment"
             app:destination="@id/reviewRequestFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"/>
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_containerFragment_to_requestWithAllDetailsFragment"
             app:destination="@id/requestWithAllDetailsFragment"
@@ -203,7 +205,6 @@
     <fragment
         android:id="@+id/addBusinessFragment"
         android:name="com.manmanadmin.add_business.AddBusinessFragment"
-        android:label="AddBusinessFragment" />
-
+        android:label="AddBusinessFragment"/>
 
 </navigation>

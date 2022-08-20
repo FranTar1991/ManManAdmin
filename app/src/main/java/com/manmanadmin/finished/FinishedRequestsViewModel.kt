@@ -21,17 +21,18 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
     val itemsDeleted: LiveData<Boolean>
         get() = _itemsDeleted
 
-    private val _allRequestsFinished = MutableLiveData<MutableList<RequestRemote?>?>()
-    val allRequestsFinished: LiveData<MutableList<RequestRemote?>?>
+    private val _allRequestsFinished = MutableLiveData<List<RequestRemote?>?>()
+    val allRequestsFinished: LiveData<List<RequestRemote?>?>
         get() = _allRequestsFinished
 
-    private val _newAdapterQuery= MutableLiveData<Query>()
-    val newAdapterQuery: LiveData<Query>
-        get() = _newAdapterQuery
 
-   private val _numberOfRequests = MutableLiveData<Int?>()
-    val numberOfRequests: LiveData<Int?>
-        get() = _numberOfRequests
+   private val _numberOfFilteredRequests = MutableLiveData<List<RequestRemote?>?>()
+    val numberOfFilteredRequests: LiveData<List<RequestRemote?>?>
+        get() = _numberOfFilteredRequests
+
+    private val _dateToFilter = MutableLiveData<String>()
+    val dateToFilter: LiveData<String>
+        get() = _dateToFilter
 
     private var _itemDeletedCallback = MutableLiveData<Boolean>()
     val itemDeletedCallback: LiveData<Boolean>
@@ -39,21 +40,26 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
 
 
-     fun fetchFinishedRequests(query: Query){
-        repo.fetchFinishedRequests(query, _allRequestsFinished)
+     fun fetchNewFinishedRequests(query: Query){
+         repo.fetchFinishedRequests(query, _allRequestsFinished)
     }
 
-    fun setNumberOfRequests(numberOfPendingRequests: Int?) {
-        _numberOfRequests.value = numberOfPendingRequests
+    fun setAllFinishedRequests(newData: List<RequestRemote?>?){
+        _allRequestsFinished.value = newData
+    }
+
+
+    fun setMarkersForFilteredRequests(numberOfFilteredRequests: List<RequestRemote?>?) {
+        _numberOfFilteredRequests.value = numberOfFilteredRequests
     }
 
     fun setNavigateToFinishedRequestWithDetailsFragment(item: RequestRemote?) {
        _navigateToFinishedRequestWithDetailsFragment.value = item
     }
 
-    fun setAllRequestsFinished(allFinishedRequests : MutableList<RequestRemote?>?){
-        _allRequestsFinished.value = allFinishedRequests
 
+    fun setDateToFilter(date: String){
+        _dateToFilter.value = date
     }
 
     fun deleteThisItem(
@@ -77,8 +83,11 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
     }
 
-    fun setNewQuery(newQuery: Query) {
-        _newAdapterQuery.value = newQuery
+    fun filterRequestsByDate(filter: String) {
+        if(filter.isNotEmpty()){
+            val filteredData =  allRequestsFinished.value?.filter { it -> it?.date?.contains(filter) == true } ?: emptyList()
+            setAllFinishedRequests(filteredData)
+        }
     }
 
 }

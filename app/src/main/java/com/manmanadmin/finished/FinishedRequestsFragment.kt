@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentFinishedRequestsBinding
 import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
@@ -43,8 +42,6 @@ class FinishedRequestsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.fetchFinishedRequests(finishedRequestReference)
-
         bottomBar = binding.bottomAppBar
         setBottomBarListeners()
 
@@ -64,16 +61,11 @@ class FinishedRequestsFragment : Fragment() {
         val requestRv = binding.allItemsRv
         setAdapterForFinishedRequests(requestRv, listener)
 
+        viewModel.fetchNewFinishedRequests(finishedRequestReference)
 
         viewModel.itemsDeleted.observe(viewLifecycleOwner){
             if (it){
                 showSnackbar(binding.root.rootView, getString(R.string.items_deleted))
-            }
-        }
-
-        viewModel.allRequestsFinished.observe(viewLifecycleOwner){
-            it?.let {
-                viewModel.setNumberOfRequests(it.size)
             }
         }
 
@@ -84,9 +76,10 @@ class FinishedRequestsFragment : Fragment() {
             }
         }
 
-
-        viewModel.newAdapterQuery.observe(viewLifecycleOwner){
-            viewModel.fetchFinishedRequests(it)
+        viewModel.dateToFilter.observe(viewLifecycleOwner){ dateRequired ->
+            dateRequired?.let {
+                viewModel.filterRequestsByDate(it)
+            }
         }
 
         return binding.root
@@ -118,31 +111,27 @@ class FinishedRequestsFragment : Fragment() {
         val filterView = menuItem.actionView as SearchView
         filterView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                filterRequestsWithText(query)
+                filterRequestsWithDate(query.toString())
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterRequestsWithText(newText)
+               newText?.let {
+                   if (newText.isEmpty()) filterRequestsWithDate(newText)
+               }
                 return false
             }
         })
         return true
     }
-    private fun filterRequestsWithText(newText: String?) {
+    private fun filterRequestsWithDate(date: String) {
 
-        if (newText?.isEmpty() == true){
-            viewModel.fetchFinishedRequests(finishedRequestReference)
+        if (date.isEmpty()){
+           viewModel.fetchNewFinishedRequests(finishedRequestReference)
         }else{
-            callNewQuery(newText)
+            viewModel.setDateToFilter(date)
         }
 
-    }
-
-    private fun callNewQuery(newText: String?) {
-        val newQuery = finishedRequestReference.orderByChild("date").startAt(newText).endAt(newText+ "uf8ff")
-
-        viewModel.setNewQuery(newQuery)
     }
 
     private fun deleteAllRequests(): Boolean {

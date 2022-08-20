@@ -8,9 +8,10 @@ import com.manmanadmin.utils.RequestRemote
 class FinishedRequestsRepo (private val databaseReference: DatabaseReference) {
 
 
-    val oldList = mutableListOf<RequestRemote?>()
 
-    fun fetchFinishedRequests(query: Query, _allFinishedRequestLiveDataCallback: MutableLiveData<MutableList<RequestRemote?>?>) {
+
+    fun fetchFinishedRequests(query: Query, _allFinishedRequestLiveDataCallback: MutableLiveData<List<RequestRemote?>?>) {
+        val oldList = mutableListOf<RequestRemote?>()
 
         query.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -45,9 +46,6 @@ class FinishedRequestsRepo (private val databaseReference: DatabaseReference) {
         item?.id = snapshot.key
 
         my_list?.add(0,item)
-
-
-
         return my_list
     }
 
@@ -78,6 +76,7 @@ class FinishedRequestsRepo (private val databaseReference: DatabaseReference) {
     ){
         databaseReference.child(callId).get().addOnSuccessListener {
             it?.let {
+
                 it.ref.removeValue()
                 itemDeletedCallback.postValue(true)
             }
