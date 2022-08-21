@@ -1,5 +1,7 @@
 package com.manmanadmin.pending
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,6 +21,7 @@ class PendingRequestsFragment : Fragment() {
 
     private lateinit var binding: FragmentPendingRequestsBinding
     private lateinit var viewModel: PendingRequestsViewModel
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +29,7 @@ class PendingRequestsFragment : Fragment() {
     ): View? {
        binding = FragmentPendingRequestsBinding.inflate(inflater,container,false)
 
+        sharedPreferences = requireActivity().getSharedPreferences("my_prefs",MODE_PRIVATE)
         val factory = PendingRequestsViewModelFactory()
         viewModel = ViewModelProvider(this,factory)[PendingRequestsViewModel::class.java]
         binding.viewModel = viewModel as ViewModelForAdapterInterface
@@ -44,7 +48,7 @@ class PendingRequestsFragment : Fragment() {
 
         binding.fab.setOnClickListener {
             viewModel.setItemInsert(false)
-            viewModel.setEmptyRequest(RequestLocal(title = "Admin/", price = -1.0, status = STATUS.Received.name, date = getDate(), userPhone = ""))
+            viewModel.setEmptyRequest(RequestLocal(title = sharedPreferences.getString("turno",""), price = -1.0, status = STATUS.Received.name, date = getDate(), userPhone = ""))
         }
 
         val requestRv = binding.allItemsRv

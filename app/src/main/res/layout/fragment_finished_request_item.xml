@@ -39,14 +39,13 @@
 
             <ImageView
                 android:id="@+id/delet_item_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_margin="4dp"
                 android:src="@drawable/ic_baseline_delete_forever_24"
-                app:layout_constraintBottom_toTopOf="@+id/item_price"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/item_status"
-                app:layout_constraintTop_toBottomOf="@+id/item_status" />
+                app:layout_constraintStart_toEndOf="@+id/item_title" />
 
             <ImageView
                 android:id="@+id/circle_img"
@@ -84,7 +83,7 @@
                 android:ellipsize="end"
                 android:gravity="top"
                 android:maxLines="2"
-                android:text="@{remoteRequest.details}"
+                android:text="@{remoteRequest.title}"
                 app:layout_constraintBottom_toBottomOf="@+id/circle_img"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -97,16 +96,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@{remoteRequest.date}"
+                app:layout_constraintBottom_toTopOf="@+id/item_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:text="25/04/2002" />
 
             <TextView
                 android:id="@+id/item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+
                 android:text="@{remoteRequest.price.toString()}"
-                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -129,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_percent="0.82" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"

@@ -1,10 +1,11 @@
 package com.manmanadmin.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.LocationManager
@@ -15,7 +16,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -38,7 +38,10 @@ import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.change_business_status.ChangeBusinessStatusDialog
 import com.manmanadmin.databinding.ToolBarIncludedLayoutBinding
+import com.manmanadmin.main_container.ContainerFragment
+import com.manmanadmin.main_container.change_shift.ShiftChangerDialog
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 const val PROFILE_FRAGMENT = "profile_fragment"
@@ -174,9 +177,20 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
     return FirebaseDatabase.getInstance().reference.child("all_requests_not_reviewed").child(requestId)
 }
 
- fun changeBusinessStatus(activity: Activity, childFragmentManager: FragmentManager): Boolean {
+ fun callBusinessStatusChangerDialog(activity: Activity, childFragmentManager: FragmentManager): Boolean {
     val status_options = activity.resources!!.getStringArray(R.array.busines_status_options) as Array<String>
     ChangeBusinessStatusDialog(status_options).show(childFragmentManager,"business_status_dialog")
+    return true
+}
+
+fun callShiftChangerDialog(
+    activity: Activity,
+    childFragmentManager: FragmentManager,
+    sharedPreferences: SharedPreferences,
+    containerFragment: ContainerFragment
+): Boolean {
+    val text = activity.resources!!.getStringArray(R.array.shift_options) as Array<String>
+    ShiftChangerDialog(text, sharedPreferences, containerFragment).show(childFragmentManager,"shift_changer_dialog")
     return true
 }
 
@@ -211,9 +225,12 @@ fun getThisNodeReference(requestId: String): DatabaseReference {
 
 }
 
+@SuppressLint("SimpleDateFormat")
 fun getDate(): String{
-    return DateFormat.getDateInstance().format(Date())
-
+    val c = Calendar.getInstance();
+    val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    val strDate = sdf.format(c.time);
+    return strDate
 }
 
 fun sendRegistrationToServer(token: String?, userId: String) {

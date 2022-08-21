@@ -1,11 +1,11 @@
 package com.manmanadmin.main_container
 
 import android.app.Application
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.manmanadmin.R
 
 class MainContainerViewModel(private val repo: MainContainerRepo, private val app: Application) : ViewModel() {
     private val _callMainActivity = MutableLiveData<Boolean>()
@@ -20,8 +20,13 @@ class MainContainerViewModel(private val repo: MainContainerRepo, private val ap
     val navigateToAddBusinessFragment: LiveData<Boolean>
         get() = _navigateToAddBusinessFragment
 
+    private val _currentShift = MutableLiveData<String>()
+    val currentShift : LiveData<String>
+        get() = _currentShift
+
     init {
         repo.getBusinessCurrentStatus(_currentBusinessStatus)
+        getCurrentShift()
     }
 
     fun setCallMainActivity(b: Boolean) {
@@ -32,5 +37,12 @@ class MainContainerViewModel(private val repo: MainContainerRepo, private val ap
         _navigateToAddBusinessFragment.value = value
     }
 
+     private fun getCurrentShift(){
+        _currentShift.value = repo.getCurrentShift()
+    }
+
+    fun setNewShift(shift: String){
+        _currentShift.value = repo.setNewShift(shift)
+    }
 
 }

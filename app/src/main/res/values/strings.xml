@@ -225,6 +225,8 @@
     <string name="menu_links">Menus</string>
     <string name="save_exit">G y S</string>
     <string name="add_user_address_reference">Agregar la dirección del cliente</string>
+    <string name="turno_a">Turno A</string>
+    <string name="change_shift">Cambio de turno</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>
@@ -240,5 +242,10 @@
     <string-array name="busines_status_options">
         <item name="closed">closed</item>
         <item name="open">open</item>
+    </string-array>
+
+    <string-array name="shift_options">
+        <item name="Turno A">Turno A</item>
+        <item name="Turno B">Turno B</item>
     </string-array>
 </resources>

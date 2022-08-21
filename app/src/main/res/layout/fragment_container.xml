@@ -40,6 +40,16 @@
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/shift_changer"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:text="@{viewModel.currentShift}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
             <com.google.android.material.tabs.TabLayout
