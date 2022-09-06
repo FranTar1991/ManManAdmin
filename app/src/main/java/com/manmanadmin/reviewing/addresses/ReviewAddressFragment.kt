@@ -1,6 +1,7 @@
 package com.manmanadmin.reviewing.addresses
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -104,6 +105,13 @@ class ReviewAddressFragment : Fragment() {
         binding.userAddressReference.addTextChangedListener {
             currentTransactionItem?.userAddressReference = it.toString()
             viewModel.updateTransactionItem(currentTransactionItem)
+
+        }
+
+        binding.locationBAddressReference.addTextChangedListener {
+            addAnotherAddressChk.isChecked = it?.isNotEmpty() == true
+            currentTransactionItem?.locationBAddressReference = it.toString()
+            viewModel.updateTransactionItem(currentTransactionItem)
         }
 
         binding.continueBtn.setOnClickListener {
@@ -142,7 +150,7 @@ class ReviewAddressFragment : Fragment() {
             setTheUserAddressLayout(it)
 
             setTheLocationBLayout(it)
-            addAnotherAddressChk.isChecked = currentTransactionItem?.locationBAddress != null
+            addAnotherAddressChk.isChecked = currentTransactionItem?.locationBAddressReference != null
         }
 
 

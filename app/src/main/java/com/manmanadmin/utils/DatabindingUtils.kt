@@ -7,18 +7,13 @@ import com.manmanadmin.R
 import com.manmanadmin.utils.STATUS.*
 
 import android.annotation.SuppressLint
-import android.util.Log
-import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.manmanadmin.finished.FinishedRequestsViewModel
 import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
-import com.manmanadmin.pending.PendingRequestsViewModel
 import com.manmanadmin.reviewing.info.ReviewRequestViewModel
 import java.text.DateFormat.getTimeInstance
-import java.text.SimpleDateFormat
 import java.util.*
 
 

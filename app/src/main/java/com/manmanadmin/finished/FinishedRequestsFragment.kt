@@ -3,6 +3,7 @@ package com.manmanadmin.finished
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -82,6 +83,12 @@ class FinishedRequestsFragment : Fragment() {
             }
         }
 
+        viewModel.allRequestsFinished.observe(viewLifecycleOwner){
+            it?.let {
+                Toast.makeText(context,"${it.size} elementos encontrados", Toast.LENGTH_LONG).show()
+            }
+        }
+
         return binding.root
     }
 
@@ -136,7 +143,7 @@ class FinishedRequestsFragment : Fragment() {
 
     private fun deleteAllRequests(): Boolean {
         showAlertDialog(getString(R.string.alert),getString(R.string.want_to_delete_all),activity,true,null){
-            viewModel.removeAllRequests(finishedRequestReference)
+            //viewModel.removeAllRequests(finishedRequestReference)
         }?.show()
 
         return true

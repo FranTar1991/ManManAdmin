@@ -183,6 +183,7 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
             remoteItem.businessName = it.businessName
             remoteItem.businessPhoneNumber = it.businessPhoneNumber
             remoteItem.comments = it.comments
+            remoteItem.agentName = it.agentName
         }
         return remoteItem
     }

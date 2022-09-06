@@ -50,7 +50,7 @@ class ServersRepo() {
        val ref = baseReference.child("users").child(server.currentUserId ?: "")
             .child("requests").child(server.currentRequestId ?: "")
             ref.child("status").setValue(STATUS.Received.name).addOnSuccessListener {
-                ref.child("agentName").setValue(null).addOnSuccessListener {
+                ref.child("agentName").setValue("Opcional").addOnSuccessListener {
                     ref.child("agentPhone").setValue(null)
                 }
             }

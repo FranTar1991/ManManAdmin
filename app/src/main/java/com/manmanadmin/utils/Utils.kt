@@ -1,6 +1,5 @@
 package com.manmanadmin.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
@@ -40,8 +39,8 @@ import com.manmanadmin.change_business_status.ChangeBusinessStatusDialog
 import com.manmanadmin.databinding.ToolBarIncludedLayoutBinding
 import com.manmanadmin.main_container.ContainerFragment
 import com.manmanadmin.main_container.change_shift.ShiftChangerDialog
-import java.text.DateFormat
-import java.text.SimpleDateFormat
+import java.text.DateFormat.getDateTimeInstance
+import java.time.LocalDate
 import java.util.*
 
 const val PROFILE_FRAGMENT = "profile_fragment"
@@ -225,11 +224,12 @@ fun callShiftChangerDialog(
 
 }
 
-@SuppressLint("SimpleDateFormat")
+
 fun getDate(): String{
     val c = Calendar.getInstance();
-    val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    val sdf = getDateTimeInstance();
     val strDate = sdf.format(c.time);
+
     return strDate
 }
 

@@ -122,7 +122,6 @@
                 android:background="@drawable/rounded_corners_et_white"
                 android:padding="4dp"
                 android:visibility="@{viewModel.requestToReview.businessPhoneNumber != null &amp;&amp; viewModel.requestToReview.businessName != null ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toTopOf="@+id/inside_main"
                 app:layout_constraintEnd_toEndOf="@+id/inside_main"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/inside_main"
@@ -130,15 +129,15 @@
                 app:layout_constraintVertical_chainStyle="spread_inside">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:gravity="center"
                     android:id="@+id/business_info_label"
-                    android:text="@string/business_info"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     style="@style/type_txt_details"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/business_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/business_name_et"
@@ -192,6 +191,46 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_corners_et_white"
+                android:padding="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/inside_main"
+                app:layout_constraintEnd_toEndOf="@+id/inside_main"
+                app:layout_constraintStart_toStartOf="@+id/inside_main"
+                app:layout_constraintTop_toBottomOf="@+id/business_info_container">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/type_txt_details"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delivery_guy"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/spinner"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corners_et"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/inside_main"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
@@ -202,8 +241,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/business_info_container">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
                     android:id="@+id/title_et"

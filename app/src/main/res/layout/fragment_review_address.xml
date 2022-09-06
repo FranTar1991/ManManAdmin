@@ -50,12 +50,31 @@
             <include
                 android:id="@+id/location_b_address_layout"
                 layout="@layout/address_section_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:visibility="@{addAnotherAddressChk.checked ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_another_address_chk" />
+
+            <EditText
+                android:id="@+id/location_b_address_reference"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:background="@drawable/rounded_corners_et_white"
+                android:ems="10"
+                android:visibility="@{addAnotherAddressChk.checked ? View.VISIBLE : View.GONE}"
+                android:text="@{viewModel.transactionItem.locationBAddressReference}"
+                style="@style/edit_text_white"
+                android:layout_margin="30dp"
+                android:padding="16dp"
+                android:inputType="textMultiLine"
+                android:gravity="start|top"
+                android:scrollbars="vertical"
+                android:hint="@string/location_b_address_reference"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/location_b_address_layout" />
 
             <Button
                 android:id="@+id/continue_btn"
@@ -69,7 +88,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.25"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_b_address_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/location_b_address_reference" />
 
             <EditText
                 android:id="@+id/user_address_reference"

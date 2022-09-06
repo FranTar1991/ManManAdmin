@@ -48,7 +48,7 @@ class PendingRequestsFragment : Fragment() {
 
         binding.fab.setOnClickListener {
             viewModel.setItemInsert(false)
-            viewModel.setEmptyRequest(RequestLocal(title = sharedPreferences.getString("turno",""), price = -1.0, status = STATUS.Received.name, date = getDate(), userPhone = ""))
+            viewModel.setEmptyRequest(RequestLocal(title = "${sharedPreferences.getString("turno", "")}/ ", price = -1.0, status = STATUS.Received.name, date = getDate(), userPhone = ""))
         }
 
         val requestRv = binding.allItemsRv

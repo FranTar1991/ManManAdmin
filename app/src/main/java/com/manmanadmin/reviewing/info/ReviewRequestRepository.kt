@@ -1,5 +1,6 @@
 package com.manmanadmin.reviewing.info
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,16 +31,44 @@ class ReviewRequestRepository() {
         })
     }
 
+    fun getDeliveryGuysOnDuty(
+        reference: DatabaseReference?,
+        _deliveryGuysOnDutyLiveData: MutableLiveData<MutableList<String?>>
+    ) {
+
+        val listOfAssociateNames = mutableListOf<String?>("Opcional")
+
+        reference?.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+               for( snapChild in snapshot.children){
+                   listOfAssociateNames.add(snapChild.child("associate").getValue(String::class.java))
+               }
+            _deliveryGuysOnDutyLiveData.postValue(listOfAssociateNames)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
+
+
+    }
+
     fun updateRequestInfo(
         reference: DatabaseReference?, callback: MutableLiveData<Boolean>, details: String?,
-        title: String?, userName: String, userPhone: String, comments: String?
+        title: String?, userName: String, userPhone: String, comments: String?, associate: String?
     ){
         reference?.child("details")?.setValue(details)?.addOnSuccessListener {
             reference.child("title").setValue(title).addOnSuccessListener {
                 reference.child("userName").setValue(userName).addOnSuccessListener {
                     reference.child("userPhone").setValue(userPhone).addOnSuccessListener {
                         reference.child("comments").setValue(comments).addOnSuccessListener {
-                            callback.postValue(true)
+                            reference.child("agentName").setValue(associate).addOnSuccessListener {
+                                callback.postValue(true)
+                            }
                         }
                     }
                 }

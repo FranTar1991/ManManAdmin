@@ -225,8 +225,10 @@
     <string name="menu_links">Menus</string>
     <string name="save_exit">G y S</string>
     <string name="add_user_address_reference">Agregar la dirección del cliente</string>
+    <string name="location_b_address_reference">Agregar la dirección del negocio, o lugar del mandado</string>
     <string name="turno_a">Turno A</string>
     <string name="change_shift">Cambio de turno</string>
+    <string name="delivery_guy">Repartidor:</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

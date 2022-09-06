@@ -1,5 +1,6 @@
 package com.manmanadmin.finished
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -85,9 +86,32 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
     fun filterRequestsByDate(filter: String) {
         if(filter.isNotEmpty()){
-            val filteredData =  allRequestsFinished.value?.filter { it -> it?.date?.contains(filter) == true } ?: emptyList()
+            val filteredData = try {
+                val dates = filter.split("/")
+                  getFilteredDataWithTwoDates(dates)
+            }catch (e: Exception){
+                getFilteredDataDate(filter)
+            }
+
             setAllFinishedRequests(filteredData)
         }
+    }
+
+    private fun getFilteredDataWithTwoDates(dates: List<String>): List<RequestRemote?> {
+
+        var indexOfFirst = 0
+        var indexOfLast = allRequestsFinished.value?.size?.let { it - 1 } ?: 0
+
+
+        allRequestsFinished.value?.let { list ->
+            indexOfFirst = list.indexOfFirst { it?.date?.contains(dates[0]) == true }
+            indexOfLast =   list.indexOfLast { it?.date?.contains(dates[1]) == true }
+        }
+
+        return allRequestsFinished.value?.slice(indexOfFirst..indexOfLast) ?: emptyList()
+    }
+    private fun getFilteredDataDate(date: String): List<RequestRemote?> {
+        return allRequestsFinished.value?.filter { it -> it?.date?.contains(date) == true} ?: emptyList()
     }
 
 }
