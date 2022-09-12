@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
+import com.manmanadmin.utils.GeneralStatus
 import com.manmanadmin.utils.RequestRemote
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +26,10 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
     private val _allRequestsFinished = MutableLiveData<List<RequestRemote?>?>()
     val allRequestsFinished: LiveData<List<RequestRemote?>?>
         get() = _allRequestsFinished
+
+    private val _transactionAddedLiveData = MutableLiveData<GeneralStatus>()
+    val transactionAddedLiveData: LiveData<GeneralStatus>
+        get() = _transactionAddedLiveData
 
 
    private val _numberOfFilteredRequests = MutableLiveData<List<RequestRemote?>?>()
@@ -72,6 +77,9 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
     }
 
+    fun addTransactionToFirebase(transaction: RequestRemote){
+        repo.addTransactionToFirebase(transaction,_transactionAddedLiveData)
+    }
 
     fun removeAllRequests(finishedRequestReference: DatabaseReference) {
 

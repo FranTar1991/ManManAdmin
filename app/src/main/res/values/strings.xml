@@ -195,7 +195,7 @@
     <string name="waiting_to_be_processed">Solicitud a esperas de ser procesada</string>
     <string name="finished_request">Solicitud finalizada</string>
     <string name="filter_requests">Filter</string>
-    <string name="delete_all">Borrar todas</string>
+    <string name="add_expense">Agregar gasto</string>
     <string name="want_to_delete_all">¿Quieres borrar todas las solicitudes?</string>
     <string name="items_deleted">Todas las solicitudes fueron borradas.</string>
     <string name="item_count"># de solicitudes: %s</string>
@@ -229,6 +229,8 @@
     <string name="turno_a">Turno A</string>
     <string name="change_shift">Cambio de turno</string>
     <string name="delivery_guy">Repartidor:</string>
+    <string name="expense_price">Monto gastado:</string>
+    <string name="add_the_expense_details">Agrega todos los detalles del gasto realizado, recuerda el título es solo una versión corta y descriptiva.</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

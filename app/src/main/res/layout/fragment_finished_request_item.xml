@@ -51,7 +51,7 @@
                 android:id="@+id/circle_img"
                 android:layout_width="0dp"
                 android:layout_height="72dp"
-                android:src="@drawable/ic_baseline_circle_24"
+                app:setTheCircle="@{remoteRequest.price}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,10 @@ package com.manmanadmin.finished
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
+import com.manmanadmin.utils.GeneralStatus
+import com.manmanadmin.utils.RequestLocal
 import com.manmanadmin.utils.RequestRemote
+import com.manmanadmin.utils.sendRequestToNextQueue
 
 class FinishedRequestsRepo (private val databaseReference: DatabaseReference) {
 
@@ -81,6 +84,17 @@ class FinishedRequestsRepo (private val databaseReference: DatabaseReference) {
                 itemDeletedCallback.postValue(true)
             }
         }
+    }
+
+    fun addTransactionToFirebase(
+        transaction: RequestRemote,
+        _navigateToMainFragment: MutableLiveData<GeneralStatus>
+    ){
+        databaseReference.push().setValue(transaction).addOnSuccessListener {
+                _navigateToMainFragment.postValue(GeneralStatus.success)
+            }.addOnFailureListener {
+                _navigateToMainFragment.postValue(GeneralStatus.error)
+            }
     }
 
 }

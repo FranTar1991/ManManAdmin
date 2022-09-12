@@ -28,6 +28,7 @@ class FinishedRequestsFragment : Fragment() {
     private lateinit var viewModel: FinishedRequestsViewModel
     private lateinit var bottomBar: BottomAppBar
     private lateinit var finishedRequestReference: DatabaseReference
+    private var addExpenseDialog: AddExpenseDialogFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +52,8 @@ class FinishedRequestsFragment : Fragment() {
             viewModel.setNavigateToFinishedRequestWithDetailsFragment(item)
         }
 
+        addExpenseDialog = AddExpenseDialogFragment(viewModel)
+
 
         viewModel.navigateToFinishedRequestWithDetailsFragment.observe(viewLifecycleOwner){
             it?.let {
@@ -67,6 +70,15 @@ class FinishedRequestsFragment : Fragment() {
         viewModel.itemsDeleted.observe(viewLifecycleOwner){
             if (it){
                 showSnackbar(binding.root.rootView, getString(R.string.items_deleted))
+            }
+        }
+
+        viewModel.transactionAddedLiveData.observe(viewLifecycleOwner){
+            addExpenseDialog?.dismiss()
+            if (it == GeneralStatus.success){
+                showSnackbar(binding.root.rootView,"Se agregó con éxito")
+            }else{
+                showSnackbar(binding.root.rootView,"No se guardó")
             }
         }
 
@@ -109,7 +121,7 @@ class FinishedRequestsFragment : Fragment() {
 
         bottomBar.setOnMenuItemClickListener {
             when(it.itemId){
-                R.id.delete_all_in_menu -> deleteAllRequests()
+                R.id.add_expense_in_menu -> callAddExpenseDialog()
                 else ->{true}
             }
         }
@@ -141,11 +153,8 @@ class FinishedRequestsFragment : Fragment() {
 
     }
 
-    private fun deleteAllRequests(): Boolean {
-        showAlertDialog(getString(R.string.alert),getString(R.string.want_to_delete_all),activity,true,null){
-            //viewModel.removeAllRequests(finishedRequestReference)
-        }?.show()
-
+    private fun callAddExpenseDialog(): Boolean {
+        addExpenseDialog?.show(childFragmentManager,"add_expense_dialog")
         return true
     }
 

@@ -8,9 +8,9 @@
         android:title="@string/filter_requests"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/delete_all_in_menu"
-        android:title="@string/delete_all"
-        android:icon="@drawable/ic_delete_forever_normal"
+    <item android:id="@+id/add_expense_in_menu"
+        android:title="@string/add_expense"
+        android:icon="@drawable/ic_baseline_add_circle_24"
         app:showAsAction="ifRoom"/>
 
 </menu>

@@ -8,6 +8,7 @@ import com.manmanadmin.utils.STATUS.*
 
 import android.annotation.SuppressLint
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.manmanadmin.finished.FinishedRequestsViewModel
@@ -304,6 +305,19 @@ fun TextView.showMoneyEarned(allRequests: List<RequestRemote>?){
         val sumInt = getSumOfMoneyEarnedInRequests(allRequests)
         text = context.getString(R.string.sum_of_requests, sumInt.toString())
     }
+}
+
+
+@BindingAdapter("setTheCircle")
+fun ImageView.setTheCircle(price: Double?){
+    price?.let {
+        if (it < 0){
+           setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_circle_expense_24))
+        } else{
+            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_circle_24))
+        }
+    }
+
 }
 
 

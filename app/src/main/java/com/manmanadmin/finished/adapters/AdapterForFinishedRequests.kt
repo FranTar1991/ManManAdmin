@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class AdapterForFinishedRequests2(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        viewModel?.let { holder.bind(item, viewModel, activity, listener) }
+        viewModel?.let { holder.bind(context, item, viewModel, activity, listener) }
     }
 
 
@@ -41,6 +42,7 @@ class AdapterForFinishedRequests2(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
+            context: Context,
             item: RequestRemote,
             viewModel: FinishedRequestsViewModel,
             activity: Activity?,
