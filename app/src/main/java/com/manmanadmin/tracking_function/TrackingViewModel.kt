@@ -49,14 +49,10 @@ class TrackingViewModel(private val repo: TrackingRepo): ViewModel() {
 
     fun updateMapCamera(newLocation: LatLng? = DEFAULT_LOCATION){
         val moveTo = if(newLocation == DEFAULT_LOCATION){
-            CameraUpdateFactory
-                .newLatLngZoom(newLocation, DEFAULT_ZOOM.toFloat())
-
+            CameraUpdateFactory.newLatLngZoom(newLocation, DEFAULT_ZOOM.toFloat())
         }else{
-            CameraUpdateFactory
-                .newLatLng(newLocation ?: DEFAULT_LOCATION)
+            CameraUpdateFactory.newLatLng(newLocation ?: DEFAULT_LOCATION)
         }
-
         myGoogleMap.value?.apply {
             moveCamera(moveTo)
         }

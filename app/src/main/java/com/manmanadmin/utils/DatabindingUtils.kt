@@ -7,7 +7,6 @@ import com.manmanadmin.R
 import com.manmanadmin.utils.STATUS.*
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -154,6 +153,16 @@ fun TextView.setTheItemCountText(filteredRequests: List<RequestRemote?>?){
     }
     newList?.size.let {
         text = context.getString(R.string.item_count, it.toString())
+    }
+}
+
+@BindingAdapter("setTheExpensesCountText")
+fun TextView.setTheExpensesCountText(filteredRequests: List<RequestRemote?>?){
+    val newList = filteredRequests?.filter { request ->
+        request?.price?.let { it < 0 } == true
+    }
+    newList?.size.let {
+        text = context.getString(R.string.expenses_added, it.toString())
     }
 }
 
@@ -306,7 +315,26 @@ fun TextView.showTheDetails(requestRemote: RequestRemote?){
 @BindingAdapter("showMoneyEarned")
 fun TextView.showMoneyEarned(allRequests: List<RequestRemote>?){
     allRequests?.let {
-        val sumInt = getSumOfMoneyEarnedInRequests(allRequests)
+        val newList = allRequests.filter { request -> request.price?.let { it > 0 } == true }
+        val sumInt = getSum(newList)
+        text = context.getString(R.string.sum_of_requests, sumInt.toString())
+    }
+}
+
+@BindingAdapter("showMoneySpent")
+fun TextView.showMoneySpent(allRequests: List<RequestRemote>?){
+    allRequests?.let {
+        val newList = allRequests.filter { request -> request.price?.let { it < 0 } == true }
+        val sumInt = getSum(newList)
+        text = context.getString(R.string.sum_of_requests, sumInt.toString())
+    }
+}
+
+@BindingAdapter("calculateResult")
+fun TextView.calculateResult(allRequests: List<RequestRemote>?){
+    allRequests?.let {
+        val sumInt = getSum(allRequests)
+        if(sumInt < 0) setTextColor( ContextCompat.getColor(context, R.color.pending_color)) else setTextColor( ContextCompat.getColor(context, R.color.finished_color))
         text = context.getString(R.string.sum_of_requests, sumInt.toString())
     }
 }

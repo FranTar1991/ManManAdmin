@@ -61,9 +61,13 @@ class TrackingFragment : Fragment() {
         }
 
         viewModel.myGoogleMap.observe(viewLifecycleOwner, Observer { map->
-            viewModel.updateMapCamera()
-            context?.let { viewModel.setBikerIcon(it)}
-            setTheLocationMarkers()
+
+            map?.let {
+                viewModel.updateMapCamera()
+                context?.let { viewModel.setBikerIcon(it)}
+                setTheLocationMarkers()
+            }
+
         })
 
         viewModel.updatedRequestLocation.observe(viewLifecycleOwner){newLocation ->

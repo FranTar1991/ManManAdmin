@@ -259,7 +259,7 @@ fun sendRequestToNextQueue(thisNodeReference: DatabaseReference?) {
     }
 }
 
-fun getSumOfMoneyEarnedInRequests(requests: List<RequestRemote>?): Double{
+fun getSum(requests: List<RequestRemote>?): Double{
     var sum  = 0.0
         requests?.let {
             for (request in requests){

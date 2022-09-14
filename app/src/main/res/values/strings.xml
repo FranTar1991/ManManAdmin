@@ -200,7 +200,7 @@
     <string name="items_deleted">Todas las solicitudes fueron borradas.</string>
     <string name="item_count"># de solicitudes: %s</string>
     <string name="cordoba_sign">C$</string>
-    <string name="sum_of_requests">Monto en C$: %s</string>
+    <string name="sum_of_requests">C$: %s</string>
     <string name="no_reviewed_requests">No hay solicitudes revisadas.</string>
     <string name="no_finished_requests">No hay solicitudes completadas.</string>
     <string name="no_servers">No hay repartidores disponibles</string>
@@ -231,6 +231,8 @@
     <string name="delivery_guy">Repartidor:</string>
     <string name="expense_price">Monto gastado:</string>
     <string name="add_the_expense_details">Agrega todos los detalles del gasto realizado, recuerda el título es solo una versión corta y descriptiva.</string>
+    <string name="expenses_added">Gastos registrados: %s</string>
+    <string name="result">Resultado:</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

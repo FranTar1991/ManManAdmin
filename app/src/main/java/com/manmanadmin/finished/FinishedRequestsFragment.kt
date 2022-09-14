@@ -3,7 +3,6 @@ package com.manmanadmin.finished
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentFinishedRequestsBinding
 import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
@@ -28,6 +28,7 @@ class FinishedRequestsFragment : Fragment() {
     private lateinit var viewModel: FinishedRequestsViewModel
     private lateinit var bottomBar: BottomAppBar
     private lateinit var finishedRequestReference: DatabaseReference
+
     private var addExpenseDialog: AddExpenseDialogFragment? = null
 
     override fun onCreateView(
@@ -96,7 +97,9 @@ class FinishedRequestsFragment : Fragment() {
         }
 
         viewModel.allRequestsFinished.observe(viewLifecycleOwner){
-
+            it?.let {
+                binding.progressbar.visibility = View.GONE
+            }
         }
 
         return binding.root
@@ -128,25 +131,28 @@ class FinishedRequestsFragment : Fragment() {
         val filterView = menuItem.actionView as SearchView
         filterView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                filterRequestsWithDate(query.toString())
+                filterRequests(query.toString())
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                newText?.let {
-                   if (newText.isEmpty()) filterRequestsWithDate(newText)
+                   if (newText.isEmpty()) filterRequests(newText)
                }
                 return false
             }
         })
         return true
     }
-    private fun filterRequestsWithDate(date: String) {
+    private fun filterRequests(filter: String) {
 
-        if (date.isEmpty()){
+        if (filter.isEmpty()){
            viewModel.fetchNewFinishedRequests(finishedRequestReference)
-        }else{
-            viewModel.setDateToFilter(date)
+        }else if(filter.contains("+505")){
+            val newQuery = finishedRequestReference.orderByChild("userPhone").startAt(filter).endAt(filter+ "uf8ff")
+            viewModel.fetchNewFinishedRequests(newQuery)
+        } else{
+            viewModel.setDateToFilter(filter)
         }
 
     }
