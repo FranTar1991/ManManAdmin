@@ -7,6 +7,7 @@ import com.manmanadmin.R
 import com.manmanadmin.utils.STATUS.*
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -148,7 +149,10 @@ fun TextView.setTheTitleText(title: String?){
 
 @BindingAdapter("setTheItemCountText")
 fun TextView.setTheItemCountText(filteredRequests: List<RequestRemote?>?){
-    filteredRequests?.size.let {
+    val newList = filteredRequests?.filter { request ->
+        request?.price?.let { it > 0 } == true
+    }
+    newList?.size.let {
         text = context.getString(R.string.item_count, it.toString())
     }
 }

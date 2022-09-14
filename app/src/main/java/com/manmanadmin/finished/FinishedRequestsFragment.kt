@@ -96,9 +96,7 @@ class FinishedRequestsFragment : Fragment() {
         }
 
         viewModel.allRequestsFinished.observe(viewLifecycleOwner){
-            it?.let {
-                Toast.makeText(context,"${it.size} elementos encontrados", Toast.LENGTH_LONG).show()
-            }
+
         }
 
         return binding.root
