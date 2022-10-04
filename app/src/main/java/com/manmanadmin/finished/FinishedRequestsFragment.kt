@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
 import com.manmanadmin.R
 import com.manmanadmin.databinding.FragmentFinishedRequestsBinding
 import com.manmanadmin.finished.adapters.AdapterForFinishedRequests2
@@ -96,6 +95,12 @@ class FinishedRequestsFragment : Fragment() {
             }
         }
 
+        viewModel.anyFilter.observe(viewLifecycleOwner){
+           it?.let {
+               viewModel.filterRequestsByAnyFilter(it)
+           }
+        }
+
         viewModel.allRequestsFinished.observe(viewLifecycleOwner){
             it?.let {
                 binding.progressbar.visibility = View.GONE
@@ -151,6 +156,8 @@ class FinishedRequestsFragment : Fragment() {
         }else if(filter.contains("+505")){
             val newQuery = finishedRequestReference.orderByChild("userPhone").startAt(filter).endAt(filter+ "uf8ff")
             viewModel.fetchNewFinishedRequests(newQuery)
+        } else if(filter.contains("a/") or filter.contains("d/")) {
+            viewModel.setAnyFilter(filter)
         } else{
             viewModel.setDateToFilter(filter)
         }

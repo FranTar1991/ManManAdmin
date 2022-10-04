@@ -1,4 +1,4 @@
-package com.manmanadmin.reviewing.transaction_checkout
+package com.manmanadmin.reviewing.checkout
 
 import android.content.Context
 import android.location.Address
@@ -33,7 +33,7 @@ class CheckoutFragmentRepo(private val databaseReference: DatabaseReference,
 
         try {
             latLng?.apply {
-                    address =  Geocoder(context).getFromLocation(latLng.latitude,latLng.longitude,1)
+                    address = context?.let { Geocoder(it).getFromLocation(latLng.latitude,latLng.longitude,1) } as MutableList<Address>
             }
 
             city = address[0].locality.replace(" ","")

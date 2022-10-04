@@ -233,6 +233,7 @@
     <string name="add_the_expense_details">Agrega todos los detalles del gasto realizado, recuerda el título es solo una versión corta y descriptiva.</string>
     <string name="expenses_added">Gastos registrados: %s</string>
     <string name="result">Resultado:</string>
+    <string name="expense_added">Gasto Agregado</string>
 
     <string-array name="cities_array">
         <item>--Selecciona--</item>

@@ -41,7 +41,7 @@ class AddExpenseDialogFragment(private val viewModel: FinishedRequestsViewModel 
         val details = binding?.detailsExpenseEt?.text.toString()
         val price = binding?.priceExpenseEt?.text?.toString()?.toDouble() ?: 0.0
 
-        return RequestRemote(agentName ="Gasto Agregado", title = expenseTitle, date = getDate(), details = details, price = price * -1, comments = "is expense")
+        return RequestRemote(agentName = getString(R.string.expense_added), title = expenseTitle, date = getDate(), details = details, price = price * -1, comments = "is expense")
 
     }
 

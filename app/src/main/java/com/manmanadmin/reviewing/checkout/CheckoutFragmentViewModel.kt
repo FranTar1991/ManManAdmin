@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DatabaseReference
 import com.manmanadmin.R
-import com.manmanadmin.reviewing.transaction_checkout.CheckoutFragmentRepo
 import com.manmanadmin.utils.*
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

@@ -1,6 +1,5 @@
 package com.manmanadmin.finished
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,6 +38,10 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
     private val _dateToFilter = MutableLiveData<String>()
     val dateToFilter: LiveData<String>
         get() = _dateToFilter
+
+    private val _anyFilter = MutableLiveData<String>()
+    val anyFilter: LiveData<String>
+        get() = _anyFilter
 
     private var _itemDeletedCallback = MutableLiveData<Boolean>()
     val itemDeletedCallback: LiveData<Boolean>
@@ -105,6 +108,41 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
         }
     }
 
+    fun filterRequestsByAnyFilter(filter: String){
+        val actualFilter = filter.split("/")[1]
+        var resultList = listOf<RequestRemote?>()
+        if (filter.contains("a/")){
+            resultList = getListFilteredByAgentName(actualFilter)
+        } else if (filter.contains("d/")){
+            resultList = getListFilteredByDetails(actualFilter)
+        }
+
+        setAllFinishedRequests(resultList)
+    }
+
+    private fun getListFilteredByAgentName(agentName: String): List<RequestRemote?> {
+        var agentNameList = listOf<RequestRemote?>()
+
+        if (agentName.isNotEmpty()){
+            allRequestsFinished.value?.let { list ->
+                agentNameList = list.filter { it?.agentName?.contains(agentName) == true }
+            }
+        }
+
+        return agentNameList
+    }
+    private fun getListFilteredByDetails(detailKey: String): List<RequestRemote?> {
+        var result = listOf<RequestRemote?>()
+
+        if (detailKey.isNotEmpty()){
+            allRequestsFinished.value?.let { list ->
+                result = list.filter { it?.details?.contains(detailKey) == true }
+            }
+        }
+
+        return result
+    }
+
     private fun getFilteredDataWithTwoDates(dates: List<String>): List<RequestRemote?> {
 
         var indexOfFirst = 0
@@ -118,8 +156,13 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
         return allRequestsFinished.value?.slice(indexOfFirst..indexOfLast) ?: emptyList()
     }
+
     private fun getFilteredDataDate(date: String): List<RequestRemote?> {
         return allRequestsFinished.value?.filter { it -> it?.date?.contains(date) == true} ?: emptyList()
+    }
+
+    fun setAnyFilter(filter: String) {
+        _anyFilter.value = filter
     }
 
 }
