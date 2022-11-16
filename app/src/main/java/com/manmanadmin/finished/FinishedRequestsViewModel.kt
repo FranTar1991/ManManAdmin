@@ -43,6 +43,10 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
     val anyFilter: LiveData<String>
         get() = _anyFilter
 
+    private val _phoneNumberFilter = MutableLiveData<String>()
+    val phoneNumber: LiveData<String>
+    get() = _phoneNumberFilter
+
     private var _itemDeletedCallback = MutableLiveData<Boolean>()
     val itemDeletedCallback: LiveData<Boolean>
     get() = _itemDeletedCallback
@@ -110,11 +114,15 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
     fun filterRequestsByAnyFilter(filter: String){
         val actualFilter = filter.split("/")[1]
-        var resultList = listOf<RequestRemote?>()
+        val resultList =
+        //agent name
         if (filter.contains("a/")){
-            resultList = getListFilteredByAgentName(actualFilter)
+             getListFilteredByAgentName(actualFilter)
+            //details
         } else if (filter.contains("d/")){
-            resultList = getListFilteredByDetails(actualFilter)
+             getListFilteredByDetails(actualFilter)
+        } else {
+            listOf()
         }
 
         setAllFinishedRequests(resultList)
@@ -143,6 +151,21 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
         return result
     }
 
+
+    fun getListFilteredByPhoneNumber(phoneNumber: String){
+        var result = listOf<RequestRemote?>()
+
+
+        if (phoneNumber.isNotEmpty()){
+            allRequestsFinished.value?.let { list ->
+                result = list.filter { it?.userPhone?.replace(" ","") == phoneNumber.replace(" ","") }
+            }
+        }
+
+        setAllFinishedRequests(result)
+
+    }
+
     private fun getFilteredDataWithTwoDates(dates: List<String>): List<RequestRemote?> {
 
         var indexOfFirst = 0
@@ -163,6 +186,10 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
 
     fun setAnyFilter(filter: String) {
         _anyFilter.value = filter
+    }
+
+    fun setFilterWithPhoneNumber(filter: String){
+        _phoneNumberFilter.value = filter
     }
 
 }

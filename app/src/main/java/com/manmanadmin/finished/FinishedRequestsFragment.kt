@@ -101,6 +101,12 @@ class FinishedRequestsFragment : Fragment() {
            }
         }
 
+        viewModel.phoneNumber.observe(viewLifecycleOwner){
+            it?.let {
+                viewModel.getListFilteredByPhoneNumber(it)
+            }
+        }
+
         viewModel.allRequestsFinished.observe(viewLifecycleOwner){
             it?.let {
                 binding.progressbar.visibility = View.GONE
@@ -154,12 +160,11 @@ class FinishedRequestsFragment : Fragment() {
         if (filter.isEmpty()){
            viewModel.fetchNewFinishedRequests(finishedRequestReference)
         }else if(filter.contains("+505")){
-            val newQuery = finishedRequestReference.orderByChild("userPhone").startAt(filter).endAt(filter+ "uf8ff")
-            viewModel.fetchNewFinishedRequests(newQuery)
+//            val newQuery = finishedRequestReference.orderByChild("userPhone").startAt(filter).endAt(filter+ "uf8ff")
+//            viewModel.fetchNewFinishedRequests(newQuery)
+            viewModel.setFilterWithPhoneNumber(filter)
         } else if(filter.contains("a/") or filter.contains("d/")) {
             viewModel.setAnyFilter(filter)
-        } else{
-            viewModel.setDateToFilter(filter)
         }
 
     }
