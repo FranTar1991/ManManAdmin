@@ -100,6 +100,11 @@ class FinishedRequestsFragment : Fragment() {
                viewModel.filterRequestsByAnyFilter(it)
            }
         }
+        viewModel.shiftFilter.observe(viewLifecycleOwner){
+            it?.let {
+                viewModel.filterRequestsByShiftFilter(it)
+            }
+        }
 
         viewModel.phoneNumber.observe(viewLifecycleOwner){
             it?.let {
@@ -165,6 +170,10 @@ class FinishedRequestsFragment : Fragment() {
             viewModel.setFilterWithPhoneNumber(filter)
         } else if(filter.contains("a/") or filter.contains("d/")) {
             viewModel.setAnyFilter(filter)
+        } else if(filter.lowercase().contains("ta") or filter.lowercase().contains("tb")){
+            viewModel.setFilterByShift(filter)
+        }else{
+            viewModel.setDateToFilter(filter)
         }
 
     }

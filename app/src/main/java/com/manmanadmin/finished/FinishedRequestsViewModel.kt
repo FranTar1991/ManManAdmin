@@ -1,5 +1,6 @@
 package com.manmanadmin.finished
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
 import com.manmanadmin.utils.GeneralStatus
 import com.manmanadmin.utils.RequestRemote
+import com.manmanadmin.utils.getDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -42,6 +44,10 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
     private val _anyFilter = MutableLiveData<String>()
     val anyFilter: LiveData<String>
         get() = _anyFilter
+
+    private val _shiftFilter = MutableLiveData<String>()
+    val shiftFilter: LiveData<String>
+        get() = _shiftFilter
 
     private val _phoneNumberFilter = MutableLiveData<String>()
     val phoneNumber: LiveData<String>
@@ -128,6 +134,28 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
         setAllFinishedRequests(resultList)
     }
 
+    fun filterRequestsByShiftFilter(shift: String){
+        var result = listOf<RequestRemote?>()
+        val key = if (shift == "ta"){
+            "Turno A"
+        } else{
+            "Turno B"
+        }
+        val decomposedDate = getDate().replace(","," "). split(" ")
+        val today1 = "${decomposedDate[0].lowercase()} ${decomposedDate[1].lowercase()}"
+        val today2 = "${decomposedDate[1].lowercase()} ${decomposedDate[0].lowercase()}"
+
+        if (shift.isNotEmpty()){
+            allRequestsFinished.value?.let { list ->
+                result = list.filter {
+                    it?.title?.contains(key) == true
+                            && (it.date.toString().contains(today1) || it.date.toString().contains(today2)) }
+            }
+        }
+
+        setAllFinishedRequests(result)
+    }
+
     private fun getListFilteredByAgentName(agentName: String): List<RequestRemote?> {
         var agentNameList = listOf<RequestRemote?>()
 
@@ -188,6 +216,9 @@ class FinishedRequestsViewModel (private val repo: FinishedRequestsRepo): ViewMo
         _anyFilter.value = filter
     }
 
+    fun setFilterByShift(filter: String){
+        _shiftFilter.value = filter
+    }
     fun setFilterWithPhoneNumber(filter: String){
         _phoneNumberFilter.value = filter
     }
